@@ -1,0 +1,50 @@
+snippet template "knitr powerdot" b
+\documentclass[
+   paper=screen
+ , mode=present
+ , style=paintings
+]{powerdot}
+
+\pdsetup{
+  % palette=gray
+  %rf={216 revisions}
+  %,lf={Michael Lerch}
+   palette=Skater
+% , randomdots=true
+% , dmindots=12
+% , dmaxdots=40
+% , dmaxsize=80pt
+% , dmindots=3
+% , dmaxdots=12
+}
+
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{listings}
+
+% \setstretch{1.5}
+
+\newcommand{\Sum}{\displaystyle\sum}
+
+\title{Title}
+\author{}
+\date{}
+
+\begin{document}
+
+<<options,echo=F,results="hide">>=
+opts_chunk$set(fig.keep='none',echo=F,results='hide',
+fig.width=5.5,fig.height=4)
+options(width=85)
+options(max.print="70")
+@
+
+\maketitle
+
+%\section{Background}
+
+body
+
+\end{document}
+endsnippet

@@ -1,0 +1,82 @@
+extends onlytex
+
+snippet beg "begin an environment" b
+\begin{${1:align}}
+${2:content}
+\end{$1}
+$0
+endsnippet
+
+snippet slideno "slide no toc,bm" !b
+\begin{slide}[toc=,bm=]{${1:title}}
+	${2:content}
+\end{slide}
+
+endsnippet
+
+snippet th "to the th" i
+^{\text{th}}
+endsnippet
+
+snippet eq "equation" !
+\begin{equation} \label{eq:${2:label}}
+	${1:equation}
+\end{equation}
+endsnippet
+
+snippet fig "figure"
+\begin{figure}[${1:h}]
+	${2:\centering}
+	${3:figure}
+	\caption{${4:caption}}
+	\label{${5:label}}
+\end{figure}
+endsnippet
+
+snippet \includeg "include graphics" !b
+\includegraphics[width=${1:width}]{${2:path}}
+endsnippet
+
+snippet table "table with caption"
+\begin{table}[${1:h}]
+	${2:\centering}
+	\caption{${3:caption}}
+	\label{${4:label}}
+	${5:table}
+\end{table}
+endsnippet
+
+snippet stretch "vspace{stretch{1}}"
+\vspace{\stretch{1}}
+endsnippet
+
+snippet em "emphasis"
+\emph{${1:${VISUAL:text}}}
+endsnippet
+
+snippet tt "texttt"
+\texttt{${1:${VISUAL:text}}}
+endsnippet
+
+snippet bf "boldface"
+\textbf{${1:${VISUAL:text}}}
+endsnippet
+
+snippet mbf "math boldface"
+\mathbf{${1:${VISUAL:text}}}
+endsnippet
+
+snippet sec "section"
+\section{${1:Section Name}}
+$0
+endsnippet
+
+snippet sub "subsection"
+\subsection{${1:Subsection Name}}
+$0
+endsnippet
+
+snippet ni "noindent"
+\noindent
+$0
+endsnippet

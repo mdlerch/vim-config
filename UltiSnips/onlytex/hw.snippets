@@ -1,0 +1,35 @@
+snippet template "basic homework" b
+\documentclass[10pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[]{amsmath}
+\usepackage{amssymb}
+\usepackage[]{graphicx}
+\usepackage{float}
+\usepackage{setspace}
+
+% \pagestyle{empty}
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Int}{\displaystyle\int}
+\newcommand{\Frac}{\displaystyle\frac}
+\newcommand{\Not}[1]{\overline{#1}}
+\newcommand{\newq}[1]{\noindent\hspace{-2em}\textbf{#1}}
+\newcommand{\subq}[1]{\noindent\hspace{-1em}\textbf{#1}}
+\newcommand{\subsubq}[1]{\noindent\hspace{-.5em}\textbf{#1}}
+
+\setstretch{1.2}
+
+\begin{document}
+\hspace{\fill} Michael Lerch
+
+\hspace{\fill} ${1:class}
+
+\hspace{\fill}HW \# ${2:hw number}
+
+\hspace{\fill} Due ${3:due date}
+
+\vspace{1cm}
+
+${4:body}
+
+\end{document}
+endsnippet

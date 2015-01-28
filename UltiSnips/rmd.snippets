@@ -1,0 +1,24 @@
+extends markdown
+extends r
+extends tex
+
+snippet ` "code chunk" b
+\`\`\`{r ${1:chunkname}}
+${2:code}
+\`\`\`
+endsnippet
+
+snippet `r "inline code"
+\`r ${1:code} \` $0
+endsnippet
+
+snippet setup
+\`\`\`{r setup, echo = FALSE, results = "hide", warning = FALSE}
+require(knitr)
+opts_chunk$set(echo = FALSE)
+opts_chunk$set(warning = FALSE)
+opts_chunk$set(results = "hide")
+\`\`\`
+
+$0
+endsnippet

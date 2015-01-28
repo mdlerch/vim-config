@@ -1,0 +1,13 @@
+extends tex
+extends r
+
+snippet < "code chunk" b
+<<${1:chunkname}>>=
+${2:code}
+
+@
+endsnippet
+
+snippet S "Sexpr"
+\Sexpr{${1:${VISUAL:rcode}}}
+endsnippet

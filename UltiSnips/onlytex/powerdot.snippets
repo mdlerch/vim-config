@@ -1,0 +1,44 @@
+snippet template "powerdot" b
+\documentclass[
+   paper=screen
+ , mode=present
+ , style=paintings
+]{powerdot}
+
+\pdsetup{
+  % palette=gray
+  %rf={216 revisions}
+  %,lf={Michael Lerch}
+   palette=Skater
+% , randomdots=true
+% , dmindots=12
+% , dmaxdots=40
+% , dmaxsize=80pt
+% , dmindots=3
+% , dmaxdots=12
+}
+
+\usepackage{graphics}
+\usepackage{amsmath}
+\usepackage{setspace}
+\usepackage{listings}
+
+% \setstretch{1.5}
+
+\newcommand{\Sum}{\displaystyle\sum}
+
+\title{${1:Title}}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+%\section{Background}
+
+${2:body}
+
+\end{document}
+
+endsnippet

@@ -1,0 +1,41 @@
+snippet template "knitr file" b
+\documentclass[10pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[]{amsmath}
+\usepackage{amssymb}
+\usepackage{subfig}
+\usepackage{wrapfig}
+\usepackage{float}
+\usepackage[]{graphicx}
+\usepackage{setspace}
+
+% \pagestyle{empty}
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Int}{\displaystyle\int}
+\newcommand{\Frac}{\displaystyle\frac}
+\newcommand{\Not}[1]{\overline{#1}}
+\newcommand{\newq}[1]{\noindent\hspace{-2em}\textbf{#1}}
+\newcommand{\subq}[1]{\noindent\hspace{-1em}\textbf{#1}}
+\newcommand{\subsubq}[1]{\noindent\hspace{-.5em}\textbf{#1}}
+
+\ifdefined\knitrout
+\renewenvironment{knitrout}{\begin{footnotesize}}{\end{footnotesize}}
+ \else
+\fi
+
+
+\setstretch{1.5}
+
+\begin{document}
+<<options,echo=F,results="hide">>=
+opts_chunk$set(fig.keep='none',echo=F,results='hide',
+fig.width=5.5,fig.height=4)
+options(width=85)
+options(max.print="70")
+@
+
+${1:body}
+
+
+\end{document}
+endsnippet

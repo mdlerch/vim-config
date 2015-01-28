@@ -1,0 +1,75 @@
+snippet rdoc "RDoc skeletion" b
+\name{${1:`!p snip.rv = snip.basename`}}
+\alias{${1}}
+\title{${2:Capitalized, no period, 65 characters}}
+\description{
+    ${3:A few lines}
+}
+\usage{${4:fun(arg1, arg2, ...)}}
+\arguments{
+    ${5:expand with \item}
+}
+\details{
+    ${6:Extension of description}
+}
+\value{${7:Return value, use item if list}}
+\references{${8:Use \url{} of \href{}{} for web}}
+\note{
+   ${9:Not necessary, Pie charts are very bad way of ....}
+}
+\author{${10:Name \email{myemail.email.com}}}
+\seealso{${11:Point to code \code{\link{...}}}}
+\examples{
+    ${12: Shown and run
+    \dontrun{shown only}}
+}
+\keyword{${13:zero or more keywords}}
+endsnippet
+
+snippet \item "Item for arguments"
+\item{${1:arg}}{${2:description}}
+$0
+endsnippet
+
+snippet packdoc "Documentation for a package" b
+\name{${1:PackageName}-package}
+\alias{${1}-package}
+\alias{${1}}
+\docType{package}
+\title{
+What the package does (short line)
+}
+\description{
+More about what it does (maybe more than one line)
+~~ A concise (1-5 lines) description of the package ~~
+}
+\details{
+\tabular{ll}{
+Package: \tab OptimalDesign\cr
+Type: \tab Package\cr
+Version: \tab 1.0\cr
+Date: \tab 2014-12-19\cr
+License: \tab MIT \cr
+}
+~~ An overview of how to use the package, including the most important ~~
+~~ functions ~~
+}
+\author{
+Who wrote it
+
+Maintainer: Who to complain to <yourfault@somewhere.net>
+}
+\references{
+~~ Literature or other references for background information ~~
+}
+~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
+~~ the R documentation directory ~~
+\keyword{ package }
+\seealso{
+~~ Optional links to other man pages, e.g. ~~
+~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+}
+\examples{
+%% ~~ simple examples of the most important functions ~~
+}
+endsnippet

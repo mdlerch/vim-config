@@ -1,0 +1,23 @@
+snippet template "simple" b
+\documentclass[10pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[]{amsmath}
+\usepackage{amssymb}
+\usepackage[]{graphicx}
+\usepackage{float}
+\usepackage{setspace}
+
+% \pagestyle{empty}
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Int}{\displaystyle\int}
+\newcommand{\Frac}{\displaystyle\frac}
+\newcommand{\Not}[1]{\overline{#1}}
+
+% \setstretch{1.2}
+
+\begin{document}
+
+${1:body}
+
+\end{document}
+endsnippet

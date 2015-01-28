@@ -1,0 +1,39 @@
+snippet pic "Insert a picture" 
+![${1:alt_text}](${2:path_to_picture})
+endsnippet
+
+snippet img "Image"
+![${1:pic alt}](${2:path}${3/.+/ "/}${3:opt title}${3/.+/"/})$0
+endsnippet
+
+snippet link "Link to something"
+[${1:${VISUAL:Text}}](${3:http://${2:www.url.com}})$0
+endsnippet
+
+snippet - "rule" b
+----------------------
+
+
+endsnippet
+
+snippet yaml "Insert yaml"
+---
+title: "${1:title}"
+author: "${2:author}"
+fontsize: ${3:10pt}
+---
+
+$0
+endsnippet
+
+snippet quiz "Quiz header"
+---
+title: "Quiz ${1:number}"
+output: pdf_document
+---
+
+Name
+----
+
+$0
+endsnippet

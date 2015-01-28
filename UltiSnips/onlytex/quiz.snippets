@@ -1,0 +1,31 @@
+snippet template "quiz" b
+\documentclass[10pt]{article}
+
+% \pagestyle{empty}
+\usepackage[cm]{fullpage}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{marginnote}
+
+\newcommand{\Sum}{\displaystyle\sum}
+\newcommand{\Int}{\displaystyle\Int}
+\newcommand{\Frac}{\displaystyle\frac}
+\newcommand{\Not}[1]{\overline{#1}}
+
+\begin{document}
+
+\noindent
+Name \underline{\hspace{8cm}}
+\hfill ${1:quiz number}
+
+\vspace{1cm}
+
+${2:body}
+
+
+
+
+\end{document}
+
+endsnippet
