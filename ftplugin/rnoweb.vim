@@ -16,4 +16,4 @@ function! RnwInsertMode()
     endif
 endfunction
 
-autocmd InsertEnter *.Rnw call RnwInsertMode
+autocmd InsertEnter *.Rnw call RnwInsertMode()
