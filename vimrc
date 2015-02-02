@@ -14,8 +14,8 @@ Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
 Plug 'itchyny/calendar.vim'
 Plug 'majutsushi/tagbar'
+Plug 'mbbill/undotree'
 Plug 'reedes/vim-wordy'
-Plug 'sjl/gundo.vim'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
@@ -33,6 +33,7 @@ Plug 'git@github.com:mdlerch/vim-mc-stan.git'
 Plug 'git@github.com:mdlerch/vim-pandoc-syntax'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'abudden/taghighlight-automirror'
+Plug 'justinmk/vim-syntax-extra'
 Plug 'vim-scripts/gnuplot.vim'
 
 " colorschemes
@@ -43,7 +44,6 @@ Plug 'endel/vim-github-colorscheme'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'junegunn/seoul256.vim'
 Plug 'romainl/Apprentice'
-Plug 'Yggdroot/indentLine'
 
 call plug#end()
 
@@ -52,67 +52,24 @@ call plug#end()
 
 " {{{2 Smart close =======================================
 
-" Closing windows and deleting buffers intelligently
-" TODO: Make smart for tabs, make less nested
-" If one window, quit if last buffer.  If not last buffer, just delete buffer.
-" If multiple windows, close this window.  If buffer not in remaining windows,
-" delete the buffer.
-" If this is a non-saving file, just do :q! on the window
+" Save active buffer.
+" If only one window, try to quit vim.
+" If multiple windows close the current window.
 function! SmartClose()
-    " If this is not a file that we should save
+    " If file is non-mondifiable or readonly, etc, quit
     if &readonly || !&modifiable || expand('%:t:r') =~ "test" || &ft =~ "rdoc"
         exe ":q!"
+        return 0
+    endif
+
+    " One window: write this buffer, qall
+    if winnr('$') == 1
+        exe ":w"
+        exe ":qall"
+    " multiple windows: write this buffer, close
     else
-        if winnr('$') == 1
-            exe ":w"
-            " If this is the last listed buffer quit.  If there are still other
-            " listed buffers just delete the current buffer.
-            if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-                exe ":q"
-            else
-                exe ":bdelete"
-                if &readonly || !&modifiable || expand('%:t:r') =~ "test" || &ft =~ "rdoc"
-                    let listed = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-                    let readable = 0
-                    for a in listed
-                        let cmd = ":buf " . a
-                        exe cmd
-                        if &modifiable && !&readonly
-                            let readable = 1
-                            break
-                        endif
-                    endfor
-                    if readable == 0
-                        exe ":qall"
-                    endif
-                endif
-            endif
-        else
-            " Close the window.  If there are no other windows with this
-            " buffer, delete the buffer.
-            let bufnum = bufnr(expand("%:p"))
-            exe ":w"
-            exe ":close"
-            if bufwinnr(bufnum) == -1
-                let cmd = ":bdelete " . expand(bufnum)
-                exe cmd
-            endif
-            if &readonly || !&modifiable || expand('%:t:r') =~ "test" || &ft =~ "rdoc"
-                let listed = filter(range(1, bufnr('$')), 'buflisted(v:val)')
-                let readable = 0
-                for a in listed
-                    let cmd = ":buf " . a
-                    exe cmd
-                    if &modifiable && !&readonly
-                        let readable = 1
-                        break
-                    endif
-                endfor
-                if readable == 0
-                    exe ":qall"
-                endif
-            endif
-        endif
+        exe ":w"
+        exe ":close"
     endif
 endfunction
 
@@ -506,6 +463,10 @@ set tags=./tags;
 noremap <leader>z [s1z=<C-o>
 inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 
+
+" information
+nnoremap <leader>W m[ggVGg<C-g><Esc>`[
+
 function! ListFKeys()
     let message = "F1 neomake! (project) \n" .
                 \ "F2 neomake! clean \n" .
@@ -584,7 +545,7 @@ let R_synctex = 0
 " }}}2 Vim-R-Plugin ======================================
 " {{{2 Gnuplot ===========================================
 " }}}2 Gnuplot ===========================================
-" {{{2 vim-commentary =====================================
+" {{{2 vim-commentary ====================================
 
 imap <leader>cc <C-g>u<ESC><Plug>CommentaryLine
 nmap <leader>cc <Plug>CommentaryLine
@@ -621,16 +582,13 @@ xmap Sa <Plug>VSurround
 vnoremap <leader>& :Tabularize /&<CR>
 
 " }}}2 Tabularize ========================================
-" {{{2 Gundo =============================================
+" {{{2 undotree ==========================================
 
-" placement
-let g:gundo_right = 1
-let g:gundo_preview_bottom = 1
-let g:gundo_width = 20
+let g:undotree_WindowLayout = 3
+let g:undotree_SplitWidth = 40
+nmap <F6> :UndotreeToggle<CR>
 
-nmap <F6> :GundoToggle<CR>
-
-" }}}2 Gundo =============================================
+" }}}2 undotree ==========================================
 " {{{2 DragVisuals =======================================
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
@@ -733,16 +691,6 @@ let g:rainbow_conf = {
     \}
 
 " }}}2 Rainbow ===========================================
-" {{{2 indentline ========================================
-
-let g:indentLine_enabled = 1
-let g:indentLine_fileType = ['python', 'r', 'cpp', 'c']
-let g:indentLine_fileTypeExclude = ['text', 'tex', 'markdown', 'pandoc']
-let g:indentLine_char = "."
-let g:indentLine_color_term = 238
-let g:indentLine_noConcealCursor = 1
-
-" }}}2 indentline ========================================
 " {{{2 vim-wordy =========================================
 
 map <F8> :NextWordy<CR>
@@ -775,7 +723,7 @@ let g:wordy#ring = [
     \ ]
 
 " }}}2 vim-wordy =========================================
-" {{{2 ctrlp ============================================
+" {{{2 ctrlp =============================================
 
 " Use <C-f> to switch mode
 
@@ -875,7 +823,7 @@ let g:neomake_python_pylint_maker = {
 
 let g:neomake_python_enabled_makers = ['pylint']
 
-autocmd BufWritePost *.py Neomake
+" autocmd BufWritePost *.py Neomake
 autocmd BufReadPost *.py Neomake
 
 autocmd BufReadPost *.py sign define dummy
@@ -916,7 +864,7 @@ let g:neomake_cpp_clang_maker = {
 
 let g:neomake_cpp_enabled_makers = ['clang']
 
-autocmd BufWritePost *.cpp Neomake
+" autocmd BufWritePost *.cpp Neomake
 autocmd BufReadPost *.cpp Neomake
 
 autocmd BufReadPost *.cpp sign define dummy
@@ -936,7 +884,7 @@ let g:neomake_r_lintr_maker = {
 
 let g:neomake_r_enabled_makers = ['lintr']
 
-autocmd BufWritePost *.R Neomake
+" autocmd BufWritePost *.R Neomake
 autocmd BufReadPost *.R Neomake
 
 autocmd BufReadPost *.R sign define dummy
