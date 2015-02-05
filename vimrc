@@ -31,6 +31,7 @@ Plug 'git@github.com:mdlerch/vim-gnuplot.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/vim-mc-stan.git'
 Plug 'git@github.com:mdlerch/vim-pandoc-syntax'
+Plug 'git@github.com:mdlerch/vim-pandoc'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'abudden/taghighlight-automirror'
 Plug 'justinmk/vim-syntax-extra'
@@ -454,7 +455,7 @@ nnoremap <leader><leader> <C-[>
 cnoremap <leader><leader> <C-c>
 
 " tags
-noremap <leader>ts :ts<CR>
+noremap <leader>ts <C-w><C-]>
 noremap <leader>tj <C-]>
 noremap <leader>tr :!ctags -R<CR>
 set tags=./tags;
@@ -600,6 +601,8 @@ vmap  <expr>  D        DVB_Duplicate()
 " }}}2 DragVisuals =======================================
 " {{{2 Pandoc ============================================
 
+let g:pandoc#modules#enabled = ["bibliographies", "completion"]
+
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#protect#codeblocks = 0
 let g:pandoc_syntax_dont_use_conceal_for_rules =
@@ -737,6 +740,9 @@ let g:ctrlp_open_new_file = 'r'
 let g:ctrlp_prompt_mappings = {
     \ 'CreateNewFile()': ['<F2>']
     \ }
+
+hi CtrlPMode1 ctermbg=238 ctermfg=180
+
 
 " }}}2 ctrlp =============================================
 " {{{2 UltiSnips =========================================
