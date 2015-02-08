@@ -12,6 +12,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-
 Plug 'benekastah/neomake'
 Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/goyo.vim'
 Plug 'itchyny/calendar.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
@@ -420,7 +421,6 @@ set foldlevel=1000
 noremap <F9> zM
 " open all folds
 noremap <F10> zR
-noremap <F11> :set foldmethod=marker
 
 " built-in calculator
 let pi = 3.14159265359
@@ -428,7 +428,7 @@ let e  = 2.71828182846
 vnoremap <leader>e ygvc<C-r>=<C-r>"<CR><ESC>
 
 " resync syntax
-noremap <F12> :redraw!<CR>:syntax sync fromstart<CR>
+noremap <F12> :redraw!<CR>:syntax sync fromstart<CR>:set foldmethod=marker<CR>
 
 " close scratch, remove hlsearch, remove trailing whitespace
 noremap <silent> <leader>x :nohls <BAR> :call LeaderX()<CR>
@@ -479,8 +479,8 @@ function! ListFKeys()
                 \ "F8 Wordy\n" .
                 \ "F9 close all folds \n" .
                 \ "F10 open all folds \n" .
-                \ "F11 reset fold \n" .
-                \ "F12 re-sync syntax \n"
+                \ "F11 (open) .
+                \ "F12 re-sync syntax and fold \n"
     :12new
     silent put=message
     set nomodified
@@ -636,6 +636,33 @@ let g:tagbar_map_togglefold = "<space>"
 nmap <F5> :TagbarToggle<CR>
 
 " }}}2 TagBar ============================================
+" {{{2 goyo ==============================================
+
+let g:goyo_width = 80
+let g:goyo_margin_top = 0
+let g:goyo_margin_bottom = 0
+let g:goyo_linenr = 1
+let g:goyo_status = 1
+
+function! s:goyo_enter()
+    let g:old_tw = &tw
+    set tw=0
+    set wm=0
+    set laststatus=2
+endfunction
+
+function! s:goyo_leave()
+    let cmd = "set tw=" . g:old_tw
+    exe cmd
+    set laststatus=2
+endfunction
+
+autocmd! User GoyoEnter
+autocmd! User GoyoLeave
+autocmd User GoyoEnter nested call <SID>goyo_enter()
+autocmd User GoyoLeave nested call <SID>goyo_leave()
+
+" }}}2 goyo ==============================================
 " {{{2 Rainbow ===========================================
 
 let g:rainbow_active = 1
@@ -783,7 +810,7 @@ map <F7> :UpdateTypesFile<CR>
 map <F1> :Neomake!<CR>
 map <F2> :Neomake! clean<CR>
 " set <F3> in project vimrc
-map <F4> :Neomake<CR>
+" map <F4> :Neomake<CR>
 
 let g:neomake_error_sign = {
     \ 'text': '>',
@@ -829,7 +856,7 @@ let g:neomake_python_pylint_maker = {
 
 let g:neomake_python_enabled_makers = ['pylint']
 
-" autocmd BufWritePost *.py Neomake
+autocmd BufWritePost *.py Neomake
 autocmd BufReadPost *.py Neomake
 
 autocmd BufReadPost *.py sign define dummy
@@ -870,7 +897,7 @@ let g:neomake_cpp_clang_maker = {
 
 let g:neomake_cpp_enabled_makers = ['clang']
 
-" autocmd BufWritePost *.cpp Neomake
+autocmd BufWritePost *.cpp Neomake
 autocmd BufReadPost *.cpp Neomake
 
 autocmd BufReadPost *.cpp sign define dummy
@@ -890,7 +917,7 @@ let g:neomake_r_lintr_maker = {
 
 let g:neomake_r_enabled_makers = ['lintr']
 
-" autocmd BufWritePost *.R Neomake
+autocmd BufWritePost *.R Neomake
 autocmd BufReadPost *.R Neomake
 
 autocmd BufReadPost *.R sign define dummy
