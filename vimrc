@@ -256,6 +256,7 @@ if &term =~ "^screen"
 endif
 set breakindent
 set linebreak
+set breakat-=-
 " two spaces after a period or ? or ! for a new sentence
 set cpo+=J
 
@@ -366,8 +367,8 @@ inoremap <leader>w <ESC>:w<CR>
 inoremap <leader>q <ESC>:call SmartClose()<CR>
 noremap <leader>Q :wqall<CR>
 inoremap <leader>Q <ESC>:wqall<CR>
-noremap <leader>v :call ToggleList("Location List", "l")<CR>
-noremap <leader>c :call ToggleList("Quickfix List", "c")<CR>
+noremap <leader>vc :call ToggleList("Location List", "l")<CR>
+noremap <leader>cv :call ToggleList("Quickfix List", "c")<CR>
 
 " Number increment/decrement
 set <A-a>=a

@@ -1,0 +1,14 @@
+snippet manuscript "Build .pdf from .md" b
+all: $1 clean
+
+${1:manuscript}: ${2:manuscript}.pdf
+
+$2.pdf: $2.tex
+	texi2pdf $^ -o $@
+
+$2.tex: $2.md
+	pandoc $^ ${3:--template cscrs} ${4:--natbib} -o $@ -s
+
+clean:
+	-rm $2{.aux,.bbl,.blg,.log}
+endsnippet
