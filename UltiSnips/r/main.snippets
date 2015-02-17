@@ -3,6 +3,7 @@ for (${1:i} in ${2:vector})
 {
 	${3:body}
 }
+$0
 endsnippet
 
 snippet if "if statement" b
@@ -10,13 +11,7 @@ if (${1:test})
 {
 	${2:body}
 }
-endsnippet
-
-snippet elif "else if statement"
-else if (${1:test})
-{
-	${2:body}
-}
+$0
 endsnippet
 
 snippet else "else statement"
@@ -24,6 +19,15 @@ else
 {
 	${1:body}
 }
+$0
+endsnippet
+
+snippet elif "else if statement"
+else if (${1:test})
+{
+	${2:body}
+}
+$0
 endsnippet
 
 snippet func "function" b
@@ -40,6 +44,7 @@ snippet h "plain file header" b
 # ${1:Description}
 #
 
+$0
 endsnippet
 
 

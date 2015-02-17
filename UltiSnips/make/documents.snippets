@@ -1,6 +1,8 @@
 snippet manuscript "Build .pdf from .md" b
 all: $1 clean
 
+.PHONY: $1 clean
+
 ${1:manuscript}: ${2:manuscript}.pdf
 
 $2.pdf: $2.tex
@@ -11,4 +13,15 @@ $2.tex: $2.md
 
 clean:
 	-rm $2{.aux,.bbl,.blg,.log}
+endsnippet
+
+snippet figure "A figure by running an r script and then running gnuplot" b
+all: ${1:figure}${2:.pdf}
+
+$1$2: $1.gpi $1.txt
+	gnuplot \$<
+	texi2pdf *.tex
+
+$1.txt: $1.R
+	Rscript \$<
 endsnippet

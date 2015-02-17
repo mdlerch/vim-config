@@ -1,14 +1,12 @@
-snippet tempPowerDot "PowerDot" b
+snippet powerdot "PowerDot" b
 all: deck
+
+.PHONY: deck clean
 
 deck: ${1:file}.tex
 	texi2dvi $1.tex
 	dvipdf $1.dvi
 
 clean:
-	! [ -f $1.aux ] || rm $1.aux
-	! [ -f $1.log ] || rm $1.log
-	! [ -f $1.dvi ] || rm $1.dvi
-	! [ -f $1.bm ] || rm $1.bm
-	! [ -f $1.toc ] || rm $1.toc
+	-rm $1{.aux,.log,.dvi,.bm,.toc}
 endsnippet
