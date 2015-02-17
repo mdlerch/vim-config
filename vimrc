@@ -115,36 +115,6 @@ function! LaunchHTML()
 endfunction
 
 " }}}2 Launchers =========================================
-" {{{2 location/qf toggling ==============================
-
-function! GetBufferList()
-  redir =>buflist
-  silent! ls
-  redir END
-  return buflist
-endfunction
-
-function! ToggleList(bufname, pfx)
-  let buflist = GetBufferList()
-  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
-    if bufwinnr(bufnum) != -1
-      exec(a:pfx.'close')
-      return
-    endif
-  endfor
-  if a:pfx == 'l' && len(getloclist(0)) == 0
-      echohl ErrorMsg
-      echo "Location List is Empty."
-      return
-  endif
-  let winnr = winnr()
-  exec(a:pfx.'open')
-  if winnr() != winnr
-    wincmd p
-  endif
-endfunction
-
-" }}}2 location/qf toggling ==============================
 " {{{2 Beginning and end of line =========================
 
 " Smart motion to beginning of line
@@ -162,6 +132,9 @@ function! BigH(vis)
         exe 'norm! m>`>gv'
     endif
 endfunction
+
+nnoremap H :call BigH(0)<CR>
+vnoremap H <ESC>:call BigH(1)<CR>
 
 " Smart motion to end of the line
 " Move to last non white character on wrapped line.
@@ -181,6 +154,9 @@ function! BigL(vis)
     endif
 endfunction
 
+nnoremap L :call BigL(0)<CR>
+vnoremap L <ESC>:call BigL(1)<CR>
+
 " }}}2 Beginning and end of line =========================
 " {{{2 Leader x, clear things ============================
 
@@ -198,6 +174,8 @@ function! LeaderX()
     endif
     exe 'norm! `X'
 endfunction
+
+noremap <silent> <leader>x :nohls <BAR> :call LeaderX()<CR>
 
 " }}}2 Leader x, clear things ============================
 
@@ -368,8 +346,6 @@ inoremap <leader>w <ESC>:w<CR>
 inoremap <leader>q <ESC>:call SmartClose()<CR>
 noremap <leader>Q :wqall<CR>
 inoremap <leader>Q <ESC>:wqall<CR>
-noremap <leader>vc :call ToggleList("Location List", "l")<CR>
-noremap <leader>cv :call ToggleList("Quickfix List", "c")<CR>
 
 " Number increment/decrement
 set <A-a>=a
@@ -392,10 +368,6 @@ noremap gj j
 noremap gk k
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
-nnoremap H :call BigH(0)<CR>
-vnoremap H <ESC>:call BigH(1)<CR>
-nnoremap L :call BigL(0)<CR>
-vnoremap L <ESC>:call BigL(1)<CR>
 noremap <TAB> %
 " Tab is the same as C-i in terminal
 noremap <C-p> <C-i>
@@ -431,9 +403,6 @@ vnoremap <leader>e ygvc<C-r>=<C-r>"<CR><ESC>
 
 " resync syntax
 noremap <F12> :redraw!<CR>:syntax sync fromstart<CR>:set foldmethod=marker<CR>
-
-" close scratch, remove hlsearch, remove trailing whitespace
-noremap <silent> <leader>x :nohls <BAR> :call LeaderX()<CR>
 
 " too lazy to press shift
 noremap ; :
@@ -474,14 +443,14 @@ function! ListFKeys()
     let message = "F1 neomake! (project) \n" .
                 \ "F2 neomake! clean \n" .
                 \ "F3 (to be set in project vimrc) \n" .
-                \ "F4 neomake (file) \n" .
+                \ "F4 (to be set in project vimrc) \n" .
                 \ "F5 toggle tag bar \n" .
                 \ "F6 update taghl \n" .
                 \ "F7 toggle gundo \n" .
                 \ "F8 Wordy\n" .
                 \ "F9 close all folds \n" .
                 \ "F10 open all folds \n" .
-                \ "F11 (open) .
+                \ "F11 (open)\n" .
                 \ "F12 re-sync syntax and fold \n"
     :12new
     silent put=message
