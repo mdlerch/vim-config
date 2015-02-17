@@ -32,7 +32,6 @@ Plug 'git@github.com:mdlerch/vim-gnuplot.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/vim-mc-stan.git'
 Plug 'git@github.com:mdlerch/vim-pandoc-syntax'
-Plug 'git@github.com:mdlerch/vim-pandoc'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'abudden/taghighlight-automirror'
 Plug 'justinmk/vim-syntax-extra'
@@ -212,8 +211,8 @@ set backspace=indent,eol,start
 
 " starting position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-au BufReadPost GHI* :1
-au BufReadPost COMMIT* :1
+au BufWinEnter GHI_* :1 | exe "normal! O" | startinsert
+au BufWinEnter COMMIT* :1 | exe "normal! O" | startinsert
 
 " misc
 set hidden
@@ -257,6 +256,7 @@ endif
 set breakindent
 set linebreak
 set breakat-=-
+set breakat-=@
 " two spaces after a period or ? or ! for a new sentence
 set cpo+=J
 
@@ -329,6 +329,7 @@ function! UnmatchWhite()
 endfunction
 
 autocmd FileType rbrowser call UnmatchWhite()
+
 
 highlight MatchParen cterm=NONE
 
@@ -601,8 +602,6 @@ vmap  <expr>  D        DVB_Duplicate()
 
 " }}}2 DragVisuals =======================================
 " {{{2 Pandoc ============================================
-
-let g:pandoc#modules#enabled = ["bibliographies", "completion"]
 
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#protect#codeblocks = 0
