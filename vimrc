@@ -63,10 +63,16 @@ function! SmartClose()
         return 0
     endif
 
-    " One window: write this buffer, qall
+    " One window: write this buffer
     if winnr('$') == 1
         exe ":w"
-        exe ":qall"
+        " listed buffers, delete this buffer
+        if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) > 1
+            exe ":bd"
+        " no listed buffers, quit
+        else
+            exe ":q"
+        endif
     " multiple windows: write this buffer, close
     else
         exe ":w"
@@ -133,9 +139,6 @@ function! BigH(vis)
     endif
 endfunction
 
-nnoremap H :call BigH(0)<CR>
-vnoremap H <ESC>:call BigH(1)<CR>
-
 " Smart motion to end of the line
 " Move to last non white character on wrapped line.
 " Move to last character on wrapped line.
@@ -153,9 +156,6 @@ function! BigL(vis)
         exe 'norm! m>`>gv'
     endif
 endfunction
-
-nnoremap L :call BigL(0)<CR>
-vnoremap L <ESC>:call BigL(1)<CR>
 
 " }}}2 Beginning and end of line =========================
 " {{{2 Leader x, clear things ============================
@@ -175,7 +175,6 @@ function! LeaderX()
     exe 'norm! `X'
 endfunction
 
-noremap <silent> <leader>x :nohls <BAR> :call LeaderX()<CR>
 
 " }}}2 Leader x, clear things ============================
 
@@ -225,8 +224,9 @@ set list
 set splitbelow
 set splitright
 set scrolloff=4
-set completeopt+=menuone,longest
-set completeopt+=preview
+set completeopt=menuone
+" set completeopt+=preview
+" set completeopt=menu
 set spell
 if &term =~ "^screen"
     set ttymouse=xterm2
@@ -261,7 +261,7 @@ set nolazyredraw
 " autocomplete this is both in command line mode and in file completion
 set wildmode=longest,list,full
 set wildmenu
-set wildignore+=*.out,*.aux,*.toc,*/undodir/*
+set wildignore+=*.out,*.aux,*.toc,*/undodir/*,*.o
 " set wildignore+=*.jpg,*.png,*.pdf,*.ps,*.eps
 
 " where to look for include headers
@@ -346,6 +346,11 @@ inoremap <leader>w <ESC>:w<CR>
 inoremap <leader>q <ESC>:call SmartClose()<CR>
 noremap <leader>Q :wqall<CR>
 inoremap <leader>Q <ESC>:wqall<CR>
+noremap <leader>x :nohls<CR> <BAR> :call LeaderX()<CR>
+nnoremap H :call BigH(0)<CR>
+vnoremap H <ESC>:call BigH(1)<CR>
+nnoremap L :call BigL(0)<CR>
+vnoremap L <ESC>:call BigL(1)<CR>
 
 " Number increment/decrement
 set <A-a>=a
@@ -391,7 +396,7 @@ map <RIGHT> :bn<CR>
 " toggle current fold
 noremap <silent> <space> za
 set foldlevel=1000
-" close all folds
+" close all folds but current
 noremap <F9> zM
 " open all folds
 noremap <F10> zR
@@ -433,7 +438,7 @@ set tags=./tags;
 
 " Quick spell fix
 noremap <leader>z [s1z=<C-o>
-inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
+inoremap <leader>z <C-g>u<ESC>b[s1z=`]a<C-g>u
 
 
 " information
@@ -744,6 +749,8 @@ hi CtrlPMode1 ctermbg=238 ctermfg=180
 " {{{2 UltiSnips =========================================
 
 let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " }}}2 UltiSnips =========================================
 " {{{2 YouCompleteMe =====================================
@@ -767,6 +774,7 @@ let g:ycm_key_list_select_completion = ['<TAB>', '<DOWN>']
 let g:ycm_filepath_completion_use_working_dir = 1
 let g:ycm_extra_conf_globlist = ['./*']
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_add_preview_to_completeopt = 0
 
 " }}}2 YouCompleteMe =====================================
 " {{{2 TagHighlight ======================================
