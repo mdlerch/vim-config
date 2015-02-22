@@ -261,8 +261,8 @@ set nolazyredraw
 " autocomplete this is both in command line mode and in file completion
 set wildmode=longest,list,full
 set wildmenu
-set wildignore+=*.out,*.aux,*.toc,*/undodir/*,*.o
-" set wildignore+=*.jpg,*.png,*.pdf,*.ps,*.eps
+set wildignore+=*.out,*.aux,*.toc,*/undodir/*,*.o,*.log
+set wildignore+=*.jpg,*.png,*.pdf,*.ps,*.eps
 
 " where to look for include headers
 set path+=/home/mike/R/x86_64-unknown-linux-gnu-library/3.1/Rcpp/include/**
