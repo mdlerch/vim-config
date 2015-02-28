@@ -1,0 +1,27 @@
+extends tex
+extends r
+
+snippet < "code chunk" b
+<<${1:chunkname}>>=
+${2:code}
+
+@
+endsnippet
+
+snippet S "Sexpr"
+\Sexpr{${1:${VISUAL:rcode}}}
+endsnippet
+
+snippet setup
+<<setup, echo = FALSE, results = "hide", warning = FALSE>>=
+require(knitr)
+opts_chunk$set(echo = FALSE)
+opts_chunk$set(warning = FALSE)
+opts_chunk$set(results = "hide")
+# knit_hooks$set(inline = knitr:::.inline.hook.tex)
+# knitr::render_latex()
+library(xtable)
+@
+
+$0
+endsnippet

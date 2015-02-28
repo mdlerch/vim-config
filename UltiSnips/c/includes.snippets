@@ -1,0 +1,14 @@
+snippet inc "include statement" b
+#include <${1:math.h}>
+$0
+endsnippet
+
+snippet incl "include local header" b
+#include "${1:header}.h"
+$0
+endsnippet
+
+snippet inch "include this header" b
+#include "${1:`!p snip.rv = snip.basename + '.h'`}"
+$0
+endsnippet

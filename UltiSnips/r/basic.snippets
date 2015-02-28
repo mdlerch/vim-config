@@ -3,6 +3,7 @@ for (${1:i} in ${2:vector})
 {
 	${3:body}
 }
+
 $0
 endsnippet
 
@@ -10,41 +11,32 @@ snippet if "if statement" b
 if (${1:test})
 {
 	${2:body}
-}
-$0
+}$0
 endsnippet
 
 snippet else "else statement"
 else
 {
 	${1:body}
-}
-$0
+}$0
 endsnippet
 
 snippet elif "else if statement"
 else if (${1:test})
 {
 	${2:body}
-}
-$0
+}$0
 endsnippet
 
 snippet func "function" b
 ${1:funcname} <- function(${2:arguments})
 {
 	${3:body}
-	return($4)
 }
-$0
-endsnippet
-
-snippet h "plain file header" b
-#
-# ${1:Description}
-#
 
 $0
 endsnippet
 
-
+snippet ret "return value"
+return ${1:value}
+endsnippet

@@ -1,0 +1,44 @@
+snippet for "for loop" b
+for ${1:el} in ${2:list}:
+	{$3:body}
+
+$0
+endsnippet
+
+snippet while "while loop" b
+while ${1:expression}:
+	${2: body}
+
+$0
+endsnippet
+
+snippet if "if statement" b
+if ${1:test}:
+	${2: body}
+$0
+endsnippet
+
+snippet else "else statement"
+else:
+	${1:body}
+$0
+endsnippet
+
+snippet elif "else if statement"
+elif ${1:test}:
+	${2:body}
+$0
+endsnippet
+
+snippet func "function definition"
+def ${1:function}(${2:arglist}):
+	${3:body}
+
+$0
+endsnippet
+
+snippet ret "function return"
+return ${1:value}
+
+$0
+endsnippet

@@ -3,3 +3,33 @@ snippet snip "Snippet definition"
 $0
 `!p snip.rv = "endsnippet"`
 endsnippet
+
+snippet basic "Basic language snippets"
+`!p snip.rv = "snippet"` for "for loop" b
+${1:forloop}
+`!p snip.rv = "endsnippet"`
+
+`!p snip.rv = "snippet"` while "while loop" b
+${2:whileloop}
+`!p snip.rv = "endsnippet"`
+
+`!p snip.rv = "snippet"` if "if statement" b
+${3:ifstatement}
+`!p snip.rv = "endsnippet"`
+
+`!p snip.rv = "snippet"` else "else statement"
+${4:elsestatement}
+`!p snip.rv = "endsnippet"`
+
+`!p snip.rv = "snippet"` elif "else if statement"
+${5:elseifstatement}
+`!p snip.rv = "endsnippet"`
+
+`!p snip.rv = "snippet"` func "function definition"
+${6:functiondefinition}
+`!p snip.rv = "endsnippet"`
+
+`!p snip.rv = "snippet"` ret "function return"
+${6:return}
+`!p snip.rv = "endsnippet"`
+endsnippet

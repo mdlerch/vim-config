@@ -73,7 +73,7 @@ def make_box(twidth, bwidth = None):
 
 endglobal
 
-snippet fold "A nice box over the full width" b
+snippet ffold "A fancier vim fold" b
 " {{{${1:1} ${2:foldname} `!p
 box = make_box(len(t[2]), 50)
 snip.rv = box[0]

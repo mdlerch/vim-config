@@ -152,4 +152,19 @@ snip.rv = e`
 $0
 endsnippet
 
+snippet h "Header comments" b
+`!p b,m,e,i = _get_comment_format()
+snip.rv = b`
+`!p b,m,e,i = _get_comment_format()
+snip.rv = b` ${1:Short Description}
+`!p b,m,e,i = _get_comment_format()
+snip.rv = b`
+`!p b,m,e,i = _get_comment_format()
+snip.rv = b` ${2:Longer Description}
+`!p b,m,e,i = _get_comment_format()
+snip.rv = b`
+
+$0
+endsnippet
+
 # vim:ft=snippets:foldmethod=marker

@@ -18,7 +18,22 @@ require(knitr)
 opts_chunk$set(echo = FALSE)
 opts_chunk$set(warning = FALSE)
 opts_chunk$set(results = "hide")
+# knit_hooks$set(inline = knitr:::.inline.hook.tex)
+# knitr::render_latex()
+library(xtable)
 \`\`\`
+
+$0
+endsnippet
+
+snippet yaml
+---
+title: ${1:title}
+author: ${2:author}
+output:
+	${3:pdf_document|html_document:}
+		${4:template: cscrs}
+---
 
 $0
 endsnippet
