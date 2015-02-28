@@ -13,7 +13,6 @@ Plug 'benekastah/neomake'
 Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
-Plug 'itchyny/calendar.vim'
 Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'reedes/vim-wordy'
@@ -39,9 +38,8 @@ Plug 'vim-scripts/gnuplot.vim'
 
 " colorschemes
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
+Plug 'git@github.com:mdlerch/vim-yttrium.git'
 Plug 'git@github.com:mdlerch/rainbow'
-Plug 'altercation/vim-colors-solarized'
-Plug 'endel/vim-github-colorscheme'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'junegunn/seoul256.vim'
 Plug 'romainl/Apprentice'
@@ -311,27 +309,33 @@ autocmd FileType rbrowser call UnmatchWhite()
 
 highlight MatchParen cterm=NONE
 
+" }}} 1 Color and appearance
+" {{{1 statusline ========================================
+
 " statusline
 hi User1 ctermbg=234 ctermfg=110
 hi User2 ctermbg=238 ctermfg=180
 hi User3 ctermbg=234 ctermfg=196
 set laststatus=2
 set statusline=
-set statusline+=%#User1#
-set statusline+=%f\           " relative filename
-set statusline+=%#User3#
+set statusline+=%#status2#
+set statusline+=%{fugitive#statusline()}  " git branch
+set statusline+=%#status1#
+set statusline+=\            " space
+set statusline+=%f\          " relative filename
+set statusline+=%#status3#
 set statusline+=%R\           " readonly
 set statusline+=%m\           " modified
-set statusline+=%#User1#
+set statusline+=%#status1#
 set statusline+=%=
-set statusline+=%#User2#
+set statusline+=%#status2#
 set statusline+=\ %Y\         " filetype
-set statusline+=%#User1#
+set statusline+=%#status1#
 set statusline+=\ %{noscrollbar#statusline(20,'-','=')}
 set statusline+=\ %5l:%-3c         " line and column
 set statusline+=\ [%L]        " total lines
 
-" }}}1 Color and appearance ==============================
+" }}}1 statusline ========================================
 " {{{1 Maps ==============================================
 
 " leaders
