@@ -29,3 +29,27 @@ imap <buffer> <LocalLeader>kk <Esc><Plug>RMakeRmd
 map  <buffer> <LocalLeader>ka <Plug>RMakeAll
 imap <buffer> <LocalLeader>ka <Esc><Plug>RMakeAll
 
+function! RmdFoldCodeSections()
+    let line = getline(v:lnum)
+    let pline = getline(v:lnum - 1)
+    if match(line, '\s*```{r') >= 0
+        return ">1"
+    elseif match(pline, '\s*```$') >= 0
+        return "0"
+    else
+        return "="
+    endif
+endfunction
+
+function! RmdFoldTextCodeSections()
+    let line = getline(v:foldstart)
+    let title = substitute(line, '^\s*```{r ', '', '')
+    let title = substitute(title, '\W.*$', '', '')
+    let title = "##  " . title . "  "
+    return title
+endfunction
+
+setlocal foldmethod=expr
+setlocal foldexpr=RmdFoldCodeSections()
+setlocal foldtext=RmdFoldTextCodeSections()
+setlocal foldcolumn=2

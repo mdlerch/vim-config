@@ -1,24 +1,16 @@
 " Start and stop
 map  <buffer> <LocalLeader>rf <Plug>RStart
-imap <buffer> <LocalLeader>rf <Esc><Plug>RStart
 map  <buffer> <LocalLeader>rq <Plug>RClose
-imap <buffer> <LocalLeader>rq <Esc><Plug>RClose
 map  <buffer> <LocalLeader>ro <Plug>RUpdateObjBrowser
-imap <buffer> <LocalLeader>ro <Esc><Plug>RUpdateObjBrowser
 
 " Send code
 map  <buffer> <LocalLeader>l  <Plug>RSendLine
-imap <buffer> <LocalLeader>l  <Esc><Plug>RSendLine
 map  <buffer> <LocalLeader>d  <Plug>RDSendLine
-imap <buffer> <LocalLeader>d  <Esc><Plug>RDSendLine
 map  <buffer> <LocalLeader>pd <Plug>RDSendParagraph
-imap <buffer> <LocalLeader>pd <Esc><Plug>RDSendParagraph
-map  <buffer> <LocalLeader>pe <Plug>RESendParagraph
-imap <buffer> <LocalLeader>pe <Esc><Plug>RESendParagraph
+map  <buffer> <LocalLeader>pp <Plug>RSendParagraph
+nmap <buffer> <LocalLeader>pe vip<Plug>RSendLine
 map  <buffer> <LocalLeader>aa <Plug>RSendFile
-imap <buffer> <LocalLeader>aa <Esc><Plug>RSendFile
-map  <buffer> <LocalLeader>ae <Plug>RESendFile
-imap <buffer> <LocalLeader>ae <Esc><Plug>RESendFile
+nmap <buffer> <LocalLeader>ae ggVG<Plug>RSendLine
 
 " R commands
 map  <buffer> <LocalLeader>rh <Plug>RHelp

@@ -57,7 +57,7 @@ call plug#end()
 function! SmartClose()
     " If file is non-mondifiable or readonly, etc, quit
     if &readonly || !&modifiable || expand('%:t:r') =~ "test" || &ft =~ "rdoc"
-        exe ":q!"
+        exe ":bd"
         return 0
     endif
 
@@ -386,6 +386,8 @@ noremap ]q :cnext<CR>
 noremap [q :cprev<CR>
 noremap ]v :lnext<CR>
 noremap [v :lprevious<CR>
+noremap <down> +
+noremap <up> -
 
 " formatting
 vnoremap < <gv
@@ -411,7 +413,7 @@ let e  = 2.71828182846
 vnoremap <leader>e ygvc<C-r>=<C-r>"<CR><ESC>
 
 " resync syntax
-noremap <F12> :redraw!<CR>:syntax sync fromstart<CR>:set foldmethod=marker<CR>
+noremap <F12> :redraw!<CR>:syntax sync fromstart<CR>
 
 " too lazy to press shift
 noremap ; :
@@ -840,8 +842,8 @@ let g:neomake_python_enabled_makers = ['pylint']
 autocmd BufWritePost *.py Neomake
 autocmd BufReadPost *.py Neomake
 
-autocmd BufReadPost *.py sign define dummy
-autocmd BufReadPost *.py execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+autocmd BufWinEnter *.py sign define dummy
+autocmd BufWinEnter *.py execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 " }}}3 python ============================================
 " {{{3 cpp ===============================================
@@ -881,8 +883,8 @@ let g:neomake_cpp_enabled_makers = ['clang']
 autocmd BufWritePost *.cpp Neomake
 autocmd BufReadPost *.cpp Neomake
 
-autocmd BufReadPost *.cpp sign define dummy
-autocmd BufReadPost *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+autocmd BufWinEnter *.cpp sign define dummy
+autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 " }}}3 cpp ===============================================
 " {{{3 r =================================================
@@ -901,8 +903,8 @@ let g:neomake_r_enabled_makers = ['lintr']
 autocmd BufWritePost *.R Neomake
 autocmd BufReadPost *.R Neomake
 
-autocmd BufReadPost *.R sign define dummy
-autocmd BufReadPost *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+autocmd BufWinEnter *.R sign define dummy
+autocmd BufWinEnter *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 " }}}3 r =================================================
 
