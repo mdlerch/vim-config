@@ -21,6 +21,7 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'justinmk/vim-sneak'
 
 " file tools
 Plug 'kien/ctrlp.vim'
@@ -186,7 +187,7 @@ set backspace=indent,eol,start
 
 " starting position
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
-au BufWinEnter GHI_* :1 | exe "normal! O" | startinsert
+au BufWinEnter GHI_* :1 | set tw=0 | exe "normal! O" | startinsert
 au BufWinEnter COMMIT* :1 | exe "normal! O" | startinsert
 
 " misc
@@ -444,7 +445,7 @@ set tags=./tags;
 
 " Quick spell fix
 noremap <leader>z [s1z=<C-o>
-inoremap <leader>z <C-g>u<ESC>b[s1z=`]a<C-g>u
+inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 
 
 " information
@@ -909,6 +910,13 @@ autocmd BufWinEnter *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bu
 " }}}3 r =================================================
 
 " }}}2 neomake ===========================================
+" {{{2 vim-sneak "
+
+nmap s <plug>(SneakStreak)
+nmap S <plug>(SneakStreakBackward)
+
+" 2}}} vim-sneak "
+
 
 " }}}1 Plugin options ====================================
 
