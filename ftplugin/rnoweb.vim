@@ -16,4 +16,7 @@ function! RnwInsertMode()
     endif
 endfunction
 
-autocmd InsertEnter *.Rnw call RnwInsertMode()
+augroup RNOWEB
+    autocmd!
+    autocmd InsertEnter *.Rnw call RnwInsertMode()
+augroup END

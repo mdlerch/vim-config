@@ -20,7 +20,10 @@ function! RmdInsertMode()
     endif
 endfunction
 
-autocmd InsertEnter *.Rmd call RmdInsertMode()
+augroup RMARKDOWN
+    autocmd!
+    autocmd InsertEnter *.Rmd call RmdInsertMode()
+augroup END
 
 map  <buffer> <LocalLeader>kh <Plug>RMakeHTML
 imap <buffer> <LocalLeader>kh <Esc><Plug>RMakeHTML

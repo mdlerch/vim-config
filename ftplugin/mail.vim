@@ -14,7 +14,7 @@ function! IsReply()
     endif
 endfunction
 
-augroup mail_filetype
+augroup MAIL
     autocmd!
     autocmd VimEnter /tmp/mutt* :call IsReply()
     autocmd VimEnter /tmp/mutt* :exe 'startinsert'

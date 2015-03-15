@@ -14,6 +14,7 @@ Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/goyo.vim'
 Plug 'majutsushi/tagbar'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
 Plug 'reedes/vim-wordy'
 Plug 'tommcdo/vim-exchange'
@@ -298,14 +299,20 @@ endif
 highlight ExtraWhitespace ctermfg=red guifg=red
 match ExtraWhitespace /\s\+$/
 " in insert mode do not highlight in current line
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup WHITESPACE
+    autocmd!
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
 
 function! UnmatchWhite()
     highlight ExtraWhitespace ctermfg=None guifg=None
 endfunction
 
-autocmd FileType rbrowser call UnmatchWhite()
+augroup UNMATCHWHITERBROWSER
+    autocmd!
+    autocmd FileType rbrowser call UnmatchWhite()
+augroup END
 
 
 highlight MatchParen cterm=NONE
@@ -440,7 +447,8 @@ cnoremap <leader><leader> <C-c>
 " tags
 noremap <leader>ts <C-w><C-]>
 noremap <leader>tj <C-]>
-noremap <leader>tr :!ctags -R<CR>
+" noremap <leader>tr :!ctags -R<CR>
+" handled by gutentag
 set tags=./tags;
 
 " Quick spell fix
@@ -537,13 +545,16 @@ vmap <leader>cc <Plug>Commentary
 
 " {{{3 vim-commentatry filetypes =========================
 
-autocmd FileType r setl commentstring=#\ %s
-autocmd FileType rmd setl commentstring=#\ %s
-autocmd FileType rnoweb setl commentstring=#\ %s
-autocmd FileType pandoc setl commentstring=<!--\ %s\ -->
-autocmd FileType gnuplot setl commentstring=#\ %s
-autocmd FileType cpp setl commentstring=//\ %s
-autocmd FileType c setl commentstring=//\ %s
+augroup VIMCOMMENTARY
+    autocmd!
+    autocmd FileType r setl commentstring=#\ %s
+    autocmd FileType rmd setl commentstring=#\ %s
+    autocmd FileType rnoweb setl commentstring=#\ %s
+    autocmd FileType pandoc setl commentstring=<!--\ %s\ -->
+    autocmd FileType gnuplot setl commentstring=#\ %s
+    autocmd FileType cpp setl commentstring=//\ %s
+    autocmd FileType c setl commentstring=//\ %s
+augroup END
 
 " }}}3 vim-commentatry filetypes =========================
 
@@ -791,6 +802,24 @@ map <F7> :UpdateTypesFile<CR>
 " }}}2 TagHighlight ======================================
 " {{{2 neomake ===========================================
 
+augroup NEOMAKEFILETYPES
+    autocmd!
+    autocmd BufWritePost *.py Neomake
+    autocmd BufReadPost *.py Neomake
+    autocmd BufWinEnter *.py sign define dummy
+    autocmd BufWinEnter *.py execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+    autocmd BufWritePost *.cpp Neomake
+    autocmd BufReadPost *.cpp Neomake
+    autocmd BufWinEnter *.cpp sign define dummy
+    autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+    autocmd BufWritePost *.R Neomake
+    autocmd BufReadPost *.R Neomake
+    autocmd BufWinEnter *.R sign define dummy
+    autocmd BufWinEnter *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+augroup END
+
 map <F1> :Neomake!<CR>
 map <F2> :Neomake! clean<CR>
 " set <F3> in project vimrc
@@ -840,12 +869,6 @@ let g:neomake_python_pylint_maker = {
 
 let g:neomake_python_enabled_makers = ['pylint']
 
-autocmd BufWritePost *.py Neomake
-autocmd BufReadPost *.py Neomake
-
-autocmd BufWinEnter *.py sign define dummy
-autocmd BufWinEnter *.py execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
 " }}}3 python ============================================
 " {{{3 cpp ===============================================
 
@@ -881,12 +904,6 @@ let g:neomake_cpp_clang_maker = {
 
 let g:neomake_cpp_enabled_makers = ['clang']
 
-autocmd BufWritePost *.cpp Neomake
-autocmd BufReadPost *.cpp Neomake
-
-autocmd BufWinEnter *.cpp sign define dummy
-autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
 " }}}3 cpp ===============================================
 " {{{3 r =================================================
 
@@ -900,12 +917,6 @@ let g:neomake_r_lintr_maker = {
     \ }
 
 let g:neomake_r_enabled_makers = ['lintr']
-
-autocmd BufWritePost *.R Neomake
-autocmd BufReadPost *.R Neomake
-
-autocmd BufWinEnter *.R sign define dummy
-autocmd BufWinEnter *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 " }}}3 r =================================================
 
