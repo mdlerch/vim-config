@@ -329,6 +329,7 @@ set statusline=
 set statusline+=%#status2#
 set statusline+=%{fugitive#statusline()}  " git branch
 set statusline+=%#status1#
+set statusline+=%{gutentags#statusline()}
 set statusline+=\            " space
 set statusline+=%f\          " relative filename
 set statusline+=%#status3#
