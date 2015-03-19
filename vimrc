@@ -12,7 +12,7 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-
 Plug 'benekastah/neomake'
 Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
+Plug 'git@github.com:mdlerch/goyo.vim'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
@@ -166,14 +166,12 @@ endfunction
 " close preview window
 " would be nice to also nohl, but doesn't work in a function (see help function)
 function! LeaderX()
-    exe 'norm! mX'
     pclose
     if &modifiable && !&readonly
         let _s=@/
         s/\s\+$//e
         let @/=_s
     endif
-    exe 'norm! `X'
 endfunction
 
 
@@ -362,7 +360,7 @@ inoremap <leader>w <ESC>:w<CR>
 inoremap <leader>q <ESC>:call SmartClose()<CR>
 noremap <leader>Q :wqall<CR>
 inoremap <leader>Q <ESC>:wqall<CR>
-noremap <leader>x :nohls<CR> <BAR> :call LeaderX()<CR>
+noremap <leader>x :call LeaderX()<CR> <BAR> :nohls<CR>
 nnoremap H :call BigH(0)<CR>
 vnoremap H <ESC>:call BigH(1)<CR>
 nnoremap L :call BigL(0)<CR>
@@ -492,6 +490,8 @@ function! ListFKeys()
 endfunction
 
 map <leader>F :call ListFKeys()<CR>
+
+noremap Y y$
 
 " }}}1 Maps ==============================================
 " {{{1 Plugin options ====================================
