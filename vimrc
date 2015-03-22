@@ -396,9 +396,9 @@ noremap gj j
 noremap gk k
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
-noremap <TAB> %
+" noremap <TAB> %
 " Tab is the same as C-i in terminal
-noremap <C-p> <C-i>
+" noremap <C-p> <C-i>
 noremap - ;
 noremap _ ,
 noremap ]q :cnext<CR>
