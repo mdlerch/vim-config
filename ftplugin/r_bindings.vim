@@ -34,6 +34,6 @@ map <buffer> <LocalLeader>gs :call RAction("summary")<CR>
 map <buffer> <LocalLeader>gp :call RAction("print")<CR>
 map <buffer> <LocalLeader>gs :call RAction("str")<CR>
 map <buffer> <LocalLeader>gd :call RAction("length")<CR>
-map <buffer> <LocalLeader>gn :call RAction("vim.names")<CR>
+map <buffer> <LocalLeader>gn :call RAction("names")<CR>
 map <buffer> <LocalLeader>gc :call RAction("coef")<CR>
 map <leader>ss Isummary(<ESC>A)<ESC>
