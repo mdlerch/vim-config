@@ -1,35 +1,21 @@
 VIMDIR = ~/vim-config
 LINK = ln -f -s
 
+define INFECT
+if ! [ -e $2 ]; then $(LINK) $(VIMDIR)/$(1) $(2) ; else echo "$2 already exists"; fi
+endef
 
-
-
-
-
+all: nvim_
 
 vim: vim_ bundle_
-nvim: nvim_ nvimrc_ nbundle_
+nvim: nvim_ bundle_
 
 vim_:
-	${LINK} ${VIMDIR} ~/.vim
+	if ! [ -e ~/.vim ] ; then $(LINK) $(VIMDIR) ~/.vim ; fi
 
-bundle_: vim_
+bundle_:
 	if ! [ -e ~/vim-bundle ] ; then mkdir ~/vim-bundle; fi
 	${LINK} ~/vim-bundle ${VIMDIR}
 
 nvim_:
-	${LINK} ${VIMDIR} ~/.nvim
-
-nvimrc_: vimrc
-	${LINK} ${VIMDIR}/vimrc ~/.nvimrc
-
-nbundle_: nvim_
-	if ! [ -e ~/vim-bundle ] ; then mkdir ~/vim-bundle; fi
-	${LINK} ~/vim-bundle ${VIMDIR}
-
-
-
-
-
-
-
+	if ! [ -e ~/.nvim ] ; then $(LINK) $(VIMDIR) ~/.nvim ; fi
