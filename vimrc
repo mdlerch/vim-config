@@ -365,6 +365,14 @@ vnoremap H <ESC>:call BigH(1)<CR>
 nnoremap L :call BigL(0)<CR>
 vnoremap L <ESC>:call BigL(1)<CR>
 
+if has('nvim')
+    tnoremap <leader><leader> <C-\><C-n>
+    tnoremap <C-w>h <C-\><C-n><C-w>h
+    tnoremap <C-w>j <C-\><C-n><C-w>j
+    tnoremap <C-w>k <C-\><C-n><C-w>k
+    tnoremap <C-w>l <C-\><C-n><C-w>l
+endif
+
 " Number increment/decrement
 set <A-a>=a
 set <A-x>=x
