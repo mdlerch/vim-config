@@ -181,7 +181,6 @@ endfunction
 " }}}1 Functions =========================================
 " {{{1 Options/settings ==================================
 
-set nocompatible
 syntax enable
 filetype plugin indent on
 set backspace=indent,eol,start
@@ -351,6 +350,8 @@ set statusline+=\ [%L]        " total lines
 let mapleader=","
 let maplocalleader=","
 
+noremap Y y$
+
 " buffer operations
 " noremap QQ <ESC>:qall<CR>
 noremap <leader>w :w<CR>
@@ -496,7 +497,7 @@ map <leader>F :call ListFKeys()<CR>
 
 let R_term = "urxvt"
 " let R_term_cmd = "urxvtc"
-" let R_in_buffer = 0
+let R_in_buffer = 1
 let R_assign = 0
 " let R_assign_map = "<space>--<space>"
 let R_rnowebchunk = 0
