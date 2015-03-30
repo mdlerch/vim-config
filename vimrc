@@ -23,6 +23,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'justinmk/vim-sneak'
+Plug 'octol/vim-cpp-enhanced-highlight'
 
 " file tools
 Plug 'kien/ctrlp.vim'
@@ -937,7 +938,11 @@ nmap s <plug>(SneakStreak)
 nmap S <plug>(SneakStreakBackward)
 
 " 2}}} vim-sneak "
+" {{{2 vim-cpp-enhanced-highlight "
 
+let g:cpp_class_scope_highlight = 1
+
+" 2}}} vim-cpp-enhanced-highlight "
 
 " }}}1 Plugin options ====================================
 
