@@ -263,6 +263,7 @@ set wildmode=longest,list,full
 set wildmenu
 set wildignore+=*.out,*.aux,*.toc,*/undodir/*,*.o,*.log
 set wildignore+=*.jpg,*.png,*.pdf,*.ps,*.eps
+set wildignore+=tags
 
 " where to look for include headers
 set path+=/home/mike/R/x86_64-unknown-linux-gnu-library/3.1/Rcpp/include/**
@@ -367,6 +368,7 @@ vnoremap H <ESC>:call BigH(1)<CR>
 nnoremap L :call BigL(0)<CR>
 vnoremap L <ESC>:call BigL(1)<CR>
 
+" terminal
 if has('nvim')
     tnoremap <leader><leader> <C-\><C-n>
     tnoremap <C-w>h <C-\><C-n><C-w>h
@@ -794,7 +796,7 @@ let g:ycm_filetype_blacklist = {
     \ }
 " I have removed: text, markdown, pandoc
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/default_ycm_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm/rcpp_ycm_conf.py'
 let g:ycm_show_diagnostics_ui = 0
 let g:ycm_cache_omnifunc = 0
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
