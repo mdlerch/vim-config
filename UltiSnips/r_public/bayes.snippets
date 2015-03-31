@@ -15,10 +15,6 @@ prop <- function(theta)
 	ifelse(y < 0, 0, ifelse(y > 1, 1, y))
 }
 
-llika <- function(x) { llik(x, y, N) }
-lpriora <- function(x) { lprior(x, 1, 1) }
-llikb <- function(x) { llik(x, y, N) }
-lpriorb <- function(x) { lprior(x, 3, 3) }
 mh <- function(llik, lprior, prop, start, n)
 {
 	chain <- array(NA, dim = c(n, length(start)))
@@ -26,12 +22,12 @@ mh <- function(llik, lprior, prop, start, n)
 
 	for (i in 2:n)
 	{
-		prop <- prop(chain[i - 1, ])
-		mh_lrat <- (llik(prop) + lprior(prop)) -
+		thetaprop <- prop(chain[i - 1, ])
+		mh_lrat <- (llik(prop) + lprior(thetaprop)) -
 		          (llik(chain[i - 1, ]) + lprior(chain[i - 1, ]))
 		if (log(runif(1)) < mh_lrat)
 		{
-			chain[i, ] <- prop
+			chain[i, ] <- thetaprop
 		}
 		else
 		{
@@ -40,6 +36,9 @@ mh <- function(llik, lprior, prop, start, n)
 	}
 	return(chain)
 }
+
+llika <- function(x) { llik(x, y, N) }
+lpriora <- function(x) { lprior(x, 1, 1) }
 
 chain <- mh(llika, lpriora, prop, .5, 10000)
 endsnippet
