@@ -491,8 +491,6 @@ endfunction
 
 map <leader>F :call ListFKeys()<CR>
 
-noremap Y y$
-
 " }}}1 Maps ==============================================
 " {{{1 Plugin options ====================================
 
