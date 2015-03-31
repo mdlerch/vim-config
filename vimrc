@@ -288,7 +288,7 @@ set cursorline
 colorscheme tungsten
 
 " additional highlighting
-highlight Comment cterm=italic gui=italic
+"highlight Comment cterm=italic gui=italic
 hi def link gitcommitOverflow Error
 
 if g:colors_name=="zenburn"
@@ -403,8 +403,8 @@ noremap - ;
 noremap _ ,
 noremap ]q :cnext<CR>
 noremap [q :cprev<CR>
-noremap ]v :lnext<CR>
-noremap [v :lprevious<CR>
+noremap ]l :lnext<CR>
+noremap [l :lprevious<CR>
 noremap <down> +
 noremap <up> -
 
