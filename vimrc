@@ -373,6 +373,7 @@ if has('nvim')
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
     tnoremap <C-w>l <C-\><C-n><C-w>l
+    nnoremap <leader>t :buf term<CR>
 endif
 
 " Number increment/decrement
@@ -499,6 +500,7 @@ map <leader>F :call ListFKeys()<CR>
 let R_term = "urxvt"
 " let R_term_cmd = "urxvtc"
 let R_in_buffer = 1
+let R_hl_term = 1
 let R_assign = 0
 " let R_assign_map = "<space>--<space>"
 let R_rnowebchunk = 0
@@ -544,6 +546,8 @@ let R_user_maps_only = 1
 let R_tmpdir = "/dev/shm/R_tmp_dir"
 let R_compldir = "~/.cache/Nvim-R"
 let R_synctex = 0
+
+let rout_follow_colorscheme = 1
 
 " }}}2 Vim-R-Plugin ======================================
 " {{{2 Gnuplot ===========================================

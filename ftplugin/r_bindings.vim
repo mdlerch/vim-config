@@ -1,6 +1,6 @@
 " Start and stop
 map  <buffer> <LocalLeader>rf <Plug>RStart
-map  <buffer> <LocalLeader>rq <Plug>RClose
+map  <buffer> <LocalLeader>rq :only<CR><BAR><Plug>RClose
 map  <buffer> <LocalLeader>ro <Plug>RUpdateObjBrowser
 
 " Send code
