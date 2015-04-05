@@ -373,7 +373,11 @@ if has('nvim')
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
     tnoremap <C-w>l <C-\><C-n><C-w>l
-    nnoremap <leader>t :buf term<CR>
+    nnoremap <leader>tt :buf term<CR>
+    augroup TERMBUFFER
+        autocmd!
+        autocmd TermOpen * setlocal nospell
+    augroup END
 endif
 
 " Number increment/decrement
