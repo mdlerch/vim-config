@@ -12,7 +12,6 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-
 Plug 'benekastah/neomake'
 Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
-Plug 'git@github.com:mdlerch/goyo.vim'
 Plug 'majutsushi/tagbar'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
@@ -22,7 +21,6 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'justinmk/vim-sneak'
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 " file tools
@@ -44,7 +42,6 @@ Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
 Plug 'git@github.com:mdlerch/rainbow'
 Plug 'gerw/vim-HiLinkTrace'
-Plug 'junegunn/seoul256.vim'
 Plug 'romainl/Apprentice'
 
 call plug#end()
@@ -176,6 +173,20 @@ endfunction
 
 
 " }}}2 Leader x, clear things ============================
+" {{{2 term jump
+
+" If a buffer named term:// is in a window, jump to it
+" jumps to first term://
+function! TermJump()
+    for winnum in range(1, winnr('$'))
+        if buffer_name(winbufnr(winnum)) =~ "term://"
+            let cmd = "normal! " . winnum . "w"
+            exe cmd
+            return
+        endif
+    endfor
+endfunction
+" 2}}}
 
 " }}}1 Functions =========================================
 " {{{1 Options/settings ==================================
@@ -373,10 +384,11 @@ if has('nvim')
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
     tnoremap <C-w>l <C-\><C-n><C-w>l
-    nnoremap <leader>tt :buf term<CR>
+    nnoremap <leader>tt :call TermJump()<CR>
     augroup TERMBUFFER
         autocmd!
         autocmd TermOpen * setlocal nospell
+        " autocmd BufEnter term://* startinsert
     augroup END
 endif
 
@@ -471,6 +483,7 @@ set tags=./tags;
 noremap <leader>z [s1z=<C-o>
 inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 
+map <F4> :call WritingOn()<CR>
 
 " information
 nnoremap <leader>W m[ggVGg<C-g><Esc>`[
