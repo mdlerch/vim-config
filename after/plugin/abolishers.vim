@@ -14,6 +14,7 @@ Abolish distnace distance
 Abolish distributoin distribution
 Abolish distributino distribution
 Abolish distributoin distribution
+Abolish eacho each
 Abolish eachother each\ other
 Abolish empgh emph
 Abolish fro for
