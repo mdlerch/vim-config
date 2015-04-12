@@ -660,33 +660,6 @@ let g:tagbar_map_togglefold = "<space>"
 nmap <F5> :TagbarToggle<CR>
 
 " }}}2 TagBar ============================================
-" {{{2 goyo ==============================================
-
-let g:goyo_width = 80
-let g:goyo_margin_top = 0
-let g:goyo_margin_bottom = 0
-let g:goyo_linenr = 1
-let g:goyo_status = 1
-
-function! s:goyo_enter()
-    let g:old_tw = &tw
-    set tw=0
-    set wm=0
-    set laststatus=2
-endfunction
-
-function! s:goyo_leave()
-    let cmd = "set tw=" . g:old_tw
-    exe cmd
-    set laststatus=2
-endfunction
-
-autocmd! User GoyoEnter
-autocmd! User GoyoLeave
-autocmd User GoyoEnter nested call <SID>goyo_enter()
-autocmd User GoyoLeave nested call <SID>goyo_leave()
-
-" }}}2 goyo ==============================================
 " {{{2 Rainbow ===========================================
 
 let g:rainbow_active = 1
@@ -953,12 +926,6 @@ let g:neomake_r_enabled_makers = ['lintr']
 " }}}3 r =================================================
 
 " }}}2 neomake ===========================================
-" {{{2 vim-sneak "
-
-nmap s <plug>(SneakStreak)
-nmap S <plug>(SneakStreakBackward)
-
-" 2}}} vim-sneak "
 " {{{2 vim-cpp-enhanced-highlight "
 
 let g:cpp_class_scope_highlight = 1
