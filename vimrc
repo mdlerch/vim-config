@@ -13,7 +13,6 @@ Plug 'benekastah/neomake'
 Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
 Plug 'majutsushi/tagbar'
-Plug 'ludovicchabant/vim-gutentags'
 Plug 'mbbill/undotree'
 Plug 'reedes/vim-wordy'
 Plug 'tommcdo/vim-exchange'
@@ -55,9 +54,13 @@ call plug#end()
 " If only one window, try to quit vim.
 " If multiple windows close the current window.
 function! SmartClose()
-    " If file is non-mondifiable or readonly, etc, quit
+    " If file is non-mondifiable or readonly, etc, delete buffer
     if &readonly || !&modifiable || expand('%:t:r') =~ "test" || &ft =~ "rdoc"
-        exe ":bd"
+        if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) <= 1
+            exe ":q"
+        else
+            exe ":bd"
+        endif
         return 0
     endif
 
@@ -71,10 +74,10 @@ function! SmartClose()
         else
             exe ":q"
         endif
-    " multiple windows: write this buffer, close
+    " multiple windows: write this buffer, delete buffer
     else
         exe ":w"
-        exe ":close"
+        exe ":bd"
     endif
 endfunction
 
@@ -339,7 +342,6 @@ set statusline=
 set statusline+=%#status2#
 set statusline+=%{fugitive#statusline()}  " git branch
 set statusline+=%#status1#
-set statusline+=%{gutentags#statusline()}
 set statusline+=\            " space
 set statusline+=%f\          " relative filename
 set statusline+=%#status3#
@@ -347,6 +349,8 @@ set statusline+=%R\           " readonly
 set statusline+=%m\           " modified
 set statusline+=%#status1#
 set statusline+=%=
+set statusline+=%{&fileencoding?&fileencoding:&encoding}
+set statusline+=\             " space
 set statusline+=%#status2#
 set statusline+=\ %Y\         " filetype
 set statusline+=%#status1#

@@ -25,12 +25,9 @@ augroup RMARKDOWN
     autocmd InsertEnter *.Rmd call RmdInsertMode()
 augroup END
 
-map  <buffer> <LocalLeader>kh <Plug>RMakeHTML
-imap <buffer> <LocalLeader>kh <Esc><Plug>RMakeHTML
 map  <buffer> <LocalLeader>kk <Plug>RMakeRmd
-imap <buffer> <LocalLeader>kk <Esc><Plug>RMakeRmd
+map  <buffer> <LocalLeader>kh <Plug>RMakeHTML
 map  <buffer> <LocalLeader>ka <Plug>RMakeAll
-imap <buffer> <LocalLeader>ka <Esc><Plug>RMakeAll
 
 function! RmdFoldCodeSections()
     let line = getline(v:lnum)

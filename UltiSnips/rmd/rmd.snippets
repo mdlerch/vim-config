@@ -2,10 +2,18 @@ snippet ` "code chunk" b
 \`\`\`{r ${1:chunkname}}
 ${2:code}
 \`\`\`
+$0
 endsnippet
 
-snippet `r "inline code"
-\`r ${1:code} \` $0
+snippet R "code chunk2" b
+\`\`\`{r ${1:chunkname}}
+${2:code}
+\`\`\`
+$0
+endsnippet
+
+snippet r "inline code"
+\`r ${1:code}\`$0
 endsnippet
 
 snippet setup
@@ -14,6 +22,7 @@ require(knitr)
 opts_chunk$set(echo = FALSE)
 opts_chunk$set(warning = FALSE)
 opts_chunk$set(results = "hide")
+opts_chunk$set(message = FALSE)
 # knit_hooks$set(inline = knitr:::.inline.hook.tex)
 # knitr::render_latex()
 library(xtable)
