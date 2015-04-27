@@ -479,8 +479,7 @@ cnoremap <leader><leader> <C-c>
 " tags
 noremap <leader>ts <C-w><C-]>
 noremap <leader>tj <C-]>
-" noremap <leader>tr :!ctags -R<CR>
-" handled by gutentag
+noremap <leader>tr :!ctags -R<CR>
 set tags=./tags;
 
 " Quick spell fix
