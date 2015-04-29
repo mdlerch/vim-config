@@ -188,7 +188,15 @@ function! TermJump()
             return
         endif
     endfor
+    for bufnum in range(1, bufnr('$'))
+        if buffer_name(bufnum) =~ "term://"
+            split
+            buffer term://
+            return
+        endif
+    endfor
 endfunction
+
 " 2}}}
 
 " }}}1 Functions =========================================
@@ -486,7 +494,7 @@ set tags=./tags;
 noremap <leader>z [s1z=<C-o>
 inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 
-map <F4> :call WritingOn()<CR>
+map <F4> :call WritingToggle()<CR>
 
 " information
 nnoremap <leader>W m[ggVGg<C-g><Esc>`[
@@ -598,6 +606,7 @@ augroup END
 
 let g:surround_no_mappings = 1
 
+nmap ys <Plug>Ysurround
 nmap Sd <Plug>Dsurround
 nmap Sc <Plug>Csurround
 nmap Sw ysiw

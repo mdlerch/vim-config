@@ -3,7 +3,10 @@ source ~/.vim/ftplugin/document_preview_bindings.vim
 setl expandtab
 setl tabstop=4
 setl shiftwidth=4
-setl tw=79
+if !exists("b:writing_on") || b:writing_on == 0
+    set tw=79
+endif
+
 setl comments=s:<!--
 setl comments+=m:\ \ \ \ 
 setl comments+=e:-->
