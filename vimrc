@@ -21,6 +21,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'amoffat/snake'
 
 " file tools
 Plug 'kien/ctrlp.vim'
@@ -42,6 +43,7 @@ Plug 'git@github.com:mdlerch/vim-yttrium.git'
 Plug 'git@github.com:mdlerch/rainbow'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'romainl/Apprentice'
+Plug '29decibel/codeschool-vim-theme'
 
 call plug#end()
 
@@ -414,7 +416,7 @@ vnoremap <silent> <A-x> :s/\%V-\=\d\+/\=submatch(0)-1/g<CR>gv
 
 " prevent accidents (I never use these default commands)
 noremap <C-a> <NOP>
-noremap q/ <NOP>
+" noremap q/ <NOP>
 noremap K <NOP>
 noremap Q <NOP>
 
@@ -639,6 +641,7 @@ vmap  <expr>  D        DVB_Duplicate()
 " }}}2 DragVisuals =======================================
 " {{{2 Pandoc ============================================
 
+let g:pandoc#syntax#style#emphases = 0
 let g:pandoc#syntax#conceal#use = 0
 let g:pandoc#syntax#protect#codeblocks = 0
 let g:pandoc_syntax_dont_use_conceal_for_rules =
@@ -856,13 +859,13 @@ let g:neomake_warning_sign = {
 let g:neomake_make_maker = {
     \ 'exe': 'make',
     \ 'args': [],
-    \ 'errorformat': '%f:%l%c: %m',
+    \ 'errorformat': '',
+    \ 'buffer_output': 1
     \ }
 
 let g:neomake_clean_maker = {
     \ 'exe': 'make',
     \ 'args': ['clean'],
-    \ 'errorformat': '%f:%l%c: %m',
     \ }
 
 " }}}3 make ==============================================
