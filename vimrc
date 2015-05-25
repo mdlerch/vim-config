@@ -38,9 +38,10 @@ Plug 'justinmk/vim-syntax-extra'
 Plug 'vim-scripts/gnuplot.vim'
 
 " colorschemes
+" Plug 'kien/rainbow_parentheses.vim'
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
-Plug 'git@github.com:mdlerch/rainbow'
+" Plug 'git@github.com:mdlerch/rainbow'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'romainl/Apprentice'
 Plug '29decibel/codeschool-vim-theme'
@@ -493,8 +494,10 @@ noremap <leader>tr :!ctags -R<CR>
 set tags=./tags;
 
 " Quick spell fix
-noremap <leader>z [s1z=<C-o>
-inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
+" noremap <leader>z [s1z=<C-o>
+" inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
+noremap <leader>z [sh1z=<C-o>
+inoremap <leader>z <C-g>u<ESC>[s1hz=`]a<C-g>u
 
 map <F4> :call WritingToggle()<CR>
 
@@ -675,64 +678,64 @@ let g:tagbar_map_togglefold = "<space>"
 nmap <F5> :TagbarToggle<CR>
 
 " }}}2 TagBar ============================================
-" {{{2 Rainbow ===========================================
+" " {{{2 Rainbow ===========================================
 
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-    \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-    \ 'ctermfgs': ['110', '187', '138', '180', '115', '131'],
-    \ 'operators': '_,_',
-    \ 'parentheses': [
-        \ 'start=/(/ end=/)/ fold',
-        \ 'start=/\[/ end=/\]/ fold',
-        \ 'start=/{/ end=/}/ fold'
-        \ ],
-    \ 'separately': {
-        \ '*': {},
-        \ 'tex': {
-            \ 'parentheses': [
-                \ 'start=/(/ end=/)/', 'start=/\[/ end=/\]/'
-                \],
-            \ },
-        \ 'vim': {
-            \ 'parentheses': [
-                \ 'start=/(/ end=/)/',
-                \ 'start=/\[/ end=/\]/',
-                \ 'start=/{/ end=/}/ fold',
-                \ 'start=/(/ end=/)/ containedin=vimFuncBody',
-                \ 'start=/\[/ end=/\]/ containedin=vimFuncBody',
-                \ 'start=/{/ end=/}/ fold containedin=vimFuncBody'
-                \ ],
-            \ },
-        \ 'xml': {
-            \ 'parentheses': [
-                \ 'start=/\v\<\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'))?)*\>/ end=#</\z1># fold'
-                \ ],
-            \ },
-        \ 'xhtml': {
-            \ 'parentheses': [
-                \ 'start=/\v\<\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'))?)*\>/ end=#</\z1># fold'
-                \ ],
-            \ },
-        \ 'html': {
-            \ 'parentheses': [
-                \ 'start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'
-                \ ],
-            \ },
-        \ 'php': {
-            \ 'parentheses': [
-                \ 'start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold', 'start=/(/ end=/)/ containedin=@htmlPreproc contains=@phpClTop', 'start=/\[/ end=/\]/ containedin=@htmlPreproc contains=@phpClTop', 'start=/{/ end=/}/ containedin=@htmlPreproc contains=@phpClTop'
-                \ ],
-            \ },
-        \ 'css': 0,
-        \ 'rnoweb': 0,
-        \ 'rmd': 0,
-        \ 'mail': 0,
-        \ 'pandoc': 0
-        \ }
-    \}
+" let g:rainbow_active = 1
+" let g:rainbow_conf = {
+"     \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+"     \ 'ctermfgs': ['110', '187', '138', '180', '115', '131'],
+"     \ 'operators': '_,_',
+"     \ 'parentheses': [
+"         \ 'start=/(/ end=/)/ fold',
+"         \ 'start=/\[/ end=/\]/ fold',
+"         \ 'start=/{/ end=/}/ fold'
+"         \ ],
+"     \ 'separately': {
+"         \ '*': {},
+"         \ 'tex': {
+"             \ 'parentheses': [
+"                 \ 'start=/(/ end=/)/', 'start=/\[/ end=/\]/'
+"                 \],
+"             \ },
+"         \ 'vim': {
+"             \ 'parentheses': [
+"                 \ 'start=/(/ end=/)/',
+"                 \ 'start=/\[/ end=/\]/',
+"                 \ 'start=/{/ end=/}/ fold',
+"                 \ 'start=/(/ end=/)/ containedin=vimFuncBody',
+"                 \ 'start=/\[/ end=/\]/ containedin=vimFuncBody',
+"                 \ 'start=/{/ end=/}/ fold containedin=vimFuncBody'
+"                 \ ],
+"             \ },
+"         \ 'xml': {
+"             \ 'parentheses': [
+"                 \ 'start=/\v\<\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'))?)*\>/ end=#</\z1># fold'
+"                 \ ],
+"             \ },
+"         \ 'xhtml': {
+"             \ 'parentheses': [
+"                 \ 'start=/\v\<\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'))?)*\>/ end=#</\z1># fold'
+"                 \ ],
+"             \ },
+"         \ 'html': {
+"             \ 'parentheses': [
+"                 \ 'start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'
+"                 \ ],
+"             \ },
+"         \ 'php': {
+"             \ 'parentheses': [
+"                 \ 'start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold', 'start=/(/ end=/)/ containedin=@htmlPreproc contains=@phpClTop', 'start=/\[/ end=/\]/ containedin=@htmlPreproc contains=@phpClTop', 'start=/{/ end=/}/ containedin=@htmlPreproc contains=@phpClTop'
+"                 \ ],
+"             \ },
+"         \ 'css': 0,
+"         \ 'rnoweb': 0,
+"         \ 'rmd': 0,
+"         \ 'mail': 0,
+"         \ 'pandoc': 0
+"         \ }
+"     \}
 
-" }}}2 Rainbow ===========================================
+" " }}}2 Rainbow ===========================================
 " {{{2 vim-wordy =========================================
 
 map <F8> :NextWordy<CR>
