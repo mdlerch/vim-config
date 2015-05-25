@@ -1,6 +1,7 @@
 source ~/.vim/ftplugin/r.vim
 source ~/.vim/ftplugin/markdown.vim
 source ~/.vim/ftplugin/r_knitr_bindings.vim
+runtime ftplugin/markdown_folding.vim
 
 setl spell
 
@@ -28,28 +29,3 @@ augroup END
 map  <buffer> <LocalLeader>kk <Plug>RMakeRmd
 map  <buffer> <LocalLeader>kh <Plug>RMakeHTML
 map  <buffer> <LocalLeader>ka <Plug>RMakeAll
-
-function! RmdFoldCodeSections()
-    let line = getline(v:lnum)
-    let pline = getline(v:lnum - 1)
-    if match(line, '\s*```{r') >= 0
-        return ">1"
-    elseif match(pline, '\s*```$') >= 0
-        return "0"
-    else
-        return "="
-    endif
-endfunction
-
-function! RmdFoldTextCodeSections()
-    let line = getline(v:foldstart)
-    let title = substitute(line, '^\s*```{r ', '', '')
-    let title = substitute(title, '\W.*$', '', '')
-    let title = "##  " . title . "  "
-    return title
-endfunction
-
-setlocal foldmethod=expr
-setlocal foldexpr=RmdFoldCodeSections()
-setlocal foldtext=RmdFoldTextCodeSections()
-setlocal foldcolumn=2

@@ -1,4 +1,5 @@
-source ~/.vim/ftplugin/document_preview_bindings.vim
+runtime ftplugin/document_preview_bindings.vim
+runtime ftplugin/markdown_folding.vim
 
 setl expandtab
 setl tabstop=4
@@ -23,4 +24,3 @@ inoremap <buffer> <leader>4 <C-g>u<ESC>I#### <ESC>A ####<ESC>o<C-g>u
 if expand("%:t") =~ "GHI_"
     setl fo-=t
 endif
-
