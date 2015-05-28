@@ -35,7 +35,16 @@ function! MarkdownFoldText()
     else
         let title = substitute(tline, '#', '', 'g')
         let title = substitute(title, '^[ ]\+\|[ ]\+$', '', 'g')
-        let title = "## " . title . " (" . foldlevel . ") " . foldsize . " lines"
+        if foldlevel == 1
+            let title = "## " . title
+        elseif foldlevel == 2
+            let title = "##   " . title
+        elseif foldlevel == 3
+            let title = "##     " . title
+        else
+            let title = "##        " . title
+        endif
+        let title = title . " (" . foldlevel . ") " . foldsize . " lines"
     endif
     return title
 endfunction
