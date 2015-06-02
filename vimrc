@@ -446,8 +446,8 @@ vnoremap > >gv
 nnoremap <leader>SS gg:%!git stripspace<CR><C-o>
 
 " buffer selection
-map <LEFT> <C-^>
-map <RIGHT> :bn<CR>
+" map <LEFT> <C-^>
+" map <RIGHT> :bn<CR>
 
 " folds
 " toggle current fold

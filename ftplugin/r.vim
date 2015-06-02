@@ -11,4 +11,4 @@ function! SwitchToHelp()
     endif
 endfunction
 
-map <buffer> <Right> :call SwitchToHelp() <CR>
+" map <buffer> <Right> :call SwitchToHelp() <CR>
