@@ -843,7 +843,7 @@ augroup NEOMAKEFILETYPES
     autocmd BufWinEnter *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 augroup END
 
-map <F1> :Neomake!<CR>
+map <F1> :Neomake! make<CR>
 map <F2> :Neomake! clean<CR>
 " set <F3> in project vimrc
 " map <F4> :Neomake<CR>
@@ -861,14 +861,15 @@ let g:neomake_warning_sign = {
 
 let g:neomake_make_maker = {
     \ 'exe': 'make',
-    \ 'args': [],
-    \ 'errorformat': '',
-    \ 'buffer_output': 1
+    \ 'args': ['all'],
+    \ 'buffer_output': 1,
+    \ 'remove_invalid_entries': 0
     \ }
 
 let g:neomake_clean_maker = {
     \ 'exe': 'make',
     \ 'args': ['clean'],
+    \ 'remove_invalid_entries': 0
     \ }
 
 " }}}3 make ==============================================
