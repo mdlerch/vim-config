@@ -530,8 +530,8 @@ map <leader>F :call ListFKeys()<CR>
 
 " {{{2 Vim-R-Plugin ======================================
 
-let R_term = "urxvt"
-" let R_term_cmd = "urxvtc"
+" let R_term = "roxterm"
+let R_term_cmd = "roxterm"
 let R_in_buffer = 1
 let R_hl_term = 1
 let R_assign = 0
