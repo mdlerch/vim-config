@@ -52,4 +52,4 @@ endfunction
 setlocal foldmethod=expr
 setlocal foldexpr=MarkdownFoldSection()
 setlocal foldtext=MarkdownFoldText()
-setlocal foldcolumn=2
+setlocal foldcolumn=1
