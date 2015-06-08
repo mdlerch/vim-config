@@ -57,7 +57,7 @@ call plug#end()
 " If only one window, try to quit vim.
 " If multiple windows close the current window.
 function! SmartClose()
-    " If file is non-mondifiable or readonly, etc, delete buffer
+    " If file is non-modifiable or readonly, etc, delete buffer
     if &readonly || !&modifiable || expand('%:t:r') =~ "test" || &ft =~ "rdoc"
         if len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) <= 1
             exe ":q"
@@ -77,10 +77,10 @@ function! SmartClose()
         else
             exe ":q"
         endif
-    " multiple windows: write this buffer, delete buffer
+    " multiple windows: write this buffer, close window
     else
         exe ":w"
-        exe ":bd"
+        exe ":close"
     endif
 endfunction
 
