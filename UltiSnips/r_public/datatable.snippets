@@ -12,3 +12,7 @@ snippet dtcol "Get columns"
 ${1:data}[ , ${2:cols}, with = FALSE]
 $0
 endsnippet
+
+snippet dtsummmany "Create multiple summaries by group"
+${1:data}[ , ${2:func_returns_list}(.SD), by = ${3:key}]
+endsnippet
