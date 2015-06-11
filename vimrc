@@ -39,6 +39,7 @@ Plug 'vim-scripts/gnuplot.vim'
 
 " colorschemes
 " Plug 'kien/rainbow_parentheses.vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
 " Plug 'git@github.com:mdlerch/rainbow'
@@ -345,9 +346,9 @@ highlight MatchParen cterm=NONE
 " {{{1 statusline ========================================
 
 " statusline
-hi User1 ctermbg=234 ctermfg=110
-hi User2 ctermbg=238 ctermfg=180
-hi User3 ctermbg=234 ctermfg=196
+hi User1 ctermbg=234 ctermfg=110 guibg=1c1c1c guifg=87afd7
+hi User2 ctermbg=238 ctermfg=180 guibg=444444 guifg=dfaf87
+hi User3 ctermbg=234 ctermfg=196 guibg=1c1c1c guifg=ff0000
 set laststatus=2
 set statusline=
 set statusline+=%#status2#
@@ -377,6 +378,14 @@ let mapleader=","
 let maplocalleader=","
 
 noremap Y y$
+
+" very magic
+nnoremap / /\v
+vnoremap / /\v
+cnoremap %s/ %smagic/
+cnoremap >s/ >smagic/
+nnoremap :g/ :g/\v
+nnoremap :g// :g//
 
 " buffer operations
 " noremap QQ <ESC>:qall<CR>

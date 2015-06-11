@@ -6,6 +6,7 @@ map  <buffer> <LocalLeader>ro <Plug>RUpdateObjBrowser
 " Send code
 map  <buffer> <LocalLeader>l  <Plug>RSendLine
 map  <buffer> <LocalLeader>d  <Plug>RDSendLine
+xmap <buffer> <LocalLeader>l  <Plug>RSendSelection
 map  <buffer> <LocalLeader>pd <Plug>RDSendParagraph
 map  <buffer> <LocalLeader>pp <Plug>RSendParagraph
 nmap <buffer> <LocalLeader>pe vip<Plug>RSendLine

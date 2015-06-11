@@ -1,4 +1,4 @@
-snippet rpack "R package" b
+snippet make_rpack "R package" b
 all: clean install
 
 PKG_VERS = $(shell grep -i ^version DESCRIPTION | cut -d : -d \  -f 2)
@@ -20,5 +20,5 @@ clean:
 
 $(PKG_NAME)_$(PKG_VERS).tar.gz: DESCRIPTION
 	${1:# }Rscript -e "Rcpp::compileAttributes()"
-	R CMD build ../${2:$(PKG_NAME)}
+	R CMD build ../\$(PKG_NAME)
 endsnippet
