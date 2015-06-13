@@ -29,9 +29,9 @@ Plug 'rking/ag.vim'
 
 " filetype and syntax
 Plug 'git@github.com:mdlerch/vim-gnuplot.git'
+Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/vim-mc-stan.git'
-Plug 'git@github.com:mdlerch/vim-pandoc-syntax'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'abudden/taghighlight-automirror'
 Plug 'justinmk/vim-syntax-extra'
@@ -382,10 +382,10 @@ noremap Y y$
 " very magic
 nnoremap / /\v
 vnoremap / /\v
-cnoremap %s/ %smagic/
-cnoremap >s/ >smagic/
-nnoremap :g/ :g/\v
-nnoremap :g// :g//
+" cnoremap %s/ %smagic/
+" cnoremap >s/ >smagic/
+" nnoremap :g/ :g/\v
+" nnoremap :g// :g//
 
 " buffer operations
 " noremap QQ <ESC>:qall<CR>

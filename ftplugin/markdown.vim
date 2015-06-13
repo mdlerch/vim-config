@@ -1,9 +1,15 @@
 runtime ftplugin/document_preview_bindings.vim
 runtime ftplugin/markdown_folding.vim
 
+" If .md then use pandoc bindings.  If .rmd use Nvim-R Rmarkdown bindings
+if &ft !~? "rmd"
+    source ~/.vim/ftplugin/document_pandoc_bindings.vim
+endif
+
 setl expandtab
 setl tabstop=4
 setl shiftwidth=4
+
 if !exists("b:writing_on") || b:writing_on == 0
     set tw=79
 endif
