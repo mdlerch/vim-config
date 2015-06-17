@@ -802,6 +802,8 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
+let g:UltiSnipsUsePythonVersion=2
+
 " }}}2 UltiSnips =========================================
 " {{{2 YouCompleteMe =====================================
 
