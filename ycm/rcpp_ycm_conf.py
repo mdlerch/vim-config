@@ -47,9 +47,9 @@ flags = [
 '-isystem',
 '/usr/local/include',
 '-isystem',
-'/home/mike/R/x86_64-unknown-linux-gnu-library/3.1/RcppArmadillo/include',
+'/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/RcppArmadillo/include',
 '-isystem',
-'/home/mike/R/x86_64-unknown-linux-gnu-library/3.1/Rcpp/include',
+'/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/Rcpp/include',
 ]
 
 

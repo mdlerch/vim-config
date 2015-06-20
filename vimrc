@@ -831,6 +831,13 @@ let g:ycm_add_preview_to_completeopt = 0
 " }}}2 YouCompleteMe =====================================
 " {{{2 TagHighlight ======================================
 
+if ! exists('g:TagHighlightSettings')
+    let g:TagHighlightSettings = {}
+endif
+let g:TagHighlightSettings['ForcedPythonVariant'] = 'if_pyth'
+
+hi link CTagsDefinedName function
+
 map <F7> :UpdateTypesFile<CR>
 
 " }}}2 TagHighlight ======================================
@@ -908,9 +915,9 @@ let g:neomake_python_enabled_makers = ['pylint']
 " {{{3 cpp ===============================================
 
 let s:RcppArmadilloInclude =
-    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.1/RcppArmadillo/include/"
+    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/RcppArmadillo/include/"
 let s:RcppInclude =
-    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.1/Rcpp/include/"
+    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/Rcpp/include/"
 let s:RInclude = "/usr/include/R/"
 let s:RextInclude = "/usr/include/R/R_ext/"
 
