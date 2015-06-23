@@ -345,30 +345,60 @@ highlight MatchParen cterm=NONE
 " }}} 1 Color and appearance
 " {{{1 statusline ========================================
 
-" statusline
+set laststatus=2
+
+augroup status
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * call <SID>DoStatusLine()
+augroup END
+
+function! s:DoStatusLine()
+    for winnum in range(1, winnr('$'))
+        call setwinvar(winnum, '&statusline', '%!SetStatusLine(' . winnum . ')')
+    endfor
+endfunction
+
 hi User1 ctermbg=234 ctermfg=110 guibg=1c1c1c guifg=87afd7
 hi User2 ctermbg=238 ctermfg=180 guibg=444444 guifg=dfaf87
 hi User3 ctermbg=234 ctermfg=196 guibg=1c1c1c guifg=ff0000
-set laststatus=2
-set statusline=
-set statusline+=%#status2#
-set statusline+=%{fugitive#statusline()}  " git branch
-set statusline+=%#status1#
-set statusline+=\            " space
-set statusline+=%f\          " relative filename
-set statusline+=%#status3#
-set statusline+=%R\           " readonly
-set statusline+=%m\           " modified
-set statusline+=%#status1#
-set statusline+=%=
-set statusline+=%{&fileencoding?&fileencoding:&encoding}
-set statusline+=\             " space
-set statusline+=%#status2#
-set statusline+=\ %Y\         " filetype
-set statusline+=%#status1#
-set statusline+=\ %{noscrollbar#statusline(20,'-','=')}
-set statusline+=\ %5l:%-3c         " line and column
-set statusline+=\ [%L]        " total lines
+hi User4 ctermbg=238 ctermfg=234 guibg=444444 guifg=87afd7
+hi User5 ctermbg=238 ctermfg=234 guibg=444444 guifg=dfaf87
+hi User6 ctermbg=238 ctermfg=234 guibg=444444 guifg=ff0000
+
+function! SetStatusLine(winnum)
+    let active = !(a:winnum == winnr())
+
+    function! StatusColor(num, active)
+        let shift = 0
+        if a:active
+            let shift = shift + 3
+        endif
+        let col = a:num + shift
+        let out = "%" . col . "*"
+        return out
+    endfunction
+
+    let statline=""
+    let statline.=StatusColor(2, active)
+    let statline.='%{fugitive#statusline()}'  " git branch
+    let statline.=StatusColor(1, active)
+    let statline.=' '            " space
+    let statline.='%f '          " relative filename
+    let statline.=StatusColor(3, active)
+    let statline.='%R '           " readonly
+    let statline.='%m '           " modified
+    let statline.=StatusColor(1, active)
+    let statline.='%='
+    let statline.='%{&fileencoding?&fileencoding:&encoding}'
+    let statline.=' '            " space
+    let statline.=StatusColor(2, active)
+    let statline.=' %Y '         " filetype
+    let statline.=StatusColor(1, active)
+    let statline.=' %{noscrollbar#statusline(20,"-","=")}'
+    let statline.=' %5l:%-3c'         " line and column
+    let statline.=' [%L]'        " total lines
+    return statline
+endfunction
 
 " }}}1 statusline ========================================
 " {{{1 Maps ==============================================
@@ -607,7 +637,7 @@ augroup VIMCOMMENTARY
     autocmd FileType r setl commentstring=#\ %s
     autocmd FileType rmd setl commentstring=#\ %s
     autocmd FileType rnoweb setl commentstring=#\ %s
-    autocmd FileType pandoc setl commentstring=<!--\ %s\ -->
+    autocmd FileType markdown setl commentstring=<!--\ %s\ -->
     autocmd FileType gnuplot setl commentstring=#\ %s
     autocmd FileType cpp setl commentstring=//\ %s
     autocmd FileType c setl commentstring=//\ %s
