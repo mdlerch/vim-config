@@ -5,10 +5,9 @@ setl fo=cl
 iabbrev <buffer> -- <-
 
 function! SwitchToHelp()
-    let f="man/" . expand("%:t:r") . ".Rd"
-    if filereadable(f)
-        exe ":e " . f
-    endif
+    let f = expand('%:p:h') . "/../man/" . expand("%:t:r") . ".Rd"
+    echo f
+    exe ":e " . f
 endfunction
 
-" map <buffer> <Right> :call SwitchToHelp() <CR>
+map <buffer> <Leader>a :call SwitchToHelp() <CR>

@@ -441,7 +441,7 @@ if has('nvim')
     nnoremap <leader>tt :call TermJump()<CR>
     augroup TERMBUFFER
         autocmd!
-        autocmd TermOpen * setlocal nospell
+        autocmd TermOpen * setlocal nospell | setlocal nocursorline
         " autocmd BufEnter term://* startinsert
     augroup END
 endif
