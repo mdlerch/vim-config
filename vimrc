@@ -243,7 +243,8 @@ set showcmd
 set showmode
 set number
 set relativenumber
-set listchars=tab:▸\ ,eol:¬,trail:·
+" set listchars=tab:▸\ ,eol:¬,trail:·
+set listchars=tab:▸\ ,trail:·
 set list
 set splitbelow
 set splitright

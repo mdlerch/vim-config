@@ -7,7 +7,7 @@ iabbrev <buffer> -- <-
 function! SwitchToHelp()
     let f = expand('%:p:h') . "/../man/" . expand("%:t:r") . ".Rd"
     echo f
-    exe ":e " . f
+    exe ":sp " . f
 endfunction
 
 map <buffer> <Leader>a :call SwitchToHelp() <CR>
