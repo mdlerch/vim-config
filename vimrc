@@ -7,6 +7,7 @@ call plug#begin('~/.vim/bundle')
 "" completion
 Plug 'sirver/ultisnips'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
+" Plug 'Shougo/deoplete.nvim'
 
 " tools
 Plug 'benekastah/neomake'
@@ -22,6 +23,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'amoffat/snake'
+Plug 'git@github.com:mdlerch/repl.nvim.git'
+Plug 'vasconcelloslf/vim-interestingwords'
 
 " file tools
 Plug 'kien/ctrlp.vim'
@@ -859,6 +862,20 @@ let g:ycm_extra_conf_globlist = ['./*']
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_add_preview_to_completeopt = 0
 
+let g:ycm_semantic_triggers =  {
+\   'c' : ['->', '.'],
+\   'objc' : ['->', '.'],
+\   'ocaml' : ['.', '#'],
+\   'cpp,objcpp' : ['->', '.', '::'],
+\   'perl' : ['->'],
+\   'php' : ['->', '::'],
+\   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+\   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
+\   'ruby' : ['.', '::'],
+\   'lua' : ['.', ':'],
+\   'erlang' : [':'],
+\ }
+
 " }}}2 YouCompleteMe =====================================
 " {{{2 TagHighlight ======================================
 
@@ -886,10 +903,10 @@ augroup NEOMAKEFILETYPES
     autocmd BufWinEnter *.cpp sign define dummy
     autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
-    autocmd BufWritePost *.R Neomake
-    autocmd BufReadPost *.R Neomake
-    autocmd BufWinEnter *.R sign define dummy
-    autocmd BufWinEnter *.R execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+    autocmd BufWritePost *.R,*.r Neomake
+    autocmd BufReadPost *.R,*.r Neomake
+    autocmd BufWinEnter *.R,*.r sign define dummy
+    autocmd BufWinEnter *.R,*.r execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 augroup END
 
 map <F1> :Neomake! make<CR>
@@ -994,11 +1011,11 @@ let g:neomake_r_enabled_makers = ['lintr']
 " }}}3 r =================================================
 
 " }}}2 neomake ===========================================
-" {{{2 vim-cpp-enhanced-highlight "
+" {{{2 vim-cpp-enhanced-highlight
 
 let g:cpp_class_scope_highlight = 1
 
-" 2}}} vim-cpp-enhanced-highlight "
+" 2}}} vim-cpp-enhanced-highlight
 
 " }}}1 Plugin options ====================================
 
