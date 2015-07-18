@@ -1,7 +1,6 @@
 snippet make_pandoc_reveal "Pandoc Reveal" b
-pandocflags = -s -S -t revealjs -V theme=default -V transition=fade --slidel-level 2 --mathjax --parse-raw
+pandocflags = -s -S -t revealjs -V transition=fade --slide-level 2 --mathjax --parse-raw
 
 ${1:output}: ${2:source}
-	pandoc $2 -o $1 pandocflags
-
+	pandoc $< -o $@ $(pandocflags)
 endsnippet
