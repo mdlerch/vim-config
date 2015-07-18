@@ -1,29 +1,29 @@
 snippet rdoc "RDoc skeletion" b
 \name{${1:`!p snip.rv = snip.basename`}}
-\alias{${1}}
-\title{${2:Capitalized, no period, 65 characters}}
+\alias{${2:`!p snip.rv = snip.basename`}}
+\title{${3:Capitalized, no period, 65 characters}}
 \description{
-    ${3:A few lines}
+    ${4:A few lines}
 }
-\usage{${4:fun(arg1, arg2, ...)}}
+\usage{${5:fun(arg1, arg2, ...)}}
 \arguments{
-    ${5:expand with \item}
+    ${6:expand with \item}
 }
 \details{
-    ${6:Extension of description}
+    ${7:Extension of description}
 }
-\value{${7:Return value, use item if list}}
-\references{${8:Use \url{} of \href{}{} for web}}
+\value{${8:Return value, use item if list}}
+\references{${9:Use \url{} of \href{}{} for web}}
 \note{
-   ${9:Not necessary, Pie charts are very bad way of ....}
+   ${10:Not necessary, Pie charts are very bad way of ....}
 }
-\author{${10:Michael Lerch \email{mdlerch@gmail.com}}}
-\seealso{${11:Point to code \code{\link{...}}}}
+\author{${11:Michael Lerch \email{mdlerch@gmail.com}}}
+\seealso{${12:Point to code \code{\link{...}}}}
 \examples{
-    ${12: Shown and run
+    ${13: Shown and run
     \dontrun{shown only}}
 }
-\keyword{${13:zero or more keywords}}
+\keyword{${14:zero or more keywords}}
 endsnippet
 
 snippet \item "Item for arguments"
