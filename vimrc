@@ -537,10 +537,10 @@ noremap <leader>tr :!ctags -R<CR>
 set tags=./tags;
 
 " Quick spell fix
-" noremap <leader>z [s1z=<C-o>
-" inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
-noremap <leader>z [sh1z=<C-o>
-inoremap <leader>z <C-g>u<ESC>[s1hz=`]a<C-g>u
+noremap <leader>z [s1z=<C-o>
+inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
+" noremap <leader>z [sh1z=<C-o>
+" inoremap <leader>z <C-g>u<ESC>[s1hz=`]a<C-g>u
 
 map <F4> :call WritingToggle()<CR>
 
