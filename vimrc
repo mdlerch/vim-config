@@ -117,15 +117,15 @@ command! -nargs=+ -complete=command Grab call Grab(<q-args>)
 " open %r.pdf in pdfviewer
 function! LaunchPDF()
     let pdfviewer = "zathura"
-    let cmd = "! " . pdfviewer . " " . expand("%:r") . ".pdf 2> /dev/null &"
-    exe cmd
+    let cmd = pdfviewer . " " . expand("%:r") . ".pdf 2> /dev/null"
+    call jobstart(cmd)
 endfunction
 
 " open %r.html in web browser
 function! LaunchHTML()
     let htmlviewer = "chromium"
-    let cmd = "!" . htmlviewer . " " . expand("%:r") . ".html &"
-    exe cmd
+    let cmd = htmlviewer . " " . expand("%:r") . ".html"
+    call jobstart(cmd)
 endfunction
 
 " }}}2 Launchers =========================================
