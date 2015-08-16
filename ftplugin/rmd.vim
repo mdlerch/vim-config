@@ -1,6 +1,6 @@
 source ~/.vim/ftplugin/r.vim
 source ~/.vim/ftplugin/markdown.vim
-source ~/.vim/ftplugin/r_knitr_bindings.vim
+source ~/.vim/ftplugin/knitr_bindings.vim
 runtime ftplugin/markdown_folding.vim
 
 setl spell

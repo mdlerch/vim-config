@@ -1,6 +1,6 @@
 source ~/.vim/ftplugin/r.vim
 source ~/.vim/ftplugin/document_preview_bindings.vim
-source ~/.vim/ftplugin/r_knitr_bindings.vim
+source ~/.vim/ftplugin/knitr_bindings.vim
 
 setl spell
 
