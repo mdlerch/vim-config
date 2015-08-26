@@ -166,14 +166,11 @@ function! BigL(vis)
 endfunction
 
 " }}}2 Beginning and end of line =========================
-" {{{2 Leader x, clear things ============================
+" {{{2 Kill white space ============================
 
-" Take care of a bunch of annoying things all in one function
 " remove trailing whitespace on current line
-" close preview window
-" would be nice to also nohl, but doesn't work in a function (see help function)
-function! LeaderX()
-    pclose
+
+function! KillWhiteSpace()
     if &modifiable && !&readonly
         let _s=@/
         s/\s\+$//e
@@ -429,7 +426,7 @@ inoremap <leader>w <ESC>:w<CR>
 inoremap <leader>q <ESC>:call SmartClose()<CR>
 noremap <leader>Q :wqall<CR>
 inoremap <leader>Q <ESC>:wqall<CR>
-noremap <leader>x :call LeaderX()<CR> <BAR> :nohls<CR>
+noremap <leader>x :pclose <BAR> :nohls<CR>
 nnoremap H :call BigH(0)<CR>
 vnoremap H <ESC>:call BigH(1)<CR>
 nnoremap L :call BigL(0)<CR>
@@ -544,17 +541,20 @@ inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 
 map <F4> :call WritingToggle()<CR>
 
+map <F5> :call KillWhiteSpace()<CR>
+imap <F5> :call KillWhiteSpace()<CR>
+
 " information
 nnoremap <leader>W m[ggVGg<C-g><Esc>`[
 
 function! ListFKeys()
-    let message = "F1 neomake! (project) \n" .
+    let message = "F1 neomake! make (project) \n" .
                 \ "F2 neomake! clean \n" .
                 \ "F3 (to be set in project vimrc) \n" .
-                \ "F4 (to be set in project vimrc) \n" .
-                \ "F5 toggle tag bar \n" .
-                \ "F6 update taghl \n" .
-                \ "F7 toggle gundo \n" .
+                \ "F4 WritingToggle\n" .
+                \ "F5 Kill white space \n" .
+                \ "F6 Undo Tree \n" .
+                \ "F7 taghl update\n" .
                 \ "F8 Wordy\n" .
                 \ "F9 close all folds \n" .
                 \ "F10 open all folds \n" .
@@ -717,8 +717,6 @@ let g:tagbar_type_r = {
     \ }
 
 let g:tagbar_map_togglefold = "<space>"
-
-nmap <F5> :TagbarToggle<CR>
 
 " }}}2 TagBar ============================================
 " " {{{2 Rainbow ===========================================
