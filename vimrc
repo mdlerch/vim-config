@@ -542,7 +542,7 @@ inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 map <F4> :call WritingToggle()<CR>
 
 map <F5> :call KillWhiteSpace()<CR>
-imap <F5> :call KillWhiteSpace()<CR>
+imap <F5> <ESC>:call KillWhiteSpace()<CR>
 
 " information
 nnoremap <leader>W m[ggVGg<C-g><Esc>`[
