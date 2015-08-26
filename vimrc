@@ -340,7 +340,6 @@ augroup UNMATCHWHITERBROWSER
     autocmd FileType rbrowser call UnmatchWhite()
 augroup END
 
-
 highlight MatchParen cterm=NONE
 
 " }}} 1 Color and appearance
