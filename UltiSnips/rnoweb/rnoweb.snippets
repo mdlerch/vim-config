@@ -22,3 +22,14 @@ library(xtable)
 
 $0
 endsnippet
+
+snippet R "code chunk" b
+<<${1:chunkname}>>=
+${2:code}
+
+@
+endsnippet
+
+snippet r "Sexpr"
+\Sexpr{${1:${VISUAL:rcode}}}
+endsnippet
