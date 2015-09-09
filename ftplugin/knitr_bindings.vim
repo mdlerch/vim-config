@@ -9,12 +9,12 @@ map  <buffer> <LocalLeader>kn <Plug>RKnit
 function! BuildDocNoR()
     let cmd = "Rscript -e \""
     if &ft =~ "RMD"
-        let cmd = cmd . "rmarkdown::render(\'" . expand('%') . "\')\""
+        let cmd = cmd . "library(rmarkdown); render(\'" . expand('%') . "\')\""
     elseif &ft =~ "RNOWEB"
-        let cmd = cmd . "knitr::knit2pdf(\'" . expand('%') . "\')\""
+        let cmd = cmd . "library(knitr); knit2pdf(\'" . expand('%') . "\')\""
     endif
     call jobstart(cmd)
 endfunction
 
 
-map <buffer> <LocalLeader>kg :call BuildDocNoR()
+map <buffer> <LocalLeader>kg :call BuildDocNoR()<CR>
