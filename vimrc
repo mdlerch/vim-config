@@ -4,51 +4,46 @@
 
 call plug#begin('~/.vim/bundle')
 
-"" completion
-Plug 'sirver/ultisnips'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
-" Plug 'Shougo/deoplete.nvim'
-
-" tools
+" general plugins
 Plug 'benekastah/neomake'
+Plug 'dhruvasagar/vim-table-mode'
 Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
-Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'reedes/vim-wordy'
+Plug 'sirver/ultisnips'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'amoffat/snake'
-Plug 'git@github.com:mdlerch/repl.nvim.git'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
 Plug 'vasconcelloslf/vim-interestingwords'
 
-" file tools
+
+" search
 Plug 'kien/ctrlp.vim'
 Plug 'rking/ag.vim'
 
 " filetype and syntax
+Plug 'abudden/taghighlight-automirror'
+Plug 'justinmk/vim-syntax-extra'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'vim-scripts/gnuplot.vim'
+
+" colorschemes
+" Plug 'kien/rainbow_parentheses.vim'
+Plug 'gerw/vim-HiLinkTrace'
+
+" My stuff
 Plug 'git@github.com:mdlerch/vim-gnuplot.git'
 Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/vim-mc-stan.git'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
-Plug 'abudden/taghighlight-automirror'
-Plug 'justinmk/vim-syntax-extra'
-Plug 'vim-scripts/gnuplot.vim'
-
-" colorschemes
-" Plug 'kien/rainbow_parentheses.vim'
-Plug 'altercation/vim-colors-solarized'
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
-" Plug 'git@github.com:mdlerch/rainbow'
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'romainl/Apprentice'
-Plug '29decibel/codeschool-vim-theme'
+Plug 'git@github.com:mdlerch/repl.nvim.git'
 
 call plug#end()
 
@@ -237,6 +232,9 @@ set smarttab
 set textwidth=80
 set formatoptions=clt
 set cinoptions+=(0
+set cpo+=J
+let formatprgs = "set formatprg=par\\ -w" . &tw
+exe formatprgs
 
 " vim appearance and behavior
 set showcmd
@@ -261,7 +259,6 @@ set linebreak
 set breakat-=-
 set breakat-=@
 " two spaces after a period or ? or ! for a new sentence
-set cpo+=J
 
 " vim generated files
 set undodir=~/.cache/vim/undodir
@@ -407,29 +404,21 @@ endfunction
 let mapleader=","
 let maplocalleader=","
 
-noremap Y y$
+nnoremap Y y$
 
 " very magic
 nnoremap / /\v
 vnoremap / /\v
-" cnoremap %s/ %smagic/
-" cnoremap >s/ >smagic/
-" nnoremap :g/ :g/\v
-" nnoremap :g// :g//
 
 " buffer operations
 " noremap QQ <ESC>:qall<CR>
-noremap <leader>w :w<CR>
-noremap <leader>q :call SmartClose()<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :call SmartClose()<CR>
 inoremap <leader>w <ESC>:w<CR>
 inoremap <leader>q <ESC>:call SmartClose()<CR>
-noremap <leader>Q :wqall<CR>
+nnoremap <leader>Q :wqall<CR>
 inoremap <leader>Q <ESC>:wqall<CR>
 noremap <leader>x :pclose <BAR> :nohls<CR>
-nnoremap H :call BigH(0)<CR>
-vnoremap H <ESC>:call BigH(1)<CR>
-nnoremap L :call BigL(0)<CR>
-vnoremap L <ESC>:call BigL(1)<CR>
 
 " terminal
 if has('nvim')
@@ -455,10 +444,14 @@ vnoremap <silent> <A-a> :s/\%V-\=\d\+/\=submatch(0)+1/g<CR>gv
 vnoremap <silent> <A-x> :s/\%V-\=\d\+/\=submatch(0)-1/g<CR>gv
 
 " prevent accidents (I never use these default commands)
-noremap <C-a> <NOP>
+nnoremap <C-a> <NOP>
+vnoremap <C-a> <NOP>
+inoremap <C-a> <NOP>
 " noremap q/ <NOP>
-noremap K <NOP>
-noremap Q <NOP>
+nnoremap K <NOP>
+nnoremap Q <NOP>
+" too lazy to press shift
+noremap ; :
 
 " motions
 noremap <expr>j (v:count ? 'j' : 'gj')
@@ -467,35 +460,33 @@ noremap gj j
 noremap gk k
 noremap <C-d> <C-d>zz
 noremap <C-u> <C-u>zz
-" noremap <TAB> %
-" Tab is the same as C-i in terminal
-" noremap <C-p> <C-i>
-noremap - ;
-noremap _ ,
-noremap ]q :cnext<CR>
-noremap [q :cprev<CR>
-noremap ]l :lnext<CR>
-noremap [l :lprevious<CR>
-noremap <down> +
-noremap <up> -
+nnoremap - ;
+nnoremap _ ,
+nnoremap ]q :cnext<CR>
+nnoremap [q :cprev<CR>
+nnoremap ]l :lnext<CR>
+nnoremap [l :lprevious<CR>
+nnoremap <down> +
+nnoremap <up> -
+nnoremap H :call BigH(0)<CR>
+xnoremap H <ESC>:call BigH(1)<CR>
+nnoremap L :call BigL(0)<CR>
+xnoremap L <ESC>:call BigL(1)<CR>
+nnoremap n nzzzxzv
+nnoremap N Nzzzxzv
 
 " formatting
 vnoremap < <gv
 vnoremap > >gv
 nnoremap <leader>SS gg:%!git stripspace<CR><C-o>
-
-" buffer selection
-" map <LEFT> <C-^>
-" map <RIGHT> :bn<CR>
+xnoremap gwp gq
 
 " folds
-" toggle current fold
 noremap <silent> <space> za
-set foldlevel=1000
-" close all folds but current
-noremap <F9> zM
-" open all folds
-noremap <F10> zR
+set foldlevel=1
+noremap <F9> zm
+noremap <F10> zr
+noremap <F11> zX
 
 " built-in calculator
 let pi = 3.14159265359
@@ -503,14 +494,8 @@ let e  = 2.71828182846
 vnoremap <leader>e ygvc<C-r>=<C-r>"<CR><ESC>
 
 " resync syntax
-noremap <F12> :redraw!<CR>:syntax sync fromstart<CR>
+nnoremap <F12> :redraw!<CR>:syntax sync fromstart<CR>
 
-" too lazy to press shift
-noremap ; :
-
-" move search result to middle
-nnoremap n nzzzMzv
-nnoremap N NzzzMzv
 
 " apply last command to all lines in visual selection
 vnoremap . :normal . <CR>
@@ -538,27 +523,26 @@ inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 " noremap <leader>z [sh1z=<C-o>
 " inoremap <leader>z <C-g>u<ESC>[s1hz=`]a<C-g>u
 
-map <F4> :call WritingToggle()<CR>
+map <F5> :call WritingToggle()<CR>
 
-map <F5> :call KillWhiteSpace()<CR>
-imap <F5> <ESC>:call KillWhiteSpace()<CR>
+map gs :call KillWhiteSpace()<CR>
 
 " information
 nnoremap <leader>W m[ggVGg<C-g><Esc>`[
 
 function! ListFKeys()
-    let message = "F1 neomake! make (project) \n" .
+    let message = "F1 neomake! make (all) \n" .
                 \ "F2 neomake! clean \n" .
-                \ "F3 (to be set in project vimrc) \n" .
-                \ "F4 WritingToggle\n" .
-                \ "F5 Kill white space \n" .
+                \ "F3 set in project? \n" .
+                \ "F4 neomake! diff \n" .
+                \ "F5 WritingToggle \n" .
                 \ "F6 Undo Tree \n" .
-                \ "F7 taghl update\n" .
-                \ "F8 Wordy\n" .
+                \ "F7 NONE\n" .
+                \ "F8 NONE\n" .
                 \ "F9 close all folds \n" .
                 \ "F10 open all folds \n" .
-                \ "F11 (open)\n" .
-                \ "F12 re-sync syntax and fold \n"
+                \ "F11 redo folding \n" .
+                \ "F12 re-sync syntax \n"
     :12new
     silent put=message
     set nomodified
@@ -644,6 +628,7 @@ augroup VIMCOMMENTARY
     autocmd FileType gnuplot setl commentstring=#\ %s
     autocmd FileType cpp setl commentstring=//\ %s
     autocmd FileType c setl commentstring=//\ %s
+    autocmd FileType sql setl commentstring=--\ %s
 augroup END
 
 " }}}3 vim-commentatry filetypes =========================
@@ -778,7 +763,7 @@ let g:tagbar_map_togglefold = "<space>"
 " " }}}2 Rainbow ===========================================
 " {{{2 vim-wordy =========================================
 
-map <F8> :NextWordy<CR>
+" use :NextWordy<CR> to start
 
 " Dictionaries:
 " ~/vim-bundle/vim-wordy/data/en/art-jargon.dic
@@ -883,8 +868,6 @@ let g:TagHighlightSettings['ForcedPythonVariant'] = 'if_pyth'
 
 hi link CTagsDefinedName function
 
-map <F7> :UpdateTypesFile<CR>
-
 " }}}2 TagHighlight ======================================
 " {{{2 neomake ===========================================
 
@@ -908,6 +891,7 @@ augroup END
 
 map <F1> :Neomake! make<CR>
 map <F2> :Neomake! clean<CR>
+map <F3> :Neomake! diff<CR>
 " set <F3> in project vimrc
 " map <F4> :Neomake<CR>
 
@@ -932,6 +916,12 @@ let g:neomake_make_maker = {
 let g:neomake_clean_maker = {
     \ 'exe': 'make',
     \ 'args': ['clean'],
+    \ 'remove_invalid_entries': 0
+    \ }
+
+let g:neomake_diff_maker = {
+    \ 'exe': 'make',
+    \ 'args': ['diff'],
     \ 'remove_invalid_entries': 0
     \ }
 
@@ -1013,6 +1003,12 @@ let g:neomake_r_enabled_makers = ['lintr']
 let g:cpp_class_scope_highlight = 1
 
 " 2}}} vim-cpp-enhanced-highlight
+" {{{2 interesting words "
+
+nnoremap <silent> <leader>k <Plug>InterestingWords
+nnoremap <silent> <leader>K <Plug>InterestingWordsClear
+
+" 2}}} interesting words "
 
 " }}}1 Plugin options ====================================
 
