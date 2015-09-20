@@ -20,10 +20,8 @@ Plug 'tpope/vim-surround'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
 Plug 'vasconcelloslf/vim-interestingwords'
 
-
 " search
 Plug 'kien/ctrlp.vim'
-Plug 'rking/ag.vim'
 
 " filetype and syntax
 Plug 'abudden/taghighlight-automirror'
@@ -235,6 +233,14 @@ set cinoptions+=(0
 set cpo+=J
 let formatprgs = "set formatprg=par\\ -w" . &tw
 exe formatprgs
+
+" grepping
+command! -nargs=+ -complete=file_in_path -bar Grep  silent! grep! <args> | copen
+
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column\ --vimgrep
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
 
 " vim appearance and behavior
 set showcmd
