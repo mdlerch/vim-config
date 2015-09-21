@@ -897,9 +897,8 @@ augroup END
 
 map <F1> :Neomake! make<CR>
 map <F2> :Neomake! clean<CR>
-map <F3> :Neomake! diff<CR>
 " set <F3> in project vimrc
-" map <F4> :Neomake<CR>
+map <F4> :Neomake! diff<CR>
 
 let g:neomake_error_sign = {
     \ 'text': '>',
