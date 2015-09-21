@@ -195,6 +195,33 @@ function! TermJump()
 endfunction
 
 " 2}}}
+" {{{2 ToggleMax
+
+" Toggle maximize a window (not what actually happens but recreates)
+
+let g:ToggleMaxPrev = ""
+
+function! ToggleMax()
+    " Only window, close if other tabs
+    if winnr('$') == 1
+        if tabpagenr('$') == 1
+            echo "Only tab remaining"
+            return
+        elseif g:ToggleMaxPrev == ""
+            echo "Not a maximized tab"
+        else
+            close
+            let cmd = ":tabn " . g:ToggleMaxPrev
+            exe cmd
+            let g:ToggleMaxPrev = ""
+        endif
+    else
+        let g:ToggleMaxPrev = tabpagenr()
+        :tab sp
+    endif
+endfunction
+
+" 2}}} ToggleMax
 
 " }}}1 Functions =========================================
 " {{{1 Options/settings ==================================
@@ -529,9 +556,10 @@ inoremap <leader>z <C-g>u<ESC>[s1z=`]a<C-g>u
 " noremap <leader>z [sh1z=<C-o>
 " inoremap <leader>z <C-g>u<ESC>[s1hz=`]a<C-g>u
 
-map <F5> :call WritingToggle()<CR>
-
-map gs :call KillWhiteSpace()<CR>
+" My function maps
+nmap <F5> :call WritingToggle()<CR>
+nmap gs :call KillWhiteSpace()<CR>
+nmap <C-w>m :call ToggleMax()<CR>
 
 " information
 nnoremap <leader>W m[ggVGg<C-g><Esc>`[
@@ -542,7 +570,7 @@ function! ListFKeys()
                 \ "F3 set in project? \n" .
                 \ "F4 neomake! diff \n" .
                 \ "F5 WritingToggle \n" .
-                \ "F6 Undo Tree \n" .
+                \ "F6 NONE \n" .
                 \ "F7 NONE\n" .
                 \ "F8 NONE\n" .
                 \ "F9 close all folds \n" .
@@ -663,7 +691,6 @@ vnoremap <leader>& :Tabularize /&<CR>
 
 let g:undotree_WindowLayout = 3
 let g:undotree_SplitWidth = 40
-nmap <F6> :UndotreeToggle<CR>
 
 " }}}2 undotree ==========================================
 " {{{2 DragVisuals =======================================
