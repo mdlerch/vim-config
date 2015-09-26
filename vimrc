@@ -11,6 +11,7 @@ Plug 'gcavallanti/vim-noscrollbar'
 Plug 'godlygeek/tabular'
 Plug 'mbbill/undotree'
 Plug 'reedes/vim-wordy'
+Plug 'rhysd/clever-f.vim'
 Plug 'sirver/ultisnips'
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-abolish'
@@ -170,7 +171,6 @@ function! KillWhiteSpace()
         let @/=_s
     endif
 endfunction
-
 
 " }}}2 Leader x, clear things ============================
 " {{{2 term jump
@@ -529,7 +529,6 @@ vnoremap <leader>e ygvc<C-r>=<C-r>"<CR><ESC>
 " resync syntax
 nnoremap <F12> :redraw!<CR>:syntax sync fromstart<CR>
 
-
 " apply last command to all lines in visual selection
 vnoremap . :normal . <CR>
 
@@ -842,7 +841,6 @@ let g:ctrlp_prompt_mappings = {
     \ }
 
 hi CtrlPMode1 ctermbg=238 ctermfg=180
-
 
 " }}}2 ctrlp =============================================
 " {{{2 UltiSnips =========================================
