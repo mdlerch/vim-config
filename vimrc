@@ -860,7 +860,6 @@ let g:ycm_filetype_blacklist = {
     \ 'notes' : 1,
     \ 'unite' : 1,
     \ 'vimwiki' : 1,
-    \ 'tex' : 1,
     \ }
 " I have removed: text, markdown, pandoc
 
