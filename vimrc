@@ -512,7 +512,6 @@ nnoremap N Nzzzxzv
 vnoremap < <gv
 vnoremap > >gv
 nnoremap <leader>SS gg:%!git stripspace<CR><C-o>
-xnoremap gwp gq
 
 " folds
 noremap <silent> <space> za
