@@ -44,7 +44,7 @@ function! MarkdownFoldText()
         else
             let title = "##        " . title
         endif
-        let title = title . " (" . foldlevel . ") " . foldsize . " lines"
+        let title = title . " [" . foldsize . " lines]" . " (" . foldlevel . ") "
     endif
     return title
 endfunction

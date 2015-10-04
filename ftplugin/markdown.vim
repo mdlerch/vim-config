@@ -18,14 +18,45 @@ setl comments=s:<!--
 setl comments+=m:\ \ \ \ 
 setl comments+=e:-->
 
-noremap  <buffer> <leader>1       <ESC>VypVr=<CR>
-inoremap <buffer> <leader>1 <C-g>u<ESC>VypVr=o<C-g>u
-noremap  <buffer> <leader>2       <ESC>VypVr-<CR>
-inoremap <buffer> <leader>2 <C-g>u<ESC>VypVr-o<C-g>u
-noremap  <buffer> <leader>3       <ESC>I### <ESC>A ###<ESC>
-inoremap <buffer> <leader>3 <C-g>u<ESC>I### <ESC>A ###<ESC>o<C-g>u
-noremap  <buffer> <leader>4       <ESC>I#### <ESC>A ####<ESC>
-inoremap <buffer> <leader>4 <C-g>u<ESC>I#### <ESC>A ####<ESC>o<C-g>u
+function! ToggleSection(level)
+    let thisline = getline('.')
+    let nextline = getline(line('.') + 1)
+    if a:level == 1
+        if nextline =~ '^=\+$'
+            exe "normal! jdd"
+        else
+            exe "normal VypVr="
+        endif
+    elseif a:level == 2
+        if nextline =~ '^-\+$'
+            exe "normal! jdd"
+        else
+            exe "normal VypVr-"
+        endif
+    elseif a:level == 3
+        if thisline =~ '^### .* ###$'
+            exe "normal! 04x$3h4x"
+        else
+            exe "normal! I### A ###"
+        endif
+    elseif a:level == 4
+        if thisline =~ '^#### .* ####$'
+            exe "normal! 04x$3h4x"
+        else
+            exe "normal! I#### A ####"
+        endif
+    endif
+endfunction
+
+
+noremap  <buffer> <leader>1 :call ToggleSection(1)<CR>
+inoremap <buffer> <leader>1 <C-g>u<ESC>:call ToggleSection(1)<C-g>u
+noremap  <buffer> <leader>2 :call ToggleSection(2)<CR>
+inoremap <buffer> <leader>2 <C-g>u<ESC>:call ToggleSection(2)<C-g>u
+noremap  <buffer> <leader>3 :call ToggleSection(3)<CR>
+inoremap <buffer> <leader>3 <C-g>u<ESC>:call ToggleSection(3)<ESC>A ###<ESC>o<C-g>u
+noremap  <buffer> <leader>4 :call ToggleSection(4)<CR>
+inoremap <buffer> <leader>4 <C-g>u<ESC>:call ToggleSection(4)<ESC>A ####<ESC>o<C-g>u
 
 if expand("%:t") =~ "GHI_"
     setl fo-=t
