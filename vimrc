@@ -245,6 +245,7 @@ set mouse=ni
 set nrformats=octal,hex,alpha
 set exrc
 set secure
+let g:sql_type_default = "mysql"
 
 " Default tab settings
 set expandtab
