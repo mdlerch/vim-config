@@ -43,6 +43,7 @@ Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
 Plug 'git@github.com:mdlerch/repl.nvim.git'
+Plug 'git@github.com:mdlerch/R-Vim-runtime'
 
 call plug#end()
 
@@ -520,6 +521,7 @@ set foldlevel=1
 noremap <F9> zm
 noremap <F10> zr
 noremap <F11> zX
+noremap ]z zj
 
 " built-in calculator
 let pi = 3.14159265359
