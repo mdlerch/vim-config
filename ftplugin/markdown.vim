@@ -21,42 +21,44 @@ setl comments+=e:-->
 function! ToggleSection(level)
     let thisline = getline('.')
     let nextline = getline(line('.') + 1)
+    let tline = line('.')
+
+    if nextline =~ '^=\+$'
+        exe "normal! jdd"
+    elseif nextline =~ '^-\+$'
+        exe "normal! jdd"
+    elseif thisline =~ '^### .* ###$'
+        exe "normal! 04x$3h4x"
+    elseif thisline =~ '^#### .* ####$'
+        exe "normal! 05x$4h5x"
+    endif
+
+    exe "normal " . tline . "G<CR>"
+
     if a:level == 1
-        if nextline =~ '^=\+$'
-            exe "normal! jdd"
-        else
-            exe "normal VypVr="
-        endif
+        exe "normal VypVr="
     elseif a:level == 2
-        if nextline =~ '^-\+$'
-            exe "normal! jdd"
-        else
-            exe "normal VypVr-"
-        endif
+        exe "normal VypVr-"
     elseif a:level == 3
-        if thisline =~ '^### .* ###$'
-            exe "normal! 04x$3h4x"
-        else
-            exe "normal! I### A ###"
-        endif
+        exe "normal! I### A ###"
     elseif a:level == 4
-        if thisline =~ '^#### .* ####$'
-            exe "normal! 04x$3h4x"
-        else
-            exe "normal! I#### A ####"
-        endif
+        exe "normal! I#### A ####"
+    endif
+
+    if line('.') == line('$')
+        exe "normal! o"
     endif
 endfunction
 
 
 noremap  <buffer> <leader>1 :call ToggleSection(1)<CR>
-inoremap <buffer> <leader>1 <C-g>u<ESC>:call ToggleSection(1)<C-g>u
+inoremap <buffer> <leader>1 <C-g>u<ESC>:call ToggleSection(1)<CR>
 noremap  <buffer> <leader>2 :call ToggleSection(2)<CR>
-inoremap <buffer> <leader>2 <C-g>u<ESC>:call ToggleSection(2)<C-g>u
+inoremap <buffer> <leader>2 <C-g>u<ESC>:call ToggleSection(2)<CR>
 noremap  <buffer> <leader>3 :call ToggleSection(3)<CR>
-inoremap <buffer> <leader>3 <C-g>u<ESC>:call ToggleSection(3)<ESC>A ###<ESC>o<C-g>u
+inoremap <buffer> <leader>3 <C-g>u<ESC>:call ToggleSection(3)<CR>
 noremap  <buffer> <leader>4 :call ToggleSection(4)<CR>
-inoremap <buffer> <leader>4 <C-g>u<ESC>:call ToggleSection(4)<ESC>A ####<ESC>o<C-g>u
+inoremap <buffer> <leader>4 <C-g>u<ESC>:call ToggleSection(4)<CR>
 
 if expand("%:t") =~ "GHI_"
     setl fo-=t
