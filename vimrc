@@ -596,7 +596,7 @@ map <leader>F :call ListFKeys()<CR>
 let R_term_cmd = "roxterm"
 let R_in_buffer = 1
 let R_hl_term = 1
-let R_setwidth = 0
+let R_setwidth = 1
 let R_assign = 0
 " let R_assign_map = "<space>--<space>"
 let R_rnowebchunk = 0

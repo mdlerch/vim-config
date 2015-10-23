@@ -8,6 +8,8 @@ function! MarkdownFoldSection()
         return ">1"
     elseif match(nline, '^----\+') >= 0
         return ">2"
+    elseif match(tline, '^---\+') >= 0 && match(pline, '^$') >= 0 && match(nline, '^$') >= 0
+        return ">2"
     elseif match(tline, '^### ') >= 0
         return ">3"
     elseif match(tline, '^#### ') >= 0
