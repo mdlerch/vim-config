@@ -33,6 +33,7 @@ Plug 'vim-scripts/gnuplot.vim'
 " colorschemes
 " Plug 'kien/rainbow_parentheses.vim'
 Plug 'gerw/vim-HiLinkTrace'
+Plug 'jnurmine/Zenburn'
 
 " My stuff
 Plug 'git@github.com:mdlerch/vim-gnuplot.git'
@@ -520,7 +521,7 @@ noremap <silent> <space> za
 set foldlevel=1
 noremap <F9> zm
 noremap <F10> zr
-noremap <F11> zX
+noremap <F11> zMzv
 noremap ]z zj
 
 " built-in calculator
@@ -595,6 +596,7 @@ map <leader>F :call ListFKeys()<CR>
 let R_term_cmd = "roxterm"
 let R_in_buffer = 1
 let R_hl_term = 1
+let R_setwidth = 0
 let R_assign = 0
 " let R_assign_map = "<space>--<space>"
 let R_rnowebchunk = 0

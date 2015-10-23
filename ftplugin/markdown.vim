@@ -33,7 +33,10 @@ function! ToggleSection(level)
         exe "normal! 05x$4h5x"
     endif
 
-    exe "normal " . tline . "G<CR>"
+    exe "normal! " . tline . "G<CR>"
+    if (foldclosed('.') > -1)
+        exe "normal! zO"
+    endif
 
     if a:level == 1
         exe "normal VypVr="
