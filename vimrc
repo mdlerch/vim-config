@@ -36,7 +36,6 @@ Plug 'gerw/vim-HiLinkTrace'
 Plug 'jnurmine/Zenburn'
 
 " My stuff
-Plug 'git@github.com:mdlerch/vim-gnuplot.git'
 Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/vim-mc-stan.git'
