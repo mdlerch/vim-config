@@ -35,7 +35,11 @@ function! ToggleSection(level)
 
     exe "normal! " . tline . "G<CR>"
     if (foldclosed('.') > -1)
+        let folded = 1
+        let foldline = tline - 1
         exe "normal! zO"
+    else
+        let folded = 0
     endif
 
     if a:level == 1
@@ -46,6 +50,13 @@ function! ToggleSection(level)
         exe "normal! I### A ###"
     elseif a:level == 4
         exe "normal! I#### A ####"
+    endif
+
+    if folded == 1
+        let curline = line('.')
+        exe "normal! " . foldline ."G<CR>"
+        exe "normal! za"
+        exe "normal! " . curline . "G<CR>"
     endif
 
     if line('.') == line('$')
