@@ -18,4 +18,4 @@ bundle_:
 	${LINK} ~/vim-bundle ${VIMDIR}
 
 nvim_:
-	if ! [ -e ~/.nvim ] ; then $(LINK) $(VIMDIR) ~/.nvim ; fi
+	if ! [ -e ~/config/nvim ] ; then $(LINK) $(VIMDIR) ~/.config/nvim ; fi

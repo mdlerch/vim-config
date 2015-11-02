@@ -299,7 +299,11 @@ set breakat-=@
 set undodir=~/.cache/vim/undodir
 set undofile
 set swapfile
-set viminfo+=n$HOME/.cache/vim/viminfo
+if has('nvim')
+    set shada+=n$HOME/.cache/vim/nviminfo
+else
+    set viminfo+=n$HOME/.cache/vim/viminfo
+endif
 let g:netrw_home = "~/.cache/"
 
 " searching
