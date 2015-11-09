@@ -394,15 +394,15 @@ function! s:DoStatusLine()
     endfor
 endfunction
 
-hi User1 ctermbg=234 ctermfg=110 guibg=1c1c1c guifg=87afd7
-hi User2 ctermbg=238 ctermfg=180 guibg=444444 guifg=dfaf87
-hi User3 ctermbg=234 ctermfg=196 guibg=1c1c1c guifg=ff0000
-hi User4 ctermbg=238 ctermfg=234 guibg=444444 guifg=87afd7
-hi User5 ctermbg=238 ctermfg=234 guibg=444444 guifg=dfaf87
-hi User6 ctermbg=238 ctermfg=234 guibg=444444 guifg=ff0000
+hi User1 ctermbg=234 ctermfg=110 guibg=#1c1c1c guifg=#87afd7
+hi User2 ctermbg=238 ctermfg=180 guibg=#444444 guifg=#dfaf87
+hi User3 ctermbg=234 ctermfg=196 guibg=#1c1c1c guifg=#ff0000
+hi User4 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
+hi User5 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
+hi User6 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
 
 function! SetStatusLine(winnum)
-    let active = !(a:winnum == winnr())
+    let active = (a:winnum == winnr())
 
     function! StatusColor(num, active)
         let shift = 0
