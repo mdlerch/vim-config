@@ -149,8 +149,9 @@ endfunction
 function! BigL(vis)
     let oldcol = col('.')
     exe 'norm! g$'
-    exe 'norm! B'
-    exe 'norm! E'
+    if getline('.')[col('.') - 1] =~ '\s'
+        exe 'norm! ge'
+    endif
     let newcol = col('.')
     if newcol == oldcol
         exe 'norm! g$'
@@ -402,11 +403,11 @@ hi User5 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
 hi User6 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
 
 function! SetStatusLine(winnum)
-    let active = (a:winnum == winnr())
+    let unactive = !(a:winnum == winnr())
 
-    function! StatusColor(num, active)
+    function! StatusColor(num, unactive)
         let shift = 0
-        if a:active
+        if a:unactive
             let shift = shift + 3
         endif
         let col = a:num + shift
@@ -415,21 +416,21 @@ function! SetStatusLine(winnum)
     endfunction
 
     let statline=""
-    let statline.=StatusColor(2, active)
+    let statline.=StatusColor(2, unactive)
     let statline.='%{fugitive#statusline()}'  " git branch
-    let statline.=StatusColor(1, active)
+    let statline.=StatusColor(1, unactive)
     let statline.=' '            " space
     let statline.='%f '          " relative filename
-    let statline.=StatusColor(3, active)
+    let statline.=StatusColor(3, unactive)
     let statline.='%R '           " readonly
     let statline.='%m '           " modified
-    let statline.=StatusColor(1, active)
+    let statline.=StatusColor(1, unactive)
     let statline.='%='
     let statline.='%{&fileencoding?&fileencoding:&encoding}'
     let statline.=' '            " space
-    let statline.=StatusColor(2, active)
+    let statline.=StatusColor(2, unactive)
     let statline.=' %Y '         " filetype
-    let statline.=StatusColor(1, active)
+    let statline.=StatusColor(1, unactive)
     let statline.=' %{noscrollbar#statusline(20,"-","=")}'
     let statline.=' %5l:%-3c'         " line and column
     let statline.=' [%L]'        " total lines
