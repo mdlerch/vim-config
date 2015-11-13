@@ -66,13 +66,13 @@ endfunction
 
 
 noremap  <buffer> <leader>1 :call ToggleSection(1)<CR>
-inoremap <buffer> <leader>1 <C-g>u<ESC>:call ToggleSection(1)<CR>
+inoremap <buffer> <leader>1 <C-g>u<ESC>:call ToggleSection(1)<CR>a
 noremap  <buffer> <leader>2 :call ToggleSection(2)<CR>
-inoremap <buffer> <leader>2 <C-g>u<ESC>:call ToggleSection(2)<CR>
+inoremap <buffer> <leader>2 <C-g>u<ESC>:call ToggleSection(2)<CR>a
 noremap  <buffer> <leader>3 :call ToggleSection(3)<CR>
-inoremap <buffer> <leader>3 <C-g>u<ESC>:call ToggleSection(3)<CR>
+inoremap <buffer> <leader>3 <C-g>u<ESC>:call ToggleSection(3)<CR>a
 noremap  <buffer> <leader>4 :call ToggleSection(4)<CR>
-inoremap <buffer> <leader>4 <C-g>u<ESC>:call ToggleSection(4)<CR>
+inoremap <buffer> <leader>4 <C-g>u<ESC>:call ToggleSection(4)<CR>a
 
 if expand("%:t") =~ "GHI_"
     setl fo-=t
