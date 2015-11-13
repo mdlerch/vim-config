@@ -22,16 +22,19 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-
 Plug 'vasconcelloslf/vim-interestingwords'
 
 " search
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
+Plug 'junegunn/fzf', { 'dir': '~/bin/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 " filetype and syntax
 Plug 'abudden/taghighlight-automirror'
 Plug 'justinmk/vim-syntax-extra'
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'vim-scripts/gnuplot.vim'
+Plug 'keith/tmux.vim'
 
 " colorschemes
-" Plug 'kien/rainbow_parentheses.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'jnurmine/Zenburn'
 
@@ -745,6 +748,39 @@ let g:tagbar_map_togglefold = "<space>"
 " }}}2 TagBar ============================================
 " " {{{2 Rainbow ===========================================
 
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+augroup rainbowparens
+  autocmd!
+  autocmd FileType r,cpp,vim RainbowParentheses
+augroup END
+
+let g:rainbow#colors = {
+\   'dark': [
+\     ['yellow',  'orange1'     ],
+\     ['green',   'yellow1'     ],
+\     ['cyan',    'greenyellow' ],
+\     ['magenta', 'green1'      ],
+\     ['60',     'springgreen1'],
+\     ['yellow',  'cyan1'       ],
+\     ['green',   'slateblue1'  ],
+\     ['cyan',    'magenta1'    ],
+\     ['magenta', 'purple1'     ]
+\   ],
+\   'light': [
+\     ['darkyellow',  'orangered3'    ],
+\     ['darkgreen',   'orange2'       ],
+\     ['blue',        'yellow3'       ],
+\     ['darkmagenta', 'olivedrab4'    ],
+\     ['60',         'green4'        ],
+\     ['darkyellow',  'paleturquoise3'],
+\     ['darkgreen',   'deepskyblue4'  ],
+\     ['blue',        'darkslateblue' ],
+\     ['darkmagenta', 'darkviolet'    ]
+\   ]
+\ }
+
+
 " let g:rainbow_active = 1
 " let g:rainbow_conf = {
 "     \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -833,22 +869,48 @@ let g:wordy#ring = [
     \ ]
 
 " }}}2 vim-wordy =========================================
+" {{{2 fzf "
+
+map <leader>f :FZF<CR>
+map <leader>b :Buffers<CR>
+map <leader>zl :BLines<CR>
+map <leader>zt :Tags<CR>
+
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:fzf_height = '20%'
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=180 ctermbg=234
+  highlight fzf2 ctermfg=110 ctermbg=234
+  highlight fzf3 ctermfg=196 ctermbg=234
+  setlocal statusline=%#fzf1#>>>>\ %#fzf2#fz%#fzf1#f\ narrower
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
+" 2}}} fzf "
+
 " {{{2 ctrlp =============================================
 
 " Use <C-f> to switch mode
 
-let g:ctrlp_map = '<leader>f'
-nnoremap <leader>b :CtrlPBuffer<CR>
-let g:ctrlp_extensions = ['tag']
-let g:ctrlp_working_path_mode = 'rw'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_max_depth = 10
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_prompt_mappings = {
-    \ 'CreateNewFile()': ['<F2>']
-    \ }
+" let g:ctrlp_map = '<leader>f'
+" nnoremap <leader>b :CtrlPBuffer<CR>
+" let g:ctrlp_extensions = ['tag']
+" let g:ctrlp_working_path_mode = 'rw'
+" let g:ctrlp_show_hidden = 1
+" let g:ctrlp_max_depth = 10
+" let g:ctrlp_open_new_file = 'r'
+" let g:ctrlp_prompt_mappings = {
+"     \ 'CreateNewFile()': ['<F2>']
+"     \ }
 
-hi CtrlPMode1 ctermbg=238 ctermfg=180
+" hi CtrlPMode1 ctermbg=238 ctermfg=180
 
 " }}}2 ctrlp =============================================
 " {{{2 UltiSnips =========================================
