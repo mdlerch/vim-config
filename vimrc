@@ -20,6 +20,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
 Plug 'vasconcelloslf/vim-interestingwords'
+" Plug 'Shougo/deoplete.nvim'
+
 
 " search
 " Plug 'kien/ctrlp.vim'
@@ -41,7 +43,7 @@ Plug 'jnurmine/Zenburn'
 " My stuff
 Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
-Plug 'git@github.com:mdlerch/vim-mc-stan.git'
+Plug 'git@github.com:mdlerch/mc-stan.vim.git'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
@@ -597,6 +599,23 @@ map <leader>F :call ListFKeys()<CR>
 " }}}1 Maps ==============================================
 " {{{1 Plugin options ====================================
 
+" {{{2 deoplete "
+
+let g:deoplete#enable_at_startup = 1
+
+let g:deoplete#omni_patterns = {}
+let g:deoplete#omni_patterns.r = ['\w\+\$\w*']
+
+let g:deoplete#sources = {}
+let g:deoplete#sources._ = ['buffer']
+let g:deoplete#sources.r = ['buffer', 'tag', 'omni']
+
+" inoremap <expr><Tab>  deoplete#mappings#manual_complete()
+" inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
+
+
+" 2}}} deoplete "
 " {{{2 Vim-R-Plugin ======================================
 
 " let R_term = "roxterm"
