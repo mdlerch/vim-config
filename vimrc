@@ -771,7 +771,7 @@ let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
 augroup rainbowparens
   autocmd!
-  autocmd FileType r,cpp,vim RainbowParentheses
+  autocmd FileType r,cpp,vim,sql,python RainbowParentheses
 augroup END
 
 let g:rainbow#colors = {
