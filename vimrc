@@ -472,6 +472,10 @@ if has('nvim')
     tnoremap <C-w>j <C-\><C-n><C-w>j
     tnoremap <C-w>k <C-\><C-n><C-w>k
     tnoremap <C-w>l <C-\><C-n><C-w>l
+    tnoremap <C-w>H <C-\><C-n><C-w>H
+    tnoremap <C-w>J <C-\><C-n><C-w>J
+    tnoremap <C-w>K <C-\><C-n><C-w>K
+    tnoremap <C-w>L <C-\><C-n><C-w>L
     nnoremap <leader>tt :call TermJump()<CR>
     augroup TERMBUFFER
         autocmd!
@@ -765,7 +769,7 @@ let g:tagbar_type_r = {
 let g:tagbar_map_togglefold = "<space>"
 
 " }}}2 TagBar ============================================
-" " {{{2 Rainbow ===========================================
+" {{{2 Rainbow ===========================================
 
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
 
@@ -776,86 +780,37 @@ augroup END
 
 let g:rainbow#colors = {
 \   'dark': [
-\     ['yellow',  'orange1'     ],
-\     ['green',   'yellow1'     ],
-\     ['cyan',    'greenyellow' ],
-\     ['magenta', 'green1'      ],
-\     ['60',     'springgreen1'],
-\     ['yellow',  'cyan1'       ],
-\     ['green',   'slateblue1'  ],
-\     ['cyan',    'magenta1'    ],
-\     ['magenta', 'purple1'     ]
+\     ['229', '#ffffaf'],
+\     ['110', '#87afd7'],
+\     ['180', '#dfaf87'],
+\     ['108', '#87af87'],
+\     ['103', '#8787af'],
+\     ['167', '#d75f5f'],
+\     ['227', '#ffff5f'],
+\     [ '38', '#00afd7'],
+\     ['208', '#ff8700'],
+\     ['113', '#87d75f'],
+\     [ '99', '#875fff'],
+\     ['162', '#d70087']
 \   ],
 \   'light': [
-\     ['darkyellow',  'orangered3'    ],
-\     ['darkgreen',   'orange2'       ],
-\     ['blue',        'yellow3'       ],
-\     ['darkmagenta', 'olivedrab4'    ],
-\     ['60',         'green4'        ],
-\     ['darkyellow',  'paleturquoise3'],
-\     ['darkgreen',   'deepskyblue4'  ],
-\     ['blue',        'darkslateblue' ],
-\     ['darkmagenta', 'darkviolet'    ]
+\     ['229', '#ffffaf'],
+\     ['110', '#87afd7'],
+\     ['180', '#dfaf87'],
+\     ['108', '#87af87'],
+\     ['103', '#8787af'],
+\     ['167', '#d75f5f'],
+\     ['162', '#d70087'],
+\     ['227', '#ffff5f'],
+\     [ '38', '#00afd7'],
+\     ['208', '#ff8700'],
+\     ['113', '#87d75f'],
+\     [ '99', '#875fff'],
+\     ['162', '#d70087']
 \   ]
 \ }
 
-
-" let g:rainbow_active = 1
-" let g:rainbow_conf = {
-"     \ 'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-"     \ 'ctermfgs': ['110', '187', '138', '180', '115', '131'],
-"     \ 'operators': '_,_',
-"     \ 'parentheses': [
-"         \ 'start=/(/ end=/)/ fold',
-"         \ 'start=/\[/ end=/\]/ fold',
-"         \ 'start=/{/ end=/}/ fold'
-"         \ ],
-"     \ 'separately': {
-"         \ '*': {},
-"         \ 'tex': {
-"             \ 'parentheses': [
-"                 \ 'start=/(/ end=/)/', 'start=/\[/ end=/\]/'
-"                 \],
-"             \ },
-"         \ 'vim': {
-"             \ 'parentheses': [
-"                 \ 'start=/(/ end=/)/',
-"                 \ 'start=/\[/ end=/\]/',
-"                 \ 'start=/{/ end=/}/ fold',
-"                 \ 'start=/(/ end=/)/ containedin=vimFuncBody',
-"                 \ 'start=/\[/ end=/\]/ containedin=vimFuncBody',
-"                 \ 'start=/{/ end=/}/ fold containedin=vimFuncBody'
-"                 \ ],
-"             \ },
-"         \ 'xml': {
-"             \ 'parentheses': [
-"                 \ 'start=/\v\<\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'))?)*\>/ end=#</\z1># fold'
-"                 \ ],
-"             \ },
-"         \ 'xhtml': {
-"             \ 'parentheses': [
-"                 \ 'start=/\v\<\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'))?)*\>/ end=#</\z1># fold'
-"                 \ ],
-"             \ },
-"         \ 'html': {
-"             \ 'parentheses': [
-"                 \ 'start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'
-"                 \ ],
-"             \ },
-"         \ 'php': {
-"             \ 'parentheses': [
-"                 \ 'start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold', 'start=/(/ end=/)/ containedin=@htmlPreproc contains=@phpClTop', 'start=/\[/ end=/\]/ containedin=@htmlPreproc contains=@phpClTop', 'start=/{/ end=/}/ containedin=@htmlPreproc contains=@phpClTop'
-"                 \ ],
-"             \ },
-"         \ 'css': 0,
-"         \ 'rnoweb': 0,
-"         \ 'rmd': 0,
-"         \ 'mail': 0,
-"         \ 'pandoc': 0
-"         \ }
-"     \}
-
-" " }}}2 Rainbow ===========================================
+" }}}2 Rainbow ===========================================
 " {{{2 vim-wordy =========================================
 
 " use :NextWordy<CR> to start
@@ -910,10 +865,29 @@ function! s:fzf_statusline()
   setlocal statusline=%#fzf1#>>>>\ %#fzf2#fz%#fzf1#f\ narrower
 endfunction
 
+autocmd VimEnter * command! -bang -nargs=* Ag
+    \ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': 
+    \ '--color dark,pointer:110,hl+:110,bg+:234'})
+
+autocmd VimEnter * command! -bang -nargs=* FZF
+    \ call fzf#vim#files(<q-args>, {'down': '40%', 'options': 
+    \ '--color dark,pointer:110,hl+:110,bg+:234'})
+
+autocmd VimEnter * command! -bang -nargs=* Buffers
+    \ call fzf#vim#buffers({'down': '40%', 'options': 
+    \ '--color dark,pointer:110,hl+:110,bg+:234'})
+
+autocmd VimEnter * command! -bang -nargs=* BLines
+    \ call fzf#vim#buffer_lines({'down': '40%', 'options': 
+    \ '--color dark,pointer:110,hl+:110,bg+:234'})
+
+autocmd VimEnter * command! -bang -nargs=* Tags
+    \ call fzf#vim#tags({'down': '40%', 'options': 
+    \ '--color dark,pointer:110,hl+:110,bg+:234'})
+
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " 2}}} fzf "
-
 " {{{2 ctrlp =============================================
 
 " Use <C-f> to switch mode
