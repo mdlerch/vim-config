@@ -36,7 +36,6 @@ Plug 'vim-scripts/gnuplot.vim'
 Plug 'keith/tmux.vim'
 
 " colorschemes
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'jnurmine/Zenburn'
 
@@ -47,6 +46,7 @@ Plug 'git@github.com:mdlerch/mc-stan.vim.git'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 Plug 'git@github.com:mdlerch/vim-tungsten.git'
 Plug 'git@github.com:mdlerch/vim-yttrium.git'
+Plug 'git@github.com:mdlerch/rainbow_parentheses.vim'
 Plug 'git@github.com:mdlerch/repl.nvim.git'
 Plug 'git@github.com:mdlerch/R-Vim-runtime'
 
