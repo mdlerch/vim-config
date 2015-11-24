@@ -845,7 +845,7 @@ let g:wordy#ring = [
 " }}}2 vim-wordy =========================================
 " {{{2 fzf "
 
-map <leader>f :FZF<CR>
+map <leader>f :exe 'Files ' . <SID>fzf_root()<CR>
 map <leader>b :Buffers<CR>
 map <leader>zl :BLines<CR>
 map <leader>zt :Tags<CR>
@@ -865,24 +865,30 @@ function! s:fzf_statusline()
   setlocal statusline=%#fzf1#>>>>\ %#fzf2#fz%#fzf1#f\ narrower
 endfunction
 
+fun! s:fzf_root()
+    let path = finddir(".git", expand("%:p:h").";")
+    return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
+endfun
+
+
 autocmd VimEnter * command! -bang -nargs=* Ag
-    \ call fzf#vim#ag(<q-args>, {'down': '40%', 'options': 
+    \ call fzf#vim#ag(<q-args>, {'down': '40%', 'options':
     \ '--color dark,pointer:110,hl+:110,bg+:234'})
 
-autocmd VimEnter * command! -bang -nargs=* FZF
-    \ call fzf#vim#files(<q-args>, {'down': '40%', 'options': 
-    \ '--color dark,pointer:110,hl+:110,bg+:234'})
+autocmd VimEnter * command! -bang -nargs=* Files
+    \ call fzf#vim#files(<q-args>, {'down': '40%', 'options':
+    \ '--color dark,pointer:110,hl+:110,bg+:234 --prompt "> "'})
 
 autocmd VimEnter * command! -bang -nargs=* Buffers
-    \ call fzf#vim#buffers({'down': '40%', 'options': 
+    \ call fzf#vim#buffers({'down': '40%', 'options':
     \ '--color dark,pointer:110,hl+:110,bg+:234'})
 
 autocmd VimEnter * command! -bang -nargs=* BLines
-    \ call fzf#vim#buffer_lines({'down': '40%', 'options': 
+    \ call fzf#vim#buffer_lines({'down': '40%', 'options':
     \ '--color dark,pointer:110,hl+:110,bg+:234'})
 
 autocmd VimEnter * command! -bang -nargs=* Tags
-    \ call fzf#vim#tags({'down': '40%', 'options': 
+    \ call fzf#vim#tags({'down': '40%', 'options':
     \ '--color dark,pointer:110,hl+:110,bg+:234'})
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
