@@ -1,0 +1,1 @@
+runtime ftplugin/document_preview_bindings.vim

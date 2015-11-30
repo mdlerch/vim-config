@@ -44,11 +44,12 @@ Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/mc-stan.vim.git'
 Plug 'git@github.com:mdlerch/Nvim-R.git'
-Plug 'git@github.com:mdlerch/vim-tungsten.git'
-Plug 'git@github.com:mdlerch/vim-yttrium.git'
+Plug 'git@github.com:mdlerch/tungsten.vim.git'
+Plug 'git@github.com:mdlerch/yttrium.vim.git'
 Plug 'git@github.com:mdlerch/rainbow_parentheses.vim'
 Plug 'git@github.com:mdlerch/repl.nvim.git'
 Plug 'git@github.com:mdlerch/R-Vim-runtime'
+Plug 'git@github.com:mdlerch/sql.nvim'
 
 call plug#end()
 
@@ -431,7 +432,7 @@ function! SetStatusLine(winnum)
     let statline.='%m '           " modified
     let statline.=StatusColor(1, unactive)
     let statline.='%='
-    let statline.='%{&fileencoding?&fileencoding:&encoding}'
+    " let statline.='%{&fileencoding?&fileencoding:&encoding}'
     let statline.=' '            " space
     let statline.=StatusColor(2, unactive)
     let statline.=' %Y '         " filetype
@@ -477,6 +478,7 @@ if has('nvim')
     tnoremap <C-w>K <C-\><C-n><C-w>K
     tnoremap <C-w>L <C-\><C-n><C-w>L
     nnoremap <leader>tt :call TermJump()<CR>
+    tnoremap gt <C-\><C-n>gt
     augroup TERMBUFFER
         autocmd!
         autocmd TermOpen * setlocal nospell | setlocal nocursorline
