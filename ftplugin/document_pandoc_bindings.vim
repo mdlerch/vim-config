@@ -1,7 +1,15 @@
+function! PandocExit(job_id, data)
+    if a:data == 0
+        echom 'Pandoc successful'
+    else
+        echom 'Pandoc fail' . string(a:data)
+    endif
+endfunction
+
 function! Pandoc(flags, ext)
     let cmd = a:flags . ' -o ' . expand("%:r") . '.' . a:ext . ' ' . expand("%")
     let cmd = 'pandoc ' . cmd
-    call jobstart(cmd)
+    call jobstart(cmd, {'on_exit': 'g:PandocExit'})
 endfunction
 
 

@@ -116,18 +116,28 @@ command! -nargs=+ -complete=command Grab call Grab(<q-args>)
 " {{{2 Launchers =========================================
 
 " open %r.pdf in pdfviewer
-function! LaunchPDF()
+function! LaunchPDF(...)
     let pdfviewer = "zathura"
-    let cmd = pdfviewer . " " . expand("%:r") . ".pdf 2> /dev/null"
+    if a:0 < 1
+        let cmd = pdfviewer . " " . expand("%:r") . ".pdf 2> /dev/null"
+    elseif a:0 == 1
+        let cmd = pdfviewer . " " . string(a:1) . " 2> /dev/null"
+    endif
     call jobstart(cmd)
 endfunction
+command! -nargs=+ -complete=file_in_path LaunchPDF call LaunchPDF(<q-args>)
 
 " open %r.html in web browser
-function! LaunchHTML()
+function! LaunchHTML(...)
     let htmlviewer = "chromium"
-    let cmd = htmlviewer . " " . expand("%:r") . ".html"
+    if a:0 < 1
+        let cmd = htmlviewer . " " . expand("%:r") . ".html"
+    elseif a:0 == 1
+        let cmd = htmlviewer . " " . string(a:1)
+    endif
     call jobstart(cmd)
 endfunction
+command! -nargs=+ -complete=file_in_path LaunchHTML call LaunchHTML(<q-args>)
 
 " }}}2 Launchers =========================================
 " {{{2 Beginning and end of line =========================
@@ -422,8 +432,10 @@ function! SetStatusLine(winnum)
     endfunction
 
     let statline=""
-    let statline.=StatusColor(2, unactive)
-    let statline.='%{fugitive#statusline()}'  " git branch
+    if winwidth(0) > 100
+        let statline.=StatusColor(2, unactive)
+        let statline.='%{fugitive#statusline()}'  " git branch
+    endif
     let statline.=StatusColor(1, unactive)
     let statline.=' '            " space
     let statline.='%f '          " relative filename
@@ -432,12 +444,16 @@ function! SetStatusLine(winnum)
     let statline.='%m '           " modified
     let statline.=StatusColor(1, unactive)
     let statline.='%='
-    " let statline.='%{&fileencoding?&fileencoding:&encoding}'
+    if winwidth(0) > 100
+        let statline.='%{&fileencoding?&fileencoding:&encoding}'
+    endif
     let statline.=' '            " space
     let statline.=StatusColor(2, unactive)
     let statline.=' %Y '         " filetype
     let statline.=StatusColor(1, unactive)
-    let statline.=' %{noscrollbar#statusline(20,"-","=")}'
+    if winwidth(0) > 100
+        let statline.=' %{noscrollbar#statusline(20,"-","=")}'
+    endif
     let statline.=' %5l:%-3c'         " line and column
     let statline.=' [%L]'        " total lines
     return statline

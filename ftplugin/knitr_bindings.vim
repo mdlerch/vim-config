@@ -6,6 +6,14 @@ map  <buffer> <LocalLeader>kk <Plug>RMakePDFK
 map  <buffer> <LocalLeader>kd <Plug>RMakePDFK
 map  <buffer> <LocalLeader>kn <Plug>RKnit
 
+function! BuildDocNoRExit(job_id, data)
+    if a:data == 0
+        echom 'Build successful'
+    else
+        echom 'Build fail' . string(a:data)
+    endif
+endfunction
+
 function! BuildDocNoR()
     let cmd = "Rscript -e \""
     if &ft =~ "RMD"
@@ -13,7 +21,7 @@ function! BuildDocNoR()
     elseif &ft =~ "RNOWEB"
         let cmd = cmd . "library(knitr); knit2pdf(\'" . expand('%') . "\')\""
     endif
-    call jobstart(cmd)
+    call jobstart(cmd, {'on_exit': 'g:BuildDocNoRExit'})
 endfunction
 
 
