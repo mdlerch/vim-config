@@ -1,7 +1,7 @@
 function! IsReply()
     if line('$') > 1
         " Strip old signature
-        :g/^>\s*--\s*$/,$ delete
+        :g/^>\+\s*--\s*$/,$ delete
         " :%!par w72q
         " match non empty lines that are not followed by lines that are empty or
         " just >.  Replace with original line plus a space

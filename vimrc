@@ -1,62 +1,8 @@
 " vimrc file for Michael Lerch, mdlerch [at] gmail
 
-" {{{1 Vim-Plug ==========================================
+" {{{1 Functions
 
-call plug#begin('~/.vim/bundle')
-
-" general plugins
-Plug 'benekastah/neomake'
-Plug 'dhruvasagar/vim-table-mode'
-Plug 'gcavallanti/vim-noscrollbar'
-Plug 'godlygeek/tabular'
-Plug 'mbbill/undotree'
-Plug 'reedes/vim-wordy'
-Plug 'rhysd/clever-f.vim'
-Plug 'sirver/ultisnips'
-Plug 'tommcdo/vim-exchange'
-Plug 'tpope/vim-abolish'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
-Plug 'vasconcelloslf/vim-interestingwords'
-" Plug 'Shougo/deoplete.nvim'
-
-
-" search
-" Plug 'kien/ctrlp.vim'
-Plug 'junegunn/fzf', { 'dir': '~/bin/fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
-
-" filetype and syntax
-Plug 'abudden/taghighlight-automirror'
-Plug 'justinmk/vim-syntax-extra'
-Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'vim-scripts/gnuplot.vim'
-Plug 'keith/tmux.vim'
-
-" colorschemes
-Plug 'gerw/vim-HiLinkTrace'
-Plug 'jnurmine/Zenburn'
-
-" My stuff
-Plug 'git@github.com:mdlerch/vim-markdown.git'
-Plug 'git@github.com:mdlerch/vim-julia.git'
-Plug 'git@github.com:mdlerch/mc-stan.vim.git'
-Plug 'git@github.com:mdlerch/Nvim-R.git'
-Plug 'git@github.com:mdlerch/tungsten.vim.git'
-Plug 'git@github.com:mdlerch/yttrium.vim.git'
-Plug 'git@github.com:mdlerch/rainbow_parentheses.vim'
-Plug 'git@github.com:mdlerch/repl.nvim.git'
-Plug 'git@github.com:mdlerch/R-Vim-runtime'
-Plug 'git@github.com:mdlerch/sql.nvim'
-
-call plug#end()
-
-" }}}1 vim-plug  ==========================================
-" {{{1 Functions =========================================
-
-" {{{2 Smart close =======================================
+" {{{2 Smart close
 
 " Save active buffer.
 " If only one window, try to quit vim.
@@ -89,16 +35,16 @@ function! SmartClose()
     endif
 endfunction
 
-" }}}2 Smart close =======================================
-" {{{2 Dos2unix ==========================================
+" }}}2 Smart close
+" {{{2 Dos2unix
 
 " convert endlines from dos to unix
 function! Dos2unix()
     :%s///g
 endf
 
-" }}}2 Dos2unix ==========================================
-" {{{2 Grab ==============================================
+" }}}2 Dos2unix
+" {{{2 Grab
 
 " place output of vim command into new split
 function! Grab(cmd)
@@ -112,8 +58,8 @@ function! Grab(cmd)
 endfunction
 command! -nargs=+ -complete=command Grab call Grab(<q-args>)
 
-" }}}2 Grab ==============================================
-" {{{2 Launchers =========================================
+" }}}2 Grab
+" {{{2 Launchers
 
 " open %r.pdf in pdfviewer
 function! LaunchPDF(...)
@@ -139,8 +85,8 @@ function! LaunchHTML(...)
 endfunction
 command! -nargs=+ -complete=file_in_path LaunchHTML call LaunchHTML(<q-args>)
 
-" }}}2 Launchers =========================================
-" {{{2 Beginning and end of line =========================
+" }}}2 Launchers
+" {{{2 Beginning and end of line
 
 " Smart motion to beginning of line
 " Move to first non white character on wrapped line.
@@ -177,8 +123,8 @@ function! BigL(vis)
     endif
 endfunction
 
-" }}}2 Beginning and end of line =========================
-" {{{2 Kill white space ============================
+" }}}2 Beginning and end of line
+" {{{2 Kill white space
 
 " remove trailing whitespace on current line
 
@@ -190,7 +136,7 @@ function! KillWhiteSpace()
     endif
 endfunction
 
-" }}}2 Leader x, clear things ============================
+" }}}2 Leader x, clear things
 " {{{2 term jump
 
 " If a buffer named term:// is in a window, jump to it
@@ -241,8 +187,8 @@ endfunction
 
 " 2}}} ToggleMax
 
-" }}}1 Functions =========================================
-" {{{1 Options/settings ==================================
+" 1}}} Functions
+" {{{1 Options/settings
 
 syntax enable
 filetype plugin indent on
@@ -321,7 +267,7 @@ if has('nvim')
 else
     set viminfo+=n$HOME/.cache/vim/viminfo
 endif
-let g:netrw_home = "~/.cache/"
+let g:netrw_home = expand("$HOME") . "/.cache/"
 
 " searching
 set incsearch
@@ -340,7 +286,7 @@ set nolazyredraw
 set wildmode=longest,list,full
 set wildmenu
 set wildignore+=*.out,*.aux,*.toc,*/undodir/*,*.o,*.log
-set wildignore+=*.jpg,*.png,*.pdf,*.ps,*.eps
+" set wildignore+=*.jpg,*.png,*.pdf,*.ps,*.eps
 set wildignore+=tags
 
 " where to look for include headers
@@ -351,116 +297,8 @@ set path+=/usr/include/R/**
 " session vars
 set sessionoptions+=tabpages,globals
 
-" }}}1 Options/settings ==================================
-" {{{1 Color and appearance ==============================
-
-" Gvim settings
-set guifont=Inconsolata\ LGC\ Bold\ 10
-
-" colorcolumn
-set colorcolumn=+1
-" let &colorcolumn="+".join(range(1,200),",+")
-
-set cursorline
-
-" color scheme
-" set background=dark
-colorscheme tungsten
-
-" additional highlighting
-"highlight Comment cterm=italic gui=italic
-hi def link gitcommitOverflow Error
-
-if g:colors_name=="zenburn"
-    highlight SpecialKey ctermfg=238
-endif
-
-highlight ExtraWhitespace ctermfg=red guifg=red
-match ExtraWhitespace /\s\+$/
-" in insert mode do not highlight in current line
-augroup WHITESPACE
-    autocmd!
-    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-augroup END
-
-function! UnmatchWhite()
-    highlight ExtraWhitespace ctermfg=None guifg=None
-endfunction
-
-augroup UNMATCHWHITERBROWSER
-    autocmd!
-    autocmd FileType rbrowser call UnmatchWhite()
-augroup END
-
-highlight MatchParen cterm=NONE
-
-" }}} 1 Color and appearance
-" {{{1 statusline ========================================
-
-set laststatus=2
-
-augroup status
-    autocmd!
-    autocmd VimEnter,WinEnter,BufWinEnter * call <SID>DoStatusLine()
-augroup END
-
-function! s:DoStatusLine()
-    for winnum in range(1, winnr('$'))
-        call setwinvar(winnum, '&statusline', '%!SetStatusLine(' . winnum . ')')
-    endfor
-endfunction
-
-hi User1 ctermbg=234 ctermfg=110 guibg=#1c1c1c guifg=#87afd7
-hi User2 ctermbg=238 ctermfg=180 guibg=#444444 guifg=#dfaf87
-hi User3 ctermbg=234 ctermfg=196 guibg=#1c1c1c guifg=#ff0000
-hi User4 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
-hi User5 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
-hi User6 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
-
-function! SetStatusLine(winnum)
-    let unactive = !(a:winnum == winnr())
-
-    function! StatusColor(num, unactive)
-        let shift = 0
-        if a:unactive
-            let shift = shift + 3
-        endif
-        let col = a:num + shift
-        let out = "%" . col . "*"
-        return out
-    endfunction
-
-    let statline=""
-    if winwidth(0) > 100
-        let statline.=StatusColor(2, unactive)
-        let statline.='%{fugitive#statusline()}'  " git branch
-    endif
-    let statline.=StatusColor(1, unactive)
-    let statline.=' '            " space
-    let statline.='%f '          " relative filename
-    let statline.=StatusColor(3, unactive)
-    let statline.='%R '           " readonly
-    let statline.='%m '           " modified
-    let statline.=StatusColor(1, unactive)
-    let statline.='%='
-    if winwidth(0) > 100
-        let statline.='%{&fileencoding?&fileencoding:&encoding}'
-    endif
-    let statline.=' '            " space
-    let statline.=StatusColor(2, unactive)
-    let statline.=' %Y '         " filetype
-    let statline.=StatusColor(1, unactive)
-    if winwidth(0) > 100
-        let statline.=' %{noscrollbar#statusline(20,"-","=")}'
-    endif
-    let statline.=' %5l:%-3c'         " line and column
-    let statline.=' [%L]'        " total lines
-    return statline
-endfunction
-
-" }}}1 statusline ========================================
-" {{{1 Maps ==============================================
+" 1}}} Options/settings
+" {{{1 Maps
 
 " leaders
 let mapleader=","
@@ -618,10 +456,15 @@ endfunction
 
 map <leader>F :call ListFKeys()<CR>
 
-" }}}1 Maps ==============================================
-" {{{1 Plugin options ====================================
+" 1}}} Maps
+" {{{1 Plugins
 
-" {{{2 deoplete "
+call plug#begin('~/.vim/bundle')
+
+" autocomplete {{{2
+" {{{3 (deoplete)
+
+" Plug 'Shougo/deoplete.nvim'
 
 let g:deoplete#enable_at_startup = 1
 
@@ -636,9 +479,131 @@ let g:deoplete#sources.r = ['buffer', 'tag', 'omni']
 " inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 
+" 3}}} deoplete
+" {{{3 YouCompleteMe
 
-" 2}}} deoplete "
-" {{{2 Vim-R-Plugin ======================================
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
+
+let g:ycm_filetype_blacklist = {
+    \ 'tagbar' : 1,
+    \ 'qf' : 1,
+    \ 'notes' : 1,
+    \ 'unite' : 1,
+    \ 'vimwiki' : 1,
+    \ }
+" I have removed: text, markdown, pandoc
+
+let g:ycm_global_ycm_extra_conf = '~/.vim/ycm/rcpp_ycm_conf.py'
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_cache_omnifunc = 0
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_key_list_select_completion = ['<TAB>', '<DOWN>']
+let g:ycm_filepath_completion_use_working_dir = 1
+let g:ycm_extra_conf_globlist = ['./*']
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_add_preview_to_completeopt = 0
+
+let g:ycm_semantic_triggers =  {
+\   'c' : ['->', '.'],
+\   'objc' : ['->', '.'],
+\   'ocaml' : ['.', '#'],
+\   'cpp,objcpp' : ['->', '.', '::'],
+\   'perl' : ['->'],
+\   'php' : ['->', '::'],
+\   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+\   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
+\   'ruby' : ['.', '::'],
+\   'lua' : ['.', ':'],
+\   'erlang' : [':'],
+\ }
+
+" 3}}} YouCompleteMe
+" {{{3 UltiSnips
+
+Plug 'sirver/ultisnips'
+
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+
+let g:UltiSnipsUsePythonVersion=2
+
+" 3}}} UltiSnips
+
+" 2}}} autocomplete
+" color {{{2
+Plug 'git@github.com:mdlerch/tungsten.vim.git'
+Plug 'git@github.com:mdlerch/yttrium.vim.git'
+Plug 'gerw/vim-HiLinkTrace'
+Plug 'jnurmine/Zenburn'
+
+" {{{3 Rainbow
+
+Plug 'git@github.com:mdlerch/rainbow_parentheses.vim'
+let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+
+augroup rainbowparens
+  autocmd!
+  autocmd FileType r,cpp,vim,sql,python RainbowParentheses
+augroup END
+
+let g:rainbow#colors = {
+\   'dark': [
+\     ['229', '#ffffaf'],
+\     ['110', '#87afd7'],
+\     ['180', '#dfaf87'],
+\     ['108', '#87af87'],
+\     ['103', '#8787af'],
+\     ['167', '#d75f5f'],
+\     ['227', '#ffff5f'],
+\     [ '38', '#00afd7'],
+\     ['208', '#ff8700'],
+\     ['113', '#87d75f'],
+\     [ '99', '#875fff'],
+\     ['162', '#d70087']
+\   ],
+\   'light': [
+\     ['229', '#ffffaf'],
+\     ['110', '#87afd7'],
+\     ['180', '#dfaf87'],
+\     ['108', '#87af87'],
+\     ['103', '#8787af'],
+\     ['167', '#d75f5f'],
+\     ['162', '#d70087'],
+\     ['227', '#ffff5f'],
+\     [ '38', '#00afd7'],
+\     ['208', '#ff8700'],
+\     ['113', '#87d75f'],
+\     [ '99', '#875fff'],
+\     ['162', '#d70087']
+\   ]
+\ }
+
+" 3}}} Rainbow
+" {{{3 interesting words
+
+Plug 'vasconcelloslf/vim-interestingwords'
+
+nnoremap <silent> <leader>k <Plug>InterestingWords
+nnoremap <silent> <leader>K <Plug>InterestingWordsClear
+
+" 3}}} interesting words
+
+" 2}}} color
+" filetype {{{2
+Plug 'git@github.com:mdlerch/vim-markdown.git'
+Plug 'git@github.com:mdlerch/vim-julia.git'
+Plug 'git@github.com:mdlerch/mc-stan.vim.git'
+Plug 'git@github.com:mdlerch/sql.nvim'
+Plug 'git@github.com:mdlerch/R-Vim-runtime'
+Plug 'keith/tmux.vim'
+Plug 'vim-scripts/gnuplot.vim'
+Plug 'justinmk/vim-syntax-extra'
+
+" {{{3 Vim-R-Plugin
+
+Plug 'git@github.com:mdlerch/Nvim-R.git'
 
 " let R_term = "roxterm"
 let R_term_cmd = "roxterm"
@@ -693,175 +658,160 @@ let R_synctex = 0
 
 let rout_follow_colorscheme = 1
 
-" }}}2 Vim-R-Plugin ======================================
-" {{{2 Gnuplot ===========================================
-" }}}2 Gnuplot ===========================================
-" {{{2 vim-commentary ====================================
+" }}}3 Vim-R-Plugin
+" {{{3 vim-cpp-enhanced-highlight
 
-imap <leader>cc <C-g>u<ESC><Plug>CommentaryLine
-nmap <leader>cc <Plug>CommentaryLine
-vmap <leader>cc <Plug>Commentary
+Plug 'octol/vim-cpp-enhanced-highlight'
 
-" {{{3 vim-commentatry filetypes =========================
+let g:cpp_class_scope_highlight = 1
 
-augroup VIMCOMMENTARY
+" 3}}} vim-cpp-enhanced-highlight
+" {{{3 TagHighlight
+
+Plug 'abudden/taghighlight-automirror'
+
+if ! exists('g:TagHighlightSettings')
+    let g:TagHighlightSettings = {}
+endif
+let g:TagHighlightSettings['ForcedPythonVariant'] = 'if_pyth'
+
+hi link CTagsDefinedName function
+
+" }}}3 TagHighlight
+
+" }}}2 filetype
+" run commands {{{2
+
+" {{{3 neomake
+
+Plug 'benekastah/neomake'
+
+augroup NEOMAKEFILETYPES
     autocmd!
-    autocmd FileType r setl commentstring=#\ %s
-    autocmd FileType rmd setl commentstring=#\ %s
-    autocmd FileType rnoweb setl commentstring=#\ %s
-    autocmd FileType markdown setl commentstring=<!--\ %s\ -->
-    autocmd FileType gnuplot setl commentstring=#\ %s
-    autocmd FileType cpp setl commentstring=//\ %s
-    autocmd FileType c setl commentstring=//\ %s
-    autocmd FileType sql setl commentstring=--\ %s
+    autocmd BufWritePost *.py Neomake
+    autocmd BufReadPost *.py Neomake
+    autocmd BufWinEnter *.py sign define dummy
+    autocmd BufWinEnter *.py execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+    autocmd BufWritePost *.cpp Neomake
+    autocmd BufReadPost *.cpp Neomake
+    autocmd BufWinEnter *.cpp sign define dummy
+    autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+
+    autocmd BufWritePost *.R,*.r Neomake
+    autocmd BufReadPost *.R,*.r Neomake
+    autocmd BufWinEnter *.R,*.r sign define dummy
+    autocmd BufWinEnter *.R,*.r execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 augroup END
 
-" }}}3 vim-commentatry filetypes =========================
+map <F1> :Neomake! make<CR>
+map <F2> :Neomake! clean<CR>
+" set <F3> in project vimrc
+map <F4> :Neomake! diff<CR>
 
-" }}}2 vim-commentary ====================================
-" {{{2 vim-surround ======================================
-
-let g:surround_no_mappings = 1
-
-nmap ys <Plug>Ysurround
-nmap Sd <Plug>Dsurround
-nmap Sc <Plug>Csurround
-nmap Sw ysiw
-nmap SW ysiW
-nmap Sa <Plug>Ysurround
-nmap Sl <Plug>Yssurround
-xmap Sa <Plug>VSurround
-
-" }}}2 vim-surround ======================================
-" {{{2 Tabularize ========================================
-
-vnoremap <leader>& :Tabularize /&<CR>
-
-" }}}2 Tabularize ========================================
-" {{{2 undotree ==========================================
-
-let g:undotree_WindowLayout = 3
-let g:undotree_SplitWidth = 40
-
-" }}}2 undotree ==========================================
-" {{{2 DragVisuals =======================================
-
-vmap  <expr>  <LEFT>   DVB_Drag('left')
-vmap  <expr>  <RIGHT>  DVB_Drag('right')
-vmap  <expr>  <DOWN>   DVB_Drag('down')
-vmap  <expr>  <UP>     DVB_Drag('up')
-vmap  <expr>  D        DVB_Duplicate()
-
-" }}}2 DragVisuals =======================================
-" {{{2 Pandoc ============================================
-
-let g:pandoc#syntax#style#emphases = 0
-let g:pandoc#syntax#conceal#use = 0
-let g:pandoc#syntax#protect#codeblocks = 0
-let g:pandoc_syntax_dont_use_conceal_for_rules =
-    \ ['codeblock_start', 'codeblock_delim', 'dashes', 'hrule']
-
-" }}}2 Pandoc ============================================
-" {{{2 calendar.vim ======================================
-
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-
-function! Cal()
-    :Calendar -view=week
-endfunction
-command! -nargs=0 Cal call Cal()
-
-" }}}2 calendar.vim ======================================
-" {{{2 TagBar ============================================
-
-let g:tagbar_type_r = {
-    \ 'ctagstype' : 'r',
-    \ 'kinds'     : [
-        \ 'f:Functions',
-        \ 'g:GlobalVariables',
-        \ 'v:FunctionVariables',
-        \ ]
+let g:neomake_error_sign = {
+    \ 'text': '>',
+    \ 'texthl': 'ErrorMsg',
+    \ }
+let g:neomake_warning_sign = {
+    \ 'text': '>',
+    \ 'texthl': 'WarningMsg',
     \ }
 
-let g:tagbar_map_togglefold = "<space>"
+let g:neomake_make_maker = {
+    \ 'exe': 'make',
+    \ 'args': ['all'],
+    \ 'buffer_output': 1,
+    \ 'remove_invalid_entries': 0
+    \ }
 
-" }}}2 TagBar ============================================
-" {{{2 Rainbow ===========================================
+let g:neomake_clean_maker = {
+    \ 'exe': 'make',
+    \ 'args': ['clean'],
+    \ 'remove_invalid_entries': 0
+    \ }
 
-let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
+let g:neomake_diff_maker = {
+    \ 'exe': 'make',
+    \ 'args': ['diff'],
+    \ 'remove_invalid_entries': 0
+    \ }
 
-augroup rainbowparens
-  autocmd!
-  autocmd FileType r,cpp,vim,sql,python RainbowParentheses
-augroup END
+let g:neomake_python_pylint_maker = {
+    \ 'exe': 'pylint2',
+    \ 'args': [
+        \ '--rcfile=/home/mike/.pylintrc',
+        \ '-f', 'text',
+        \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
+        \ '-r', 'n'
+        \ ],
+    \ 'errorformat':
+        \ '%A%f:%l:%c:%t: %m,' .
+        \ '%A%f:%l: %m,' .
+        \ '%A%f:(%l): %m,' .
+        \ '%-Z%p^%.%#,' .
+        \ '%-G%.%#',
+    \ }
 
-let g:rainbow#colors = {
-\   'dark': [
-\     ['229', '#ffffaf'],
-\     ['110', '#87afd7'],
-\     ['180', '#dfaf87'],
-\     ['108', '#87af87'],
-\     ['103', '#8787af'],
-\     ['167', '#d75f5f'],
-\     ['227', '#ffff5f'],
-\     [ '38', '#00afd7'],
-\     ['208', '#ff8700'],
-\     ['113', '#87d75f'],
-\     [ '99', '#875fff'],
-\     ['162', '#d70087']
-\   ],
-\   'light': [
-\     ['229', '#ffffaf'],
-\     ['110', '#87afd7'],
-\     ['180', '#dfaf87'],
-\     ['108', '#87af87'],
-\     ['103', '#8787af'],
-\     ['167', '#d75f5f'],
-\     ['162', '#d70087'],
-\     ['227', '#ffff5f'],
-\     [ '38', '#00afd7'],
-\     ['208', '#ff8700'],
-\     ['113', '#87d75f'],
-\     [ '99', '#875fff'],
-\     ['162', '#d70087']
-\   ]
-\ }
+let g:neomake_python_enabled_makers = ['pylint']
 
-" }}}2 Rainbow ===========================================
-" {{{2 vim-wordy =========================================
+let s:RcppArmadilloInclude =
+    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/RcppArmadillo/include/"
+let s:RcppInclude =
+    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/Rcpp/include/"
+let s:RInclude = "/usr/include/R/"
+let s:RextInclude = "/usr/include/R/R_ext/"
 
-" use :NextWordy<CR> to start
+let g:neomake_cpp_clang_maker = {
+    \ 'exe': 'clang++',
+    \ 'args': [
+        \ '-I' . s:RcppArmadilloInclude,
+        \ '-I' . s:RcppInclude,
+        \ '-I' . s:RInclude,
+        \ '-I' . s:RextInclude,
+        \ '-fsyntax-only',
+        \ ],
+    \ 'errorformat':
+        \ '%-G%f:%s:,' .
+        \ '%-G%f:%l: %#error: %#(Each undeclared identifier is reported only%.%#,' .
+        \ '%-G%f:%l: %#error: %#for each function it appears%.%#,' .
+        \ '%-GIn file included%.%#,' .
+        \ '%-G %#from %f:%l\,,' .
+        \ '%f:%l:%c: %trror: %m,' .
+        \ '%f:%l:%c: %tarning: %m,' .
+        \ '%f:%l:%c: %m,' .
+        \ '%f:%l: %trror: %m,' .
+        \ '%f:%l: %tarning: %m,'.
+        \ '%f:%l: %m',
+    \ }
 
-" Dictionaries:
-" ~/vim-bundle/vim-wordy/data/en/art-jargon.dic
-" ~/vim-bundle/vim-wordy/data/en/being.dic
-" ~/vim-bundle/vim-wordy/data/en/business-jargon.dic
-" ~/vim-bumdle/vim-wordy/data/en/colloquial.dic
-" ~/vim-bundle/vim-wordy/data/en/contractions.dic
-" ~/vim-bundle/vim-wordy/data/en/idiomatic.dic
-" ~/vim-bundle/vim-wordy/data/en/opinion.dic
-" ~/vim-bundle/vim-wordy/data/en/passive-voice.dic
-" ~/vim-bundle/vim-wordy/data/en/problematic.dic
-" ~/vim-bundle/vim-wordy/data/en/puffery.dic
-" ~/vim-bundle/vim-wordy/data/en/redundant.dic
-" ~/vim-bundle/vim-wordy/data/en/said-synonyms.dic
-" ~/vim-bundle/vim-wordy/data/en/similies.dic
-" ~/vim-bundle/vim-wordy/data/en/vague-time.dic
-" ~/vim-bundle/vim-wordy/data/en/weak.dic
-" ~/vim-bundle/vim-wordy/data/en/weasel.dic
+let g:neomake_cpp_enabled_makers = ['clang']
 
-let g:wordy#ring = [
-    \ ['opinion', 'vague-time', 'weasel'],
-    \ ['passive-voice'],
-    \ ['problematic', 'redundant', 'similies'],
-    \ ['weak'],
-    \ ['puffery'],
-    \ ['contractions'],
-    \ ]
+let g:neomake_r_lintr_maker = {
+    \ 'exe': 'lintr',
+    \ 'args': [],
+    \ 'errorformat':
+    \ '%W%f:%l:%c: style: %m,' .
+    \ '%W%f:%l:%c: warning: %m,' .
+    \ '%E%f:%l:%c: error: %m',
+    \ }
 
-" }}}2 vim-wordy =========================================
-" {{{2 fzf "
+let g:neomake_r_enabled_makers = ['lintr']
+
+" 3}}} neomake
+" {{{3 repl
+
+Plug 'git@github.com:mdlerch/repl.nvim.git'
+
+" 3}}} repl
+
+" }}}2 run commands
+" {{{2 narrower
+
+" {{{3 fzf
+
+Plug 'junegunn/fzf', { 'dir': '~/bin/fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 map <leader>f :exe 'Files ' . <SID>fzf_root()<CR>
 map <leader>b :Buffers<CR>
@@ -911,8 +861,10 @@ autocmd VimEnter * command! -bang -nargs=* Tags
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-" 2}}} fzf "
-" {{{2 ctrlp =============================================
+" 3}}} fzf
+" {{{3 (ctrlp)
+
+" Plug 'kien/ctrlp.vim'
 
 " Use <C-f> to switch mode
 
@@ -929,204 +881,248 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " hi CtrlPMode1 ctermbg=238 ctermfg=180
 
-" }}}2 ctrlp =============================================
-" {{{2 UltiSnips =========================================
+" 3}}} ctrlp
 
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+" }}} narrower
+" {{{2 writing
 
-let g:UltiSnipsUsePythonVersion=2
+Plug 'tpope/vim-abolish'
+" {{{3 vim-wordy
 
-" }}}2 UltiSnips =========================================
-" {{{2 YouCompleteMe =====================================
+Plug 'reedes/vim-wordy'
 
-let g:ycm_filetype_blacklist = {
-    \ 'tagbar' : 1,
-    \ 'qf' : 1,
-    \ 'notes' : 1,
-    \ 'unite' : 1,
-    \ 'vimwiki' : 1,
-    \ }
-" I have removed: text, markdown, pandoc
+" use :NextWordy<CR> to start
 
-let g:ycm_global_ycm_extra_conf = '~/.vim/ycm/rcpp_ycm_conf.py'
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_cache_omnifunc = 0
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_key_list_select_completion = ['<TAB>', '<DOWN>']
-let g:ycm_filepath_completion_use_working_dir = 1
-let g:ycm_extra_conf_globlist = ['./*']
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_add_preview_to_completeopt = 0
+" Dictionaries:
+" ~/vim-bundle/vim-wordy/data/en/art-jargon.dic
+" ~/vim-bundle/vim-wordy/data/en/being.dic
+" ~/vim-bundle/vim-wordy/data/en/business-jargon.dic
+" ~/vim-bumdle/vim-wordy/data/en/colloquial.dic
+" ~/vim-bundle/vim-wordy/data/en/contractions.dic
+" ~/vim-bundle/vim-wordy/data/en/idiomatic.dic
+" ~/vim-bundle/vim-wordy/data/en/opinion.dic
+" ~/vim-bundle/vim-wordy/data/en/passive-voice.dic
+" ~/vim-bundle/vim-wordy/data/en/problematic.dic
+" ~/vim-bundle/vim-wordy/data/en/puffery.dic
+" ~/vim-bundle/vim-wordy/data/en/redundant.dic
+" ~/vim-bundle/vim-wordy/data/en/said-synonyms.dic
+" ~/vim-bundle/vim-wordy/data/en/similies.dic
+" ~/vim-bundle/vim-wordy/data/en/vague-time.dic
+" ~/vim-bundle/vim-wordy/data/en/weak.dic
+" ~/vim-bundle/vim-wordy/data/en/weasel.dic
 
-let g:ycm_semantic_triggers =  {
-\   'c' : ['->', '.'],
-\   'objc' : ['->', '.'],
-\   'ocaml' : ['.', '#'],
-\   'cpp,objcpp' : ['->', '.', '::'],
-\   'perl' : ['->'],
-\   'php' : ['->', '::'],
-\   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-\   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
-\   'ruby' : ['.', '::'],
-\   'lua' : ['.', ':'],
-\   'erlang' : [':'],
-\ }
+let g:wordy#ring = [
+    \ ['opinion', 'vague-time', 'weasel'],
+    \ ['passive-voice'],
+    \ ['problematic', 'redundant', 'similies'],
+    \ ['weak'],
+    \ ['puffery'],
+    \ ['contractions'],
+    \ ]
 
-" }}}2 YouCompleteMe =====================================
-" {{{2 TagHighlight ======================================
+" 3}}} vim-wordy
 
-if ! exists('g:TagHighlightSettings')
-    let g:TagHighlightSettings = {}
-endif
-let g:TagHighlightSettings['ForcedPythonVariant'] = 'if_pyth'
+" 2}}} writing
+" {{{2 editing
 
-hi link CTagsDefinedName function
+Plug 'dhruvasagar/vim-table-mode'
+Plug 'tommcdo/vim-exchange'
+" {{{3 vim-commentary
 
-" }}}2 TagHighlight ======================================
-" {{{2 neomake ===========================================
+Plug 'tpope/vim-commentary'
 
-augroup NEOMAKEFILETYPES
+imap <leader>cc <C-g>u<ESC><Plug>CommentaryLine
+nmap <leader>cc <Plug>CommentaryLine
+vmap <leader>cc <Plug>Commentary
+
+augroup VIMCOMMENTARY
     autocmd!
-    autocmd BufWritePost *.py Neomake
-    autocmd BufReadPost *.py Neomake
-    autocmd BufWinEnter *.py sign define dummy
-    autocmd BufWinEnter *.py execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
-    autocmd BufWritePost *.cpp Neomake
-    autocmd BufReadPost *.cpp Neomake
-    autocmd BufWinEnter *.cpp sign define dummy
-    autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
-
-    autocmd BufWritePost *.R,*.r Neomake
-    autocmd BufReadPost *.R,*.r Neomake
-    autocmd BufWinEnter *.R,*.r sign define dummy
-    autocmd BufWinEnter *.R,*.r execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+    autocmd FileType r setl commentstring=#\ %s
+    autocmd FileType rmd setl commentstring=#\ %s
+    autocmd FileType rnoweb setl commentstring=#\ %s
+    autocmd FileType markdown setl commentstring=<!--\ %s\ -->
+    autocmd FileType gnuplot setl commentstring=#\ %s
+    autocmd FileType cpp setl commentstring=//\ %s
+    autocmd FileType c setl commentstring=//\ %s
+    autocmd FileType sql setl commentstring=--\ %s
 augroup END
 
-map <F1> :Neomake! make<CR>
-map <F2> :Neomake! clean<CR>
-" set <F3> in project vimrc
-map <F4> :Neomake! diff<CR>
+" 3}}} vim-commentary
+" {{{3 vim-surround
 
-let g:neomake_error_sign = {
-    \ 'text': '>',
-    \ 'texthl': 'ErrorMsg',
-    \ }
-let g:neomake_warning_sign = {
-    \ 'text': '>',
-    \ 'texthl': 'WarningMsg',
-    \ }
+Plug 'tpope/vim-surround'
 
-" {{{3 make ==============================================
+let g:surround_no_mappings = 1
 
-let g:neomake_make_maker = {
-    \ 'exe': 'make',
-    \ 'args': ['all'],
-    \ 'buffer_output': 1,
-    \ 'remove_invalid_entries': 0
-    \ }
+nmap ys <Plug>Ysurround
+nmap Sd <Plug>Dsurround
+nmap Sc <Plug>Csurround
+nmap Sw ysiw
+nmap SW ysiW
+nmap Sa <Plug>Ysurround
+nmap Sl <Plug>Yssurround
+xmap Sa <Plug>VSurround
 
-let g:neomake_clean_maker = {
-    \ 'exe': 'make',
-    \ 'args': ['clean'],
-    \ 'remove_invalid_entries': 0
-    \ }
+" 3}}} vim-surround
+" {{{3 DragVisuals
 
-let g:neomake_diff_maker = {
-    \ 'exe': 'make',
-    \ 'args': ['diff'],
-    \ 'remove_invalid_entries': 0
-    \ }
+vmap  <expr>  <LEFT>   DVB_Drag('left')
+vmap  <expr>  <RIGHT>  DVB_Drag('right')
+vmap  <expr>  <DOWN>   DVB_Drag('down')
+vmap  <expr>  <UP>     DVB_Drag('up')
+vmap  <expr>  D        DVB_Duplicate()
 
-" }}}3 make ==============================================
-" {{{3 python ============================================
+" 3}}} DragVisuals
+" {{{3 Tabularize
 
-let g:neomake_python_pylint_maker = {
-    \ 'exe': 'pylint2',
-    \ 'args': [
-        \ '--rcfile=/home/mike/.pylintrc',
-        \ '-f', 'text',
-        \ '--msg-template="{path}:{line}:{column}:{C}: [{symbol}] {msg}"',
-        \ '-r', 'n'
-        \ ],
-    \ 'errorformat':
-        \ '%A%f:%l:%c:%t: %m,' .
-        \ '%A%f:%l: %m,' .
-        \ '%A%f:(%l): %m,' .
-        \ '%-Z%p^%.%#,' .
-        \ '%-G%.%#',
-    \ }
+Plug 'godlygeek/tabular'
 
-let g:neomake_python_enabled_makers = ['pylint']
+vnoremap <leader>& :Tabularize /&<CR>
 
-" }}}3 python ============================================
-" {{{3 cpp ===============================================
+" 3}}} Tabularize
+" {{{3 undotree
 
-let s:RcppArmadilloInclude =
-    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/RcppArmadillo/include/"
-let s:RcppInclude =
-    \ "/home/mike/R/x86_64-unknown-linux-gnu-library/3.2/Rcpp/include/"
-let s:RInclude = "/usr/include/R/"
-let s:RextInclude = "/usr/include/R/R_ext/"
+Plug 'mbbill/undotree'
 
-let g:neomake_cpp_clang_maker = {
-    \ 'exe': 'clang++',
-    \ 'args': [
-        \ '-I' . s:RcppArmadilloInclude,
-        \ '-I' . s:RcppInclude,
-        \ '-I' . s:RInclude,
-        \ '-I' . s:RextInclude,
-        \ '-fsyntax-only',
-        \ ],
-    \ 'errorformat':
-        \ '%-G%f:%s:,' .
-        \ '%-G%f:%l: %#error: %#(Each undeclared identifier is reported only%.%#,' .
-        \ '%-G%f:%l: %#error: %#for each function it appears%.%#,' .
-        \ '%-GIn file included%.%#,' .
-        \ '%-G %#from %f:%l\,,' .
-        \ '%f:%l:%c: %trror: %m,' .
-        \ '%f:%l:%c: %tarning: %m,' .
-        \ '%f:%l:%c: %m,' .
-        \ '%f:%l: %trror: %m,' .
-        \ '%f:%l: %tarning: %m,'.
-        \ '%f:%l: %m',
-    \ }
+let g:undotree_WindowLayout = 3
+let g:undotree_SplitWidth = 40
 
-let g:neomake_cpp_enabled_makers = ['clang']
+" }}}3 undotree
 
-" }}}3 cpp ===============================================
-" {{{3 r =================================================
+" 2}}} editing
+" {{{2 clever-f
 
-let g:neomake_r_lintr_maker = {
-    \ 'exe': 'lintr',
-    \ 'args': [],
-    \ 'errorformat':
-    \ '%W%f:%l:%c: style: %m,' .
-    \ '%W%f:%l:%c: warning: %m,' .
-    \ '%E%f:%l:%c: error: %m',
-    \ }
+Plug 'rhysd/clever-f.vim'
 
-let g:neomake_r_enabled_makers = ['lintr']
+" 2}}}
+" {{{2 fugitive
 
-" }}}3 r =================================================
+Plug 'tpope/vim-fugitive'
 
-" }}}2 neomake ===========================================
-" {{{2 vim-cpp-enhanced-highlight
+" 2}}}
+" {{{2 noscrollbar
 
-let g:cpp_class_scope_highlight = 1
+Plug 'gcavallanti/vim-noscrollbar'
 
-" 2}}} vim-cpp-enhanced-highlight
-" {{{2 interesting words "
+" 2}}} noscrollbar
 
-nnoremap <silent> <leader>k <Plug>InterestingWords
-nnoremap <silent> <leader>K <Plug>InterestingWordsClear
+call plug#end()
 
-" 2}}} interesting words "
+" 1}}} Plugins
+" {{{1 Color and appearance
 
-" }}}1 Plugin options ====================================
+" Gvim settings
+set guifont=Inconsolata\ LGC\ Bold\ 10
+
+" colorcolumn
+set colorcolumn=+1
+" let &colorcolumn="+".join(range(1,200),",+")
+
+set cursorline
+
+" color scheme
+" set background=dark
+colorscheme tungsten
+
+" additional highlighting
+"highlight Comment cterm=italic gui=italic
+hi def link gitcommitOverflow Error
+
+if g:colors_name=="zenburn"
+    highlight SpecialKey ctermfg=238
+endif
+
+highlight ExtraWhitespace ctermfg=red guifg=red
+match ExtraWhitespace /\s\+$/
+" in insert mode do not highlight in current line
+augroup WHITESPACE
+    autocmd!
+    autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
+
+function! UnmatchWhite()
+    highlight ExtraWhitespace ctermfg=None guifg=None
+endfunction
+
+augroup UNMATCHWHITERBROWSER
+    autocmd!
+    autocmd FileType rbrowser call UnmatchWhite()
+augroup END
+
+highlight MatchParen cterm=NONE
+
+" 1}}} Color and appearance
+" {{{1 Statusline
+
+set laststatus=2
+
+augroup status
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter * call <SID>DoStatusLine()
+augroup END
+
+function! s:DoStatusLine()
+    for winnum in range(1, winnr('$'))
+        call setwinvar(winnum, '&statusline', '%!SetStatusLine(' . winnum . ')')
+    endfor
+endfunction
+
+hi User1 ctermbg=234 ctermfg=110 guibg=#1c1c1c guifg=#87afd7
+hi User2 ctermbg=238 ctermfg=180 guibg=#444444 guifg=#dfaf87
+hi User3 ctermbg=234 ctermfg=196 guibg=#1c1c1c guifg=#ff0000
+hi User4 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
+hi User5 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
+hi User6 ctermbg=238 ctermfg=234 guibg=#444444 guifg=#87afd7
+
+function! SetStatusLine(winnum)
+    let unactive = !(a:winnum == winnr())
+
+    function! StatusColor(num, unactive)
+        let shift = 0
+        if a:unactive
+            let shift = shift + 3
+        endif
+        let col = a:num + shift
+        let out = "%" . col . "*"
+        return out
+    endfunction
+
+    let thefilename = expand('%')
+
+    let statline=""
+    if winwidth(0) > 100
+        let statline.=StatusColor(2, unactive)
+        let statline.='%{fugitive#statusline()}'  " git branch
+    endif
+    let statline.=StatusColor(1, unactive)
+    let statline.=' '            " space
+    if len(thefilename) < 30
+        let statline.='%f '          " relative filename
+    else
+        let statline .= '///' . '%t '
+    endif
+    let statline.=StatusColor(3, unactive)
+    let statline.='%R '           " readonly
+    let statline.='%m '           " modified
+    let statline.=StatusColor(1, unactive)
+    let statline.='%='
+    if winwidth(0) > 100
+        let statline.='%{&fileencoding?&fileencoding:&encoding}'
+    endif
+    let statline.=' '            " space
+    let statline.=StatusColor(2, unactive)
+    let statline.=' %Y '         " filetype
+    let statline.=StatusColor(1, unactive)
+    if winwidth(0) > 100
+        let statline.=' %{noscrollbar#statusline(20,"-","=")}'
+    endif
+    let statline.=' %5l:%-3c'         " line and column
+    let statline.=' [%L]'        " total lines
+    return statline
+endfunction
+
+" 1}}} Statusline
 
 " let rmd_syn_hl_chunk=1
 " vim:fdm=marker:foldlevel=0

@@ -1,3 +1,4 @@
 spell/
 bundle
 autoload/plug.vim
+plugin/sqlpass.vim
