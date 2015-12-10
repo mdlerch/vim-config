@@ -1088,6 +1088,16 @@ function! SetStatusLine(winnum)
         return out
     endfunction
 
+    function! PrintSQLCalls()
+        if exists("g:PSQLcalls") && &ft =~ "sql"
+            return g:PSQLcalls
+        endif
+        if !exists("g:PSQLcalls") && &ft =~ "sql"
+            return 0
+        endif
+        return ""
+    endfunction
+
     let thefilename = expand('%')
 
     let statline=""
@@ -1113,6 +1123,7 @@ function! SetStatusLine(winnum)
     let statline.=' '            " space
     let statline.=StatusColor(2, unactive)
     let statline.=' %Y '         " filetype
+    let statline.=PrintSQLCalls()
     let statline.=StatusColor(1, unactive)
     if winwidth(0) > 100
         let statline.=' %{noscrollbar#statusline(20,"-","=")}'
