@@ -595,7 +595,7 @@ nnoremap <silent> <leader>K <Plug>InterestingWordsClear
 Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/mc-stan.vim.git'
-Plug 'git@github.com:mdlerch/sql.nvim'
+Plug 'git@github.com:mdlerch/psql.nvim'
 Plug 'git@github.com:mdlerch/R-Vim-runtime'
 Plug 'keith/tmux.vim'
 Plug 'vim-scripts/gnuplot.vim'
