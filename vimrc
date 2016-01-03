@@ -815,8 +815,6 @@ Plug 'junegunn/fzf.vim'
 
 map <leader>f :exe 'Files ' . <SID>fzf_root()<CR>
 map <leader>b :Buffers<CR>
-map <leader>zl :BLines<CR>
-map <leader>zt :Tags<CR>
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
