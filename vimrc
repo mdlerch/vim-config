@@ -836,6 +836,17 @@ fun! s:fzf_root()
     return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
 endfun
 
+command! -nargs=0 PDFs
+      \ call fzf#run(
+      \ {'source': 'find -iname "*.pdf"',
+      \  'sink': 'LaunchPDF', 'down': '40%', 'options':
+      \ '--color dark,pointer:110,hl+:110,bg+:234'})
+
+command! -nargs=0 HTMLs
+      \ call fzf#run(
+      \ {'source': 'find -iname "*.html"',
+      \  'sink': 'LaunchHTML', 'down': '40%', 'options':
+      \ '--color dark,pointer:110,hl+:110,bg+:234'})
 
 autocmd VimEnter * command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>, {'down': '40%', 'options':
