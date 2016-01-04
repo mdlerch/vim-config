@@ -461,8 +461,10 @@ map <leader>F :call ListFKeys()<CR>
 
 call plug#begin('~/.vim/bundle')
 
-" autocomplete {{{2
-" {{{3 (deoplete)
+" misc
+Plug 'tpope/vim-repeat'
+" autocomplete
+" {{{2 (deoplete)
 
 " Plug 'Shougo/deoplete.nvim'
 
@@ -479,8 +481,8 @@ let g:deoplete#sources.r = ['buffer', 'tag', 'omni']
 " inoremap <expr><C-h> deolete#mappings#smart_close_popup()."\<C-h>"
 " inoremap <expr><BS> deoplete#mappings#smart_close_popup()."\<C-h>"
 
-" 3}}} deoplete
-" {{{3 YouCompleteMe
+" 2}}} deoplete
+" {{{2 YouCompleteMe
 
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang' }
 
@@ -518,8 +520,8 @@ let g:ycm_semantic_triggers =  {
 \   'erlang' : [':'],
 \ }
 
-" 3}}} YouCompleteMe
-" {{{3 UltiSnips
+" 2}}} YouCompleteMe
+" {{{2 UltiSnips
 
 Plug 'sirver/ultisnips'
 
@@ -529,16 +531,13 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 let g:UltiSnipsUsePythonVersion=2
 
-" 3}}} UltiSnips
-
-" 2}}} autocomplete
-" color {{{2
+" 2}}} UltiSnips
+" color
 Plug 'git@github.com:mdlerch/tungsten.vim.git'
 Plug 'git@github.com:mdlerch/yttrium.vim.git'
 Plug 'gerw/vim-HiLinkTrace'
 Plug 'jnurmine/Zenburn'
-
-" {{{3 Rainbow
+" {{{2 Rainbow
 
 Plug 'git@github.com:mdlerch/rainbow_parentheses.vim'
 let g:rainbow#pairs = [['(', ')'], ['[', ']'], ['{', '}']]
@@ -580,18 +579,16 @@ let g:rainbow#colors = {
 \   ]
 \ }
 
-" 3}}} Rainbow
-" {{{3 interesting words
+" 2}}} Rainbow
+" {{{2 interesting words
 
 Plug 'vasconcelloslf/vim-interestingwords'
 
 nnoremap <silent> <leader>k <Plug>InterestingWords
 nnoremap <silent> <leader>K <Plug>InterestingWordsClear
 
-" 3}}} interesting words
-
-" 2}}} color
-" filetype {{{2
+" 2}}} interesting words
+" filetype
 Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/mc-stan.vim.git'
@@ -600,8 +597,7 @@ Plug 'git@github.com:mdlerch/R-Vim-runtime'
 Plug 'keith/tmux.vim'
 Plug 'vim-scripts/gnuplot.vim'
 Plug 'justinmk/vim-syntax-extra'
-
-" {{{3 Vim-R-Plugin
+" {{{2 Vim-R-Plugin
 
 Plug 'git@github.com:mdlerch/Nvim-R.git'
 
@@ -658,15 +654,15 @@ let R_synctex = 0
 
 let rout_follow_colorscheme = 1
 
-" }}}3 Vim-R-Plugin
-" {{{3 vim-cpp-enhanced-highlight
+" }}}2 Vim-R-Plugin
+" {{{2 vim-cpp-enhanced-highlight
 
 Plug 'octol/vim-cpp-enhanced-highlight'
 
 let g:cpp_class_scope_highlight = 1
 
-" 3}}} vim-cpp-enhanced-highlight
-" {{{3 TagHighlight
+" 2}}} vim-cpp-enhanced-highlight
+" {{{2 TagHighlight
 
 Plug 'abudden/taghighlight-automirror'
 
@@ -677,12 +673,9 @@ let g:TagHighlightSettings['ForcedPythonVariant'] = 'if_pyth'
 
 hi link CTagsDefinedName function
 
-" }}}3 TagHighlight
-
-" }}}2 filetype
-" run commands {{{2
-
-" {{{3 neomake
+" }}}2 TagHighlight
+" run commands
+" {{{2 neomake
 
 Plug 'benekastah/neomake'
 
@@ -798,17 +791,10 @@ let g:neomake_r_lintr_maker = {
 
 let g:neomake_r_enabled_makers = ['lintr']
 
-" 3}}} neomake
-" {{{3 repl
-
+" 2}}} neomake
 Plug 'git@github.com:mdlerch/repl.nvim.git'
-
-" 3}}} repl
-
-" }}}2 run commands
-" {{{2 narrower
-
-" {{{3 fzf
+" narrower
+" {{{2 fzf
 
 Plug 'junegunn/fzf', { 'dir': '~/bin/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -870,8 +856,8 @@ autocmd VimEnter * command! -bang -nargs=* Tags
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-" 3}}} fzf
-" {{{3 (ctrlp)
+" 2}}} fzf
+" {{{2 (ctrlp)
 
 " Plug 'kien/ctrlp.vim'
 
@@ -890,13 +876,10 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 " hi CtrlPMode1 ctermbg=238 ctermfg=180
 
-" 3}}} ctrlp
-
-" }}} narrower
-" {{{2 writing
-
+" 2}}} ctrlp
+" writing
 Plug 'tpope/vim-abolish'
-" {{{3 vim-wordy
+" {{{2 vim-wordy
 
 Plug 'reedes/vim-wordy'
 
@@ -929,14 +912,12 @@ let g:wordy#ring = [
     \ ['contractions'],
     \ ]
 
-" 3}}} vim-wordy
-
-" 2}}} writing
+" 2}}} vim-wordy
 " {{{2 editing
 
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'tommcdo/vim-exchange'
-" {{{3 vim-commentary
+" {{{2 vim-commentary
 
 Plug 'tpope/vim-commentary'
 
@@ -956,8 +937,8 @@ augroup VIMCOMMENTARY
     autocmd FileType sql setl commentstring=--\ %s
 augroup END
 
-" 3}}} vim-commentary
-" {{{3 vim-surround
+" 2}}} vim-commentary
+" {{{2 vim-surround
 
 Plug 'tpope/vim-surround'
 
@@ -972,8 +953,8 @@ nmap Sa <Plug>Ysurround
 nmap Sl <Plug>Yssurround
 xmap Sa <Plug>VSurround
 
-" 3}}} vim-surround
-" {{{3 DragVisuals
+" 2}}} vim-surround
+" {{{2 DragVisuals
 
 vmap  <expr>  <LEFT>   DVB_Drag('left')
 vmap  <expr>  <RIGHT>  DVB_Drag('right')
@@ -981,24 +962,22 @@ vmap  <expr>  <DOWN>   DVB_Drag('down')
 vmap  <expr>  <UP>     DVB_Drag('up')
 vmap  <expr>  D        DVB_Duplicate()
 
-" 3}}} DragVisuals
-" {{{3 Tabularize
+" 2}}} DragVisuals
+" {{{2 Tabularize
 
 Plug 'godlygeek/tabular'
 
 vnoremap <leader>& :Tabularize /&<CR>
 
-" 3}}} Tabularize
-" {{{3 undotree
+" 2}}} Tabularize
+" {{{2 undotree
 
 Plug 'mbbill/undotree'
 
 let g:undotree_WindowLayout = 3
 let g:undotree_SplitWidth = 40
 
-" }}}3 undotree
-
-" 2}}} editing
+" }}}2 undotree
 " {{{2 clever-f
 
 Plug 'rhysd/clever-f.vim'
