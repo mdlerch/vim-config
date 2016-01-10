@@ -85,6 +85,16 @@ function! LaunchHTML(...)
 endfunction
 command! -nargs=+ -complete=file_in_path LaunchHTML call LaunchHTML(<q-args>)
 
+function! FuzzyLaunch(launcher, ext)
+    let sourcer = 'find -iname "*.' . a:ext . '"'
+    let sinker = a:launcher
+    call fzf#run({'source': sourcer, 'sink': sinker, 'down': '40%',
+                \ 'options': '--color dark,pointer:110,hl+:110,bg+:234'})
+endfunction
+
+command! -nargs=0 PDFs call FuzzyLaunch('LaunchPDF', 'pdf')
+command! -nargs=0 HTMLs call FuzzyLaunch('LaunchHTML', 'html')
+
 " }}}2 Launchers
 " {{{2 Beginning and end of line
 
@@ -821,18 +831,6 @@ fun! s:fzf_root()
     let path = finddir(".git", expand("%:p:h").";")
     return fnamemodify(substitute(path, ".git", "", ""), ":p:h")
 endfun
-
-command! -nargs=0 PDFs
-      \ call fzf#run(
-      \ {'source': 'find -iname "*.pdf"',
-      \  'sink': 'LaunchPDF', 'down': '40%', 'options':
-      \ '--color dark,pointer:110,hl+:110,bg+:234'})
-
-command! -nargs=0 HTMLs
-      \ call fzf#run(
-      \ {'source': 'find -iname "*.html"',
-      \  'sink': 'LaunchHTML', 'down': '40%', 'options':
-      \ '--color dark,pointer:110,hl+:110,bg+:234'})
 
 autocmd VimEnter * command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>, {'down': '40%', 'options':
