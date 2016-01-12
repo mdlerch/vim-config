@@ -73,6 +73,18 @@ function! LaunchPDF(...)
 endfunction
 command! -nargs=+ -complete=file_in_path LaunchPDF call LaunchPDF(<q-args>)
 
+function! LaunchPNG(...)
+    let pngviewer = "gpicview"
+    if a:0 < 1
+        let cmd = pngviewer . " " . expand("%:r") . ".png 2> /dev/null"
+    elseif a:0 == 1
+        let cmd = pngviewer . " " . string(a:1) . " 2> /dev/null"
+    endif
+    call jobstart(cmd)
+endfunction
+command! -nargs=+ -complete=file_in_path LaunchPNG call LaunchPNG(<q-args>)
+
+
 " open %r.html in web browser
 function! LaunchHTML(...)
     let htmlviewer = "chromium"
@@ -94,6 +106,7 @@ endfunction
 
 command! -nargs=0 PDFs call FuzzyLaunch('LaunchPDF', 'pdf')
 command! -nargs=0 HTMLs call FuzzyLaunch('LaunchHTML', 'html')
+command! -nargs=0 PNGs call FuzzyLaunch('LaunchPNG', 'png')
 
 " }}}2 Launchers
 " {{{2 Beginning and end of line
