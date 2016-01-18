@@ -364,8 +364,10 @@ if has('nvim')
 endif
 
 " Number increment/decrement
-set <A-a>=a
-set <A-x>=x
+if !has('nvim')
+    set <A-a>=a
+    set <A-x>=x
+endif
 nnoremap <A-a> <C-a>
 nnoremap <A-x> <C-x>
 vnoremap <silent> <A-a> :s/\%V-\=\d\+/\=submatch(0)+1/g<CR>gv
