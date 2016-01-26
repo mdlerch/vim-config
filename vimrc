@@ -618,7 +618,7 @@ Plug 'git@github.com:mdlerch/vim-markdown.git'
 Plug 'git@github.com:mdlerch/vim-julia.git'
 Plug 'git@github.com:mdlerch/mc-stan.vim.git'
 Plug 'git@github.com:mdlerch/psql.nvim'
-Plug 'git@github.com:mdlerch/R-Vim-runtime'
+Plug 'git@github.com:mdlerch/R-Vim-runtime.git'
 Plug 'keith/tmux.vim'
 Plug 'vim-scripts/gnuplot.vim'
 Plug 'justinmk/vim-syntax-extra'
@@ -728,11 +728,11 @@ map <F2> :Neomake! clean<CR>
 map <F4> :Neomake! diff<CR>
 
 let g:neomake_error_sign = {
-    \ 'text': '>',
+    \ 'text': '⚫',
     \ 'texthl': 'ErrorMsg',
     \ }
 let g:neomake_warning_sign = {
-    \ 'text': '>',
+    \ 'text': '⚫',
     \ 'texthl': 'WarningMsg',
     \ }
 
