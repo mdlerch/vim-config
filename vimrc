@@ -716,10 +716,10 @@ augroup NEOMAKEFILETYPES
     autocmd BufWinEnter *.cpp sign define dummy
     autocmd BufWinEnter *.cpp execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
-    autocmd BufWritePost *.R,*.r Neomake
-    autocmd BufReadPost *.R,*.r Neomake
-    autocmd BufWinEnter *.R,*.r sign define dummy
-    autocmd BufWinEnter *.R,*.r execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+    " autocmd BufWritePost *.R,*.r Neomake
+    " autocmd BufReadPost *.R,*.r Neomake
+    " autocmd BufWinEnter *.R,*.r sign define dummy
+    " autocmd BufWinEnter *.R,*.r execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 augroup END
 
 map <F1> :Neomake! make<CR>
@@ -814,7 +814,7 @@ let g:neomake_r_lintr_maker = {
     \ '%E%f:%l:%c: error: %m',
     \ }
 
-let g:neomake_r_enabled_makers = ['lintr']
+" let g:neomake_r_enabled_makers = ['lintr']
 
 " 2}}} neomake
 Plug 'git@github.com:mdlerch/repl.nvim.git'
