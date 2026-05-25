@@ -9,6 +9,8 @@ endif
 setl expandtab
 setl tabstop=4
 setl shiftwidth=4
+setl conceallevel=2
+setl foldlevel=99
 
 if !exists("b:writing_on") || b:writing_on == 0
     set tw=79

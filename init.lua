@@ -25,9 +25,10 @@ require("lazy").setup({
     build = ":TSUpdate",
     config = function()
       require('nvim-treesitter.configs').setup({
-        ensure_installed = { "c", "cpp", "python", "r", "lua", "vim", "markdown", "julia" },
+        ensure_installed = { "c", "cpp", "python", "r", "lua", "vim", "markdown", "markdown_inline", "julia" },
         highlight = {
           enable = true,
+          disable = { "markdown" },
         },
       })
     end
@@ -109,6 +110,79 @@ require("lazy").setup({
     config = function()
         require("nvim-surround").setup({})
     end
+  },
+
+  -- Obsidian support
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*",
+    lazy = true,
+    ft = "markdown",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
+    opts = {
+      workspaces = (function()
+        local all_workspaces = {
+          {
+            name = "personal",
+            path = "~/vault",
+          },
+          {
+            name = "pi",
+            path = "~/pi/vault",
+          },
+          {
+            name = "work",
+            path = "~/work/repos/grc-product-vault",
+          },
+        }
+        local existing = {}
+        for _, ws in ipairs(all_workspaces) do
+          if vim.fn.isdirectory(vim.fn.expand(ws.path)) == 1 then
+            table.insert(existing, ws)
+          end
+        end
+        return existing
+      end)(),
+      completion = {
+        nvim_cmp = true,
+        min_chars = 2,
+      },
+      -- Performance: don't scan deep into files for aliases
+      search_max_lines = 20,
+      completion = {
+        nvim_cmp = true,
+        min_chars = 2,
+      },
+      -- Asynchronous URL opening
+      follow_url_func = function(url)
+        vim.fn.jobstart({"open", url})
+      end,
+    },
+    config = function(_, opts)
+      require("obsidian").setup(opts)
+
+      -- Smart gf passthrough
+      vim.keymap.set("n", "gf", function()
+        if require("obsidian").util.cursor_on_markdown_link() then
+          return "<cmd>ObsidianFollowLink<CR>"
+        else
+          return "gf"
+        end
+      end, { noremap = false, expr = true, buffer = true })
+
+      -- Back button mapping
+      vim.keymap.set("n", "<C-o>", "<C-t>", { buffer = true, desc = "Back to previous note" })
+    end,
+  },
+
+  -- Visual Markdown rendering (Callouts, etc)
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = { "markdown" },
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- or nvim-web-devicons
+    opts = {},
   },
 
   -- Rainbow Delimiters (Treesitter version)
