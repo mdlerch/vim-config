@@ -16,6 +16,22 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+-- Define Obsidian workspaces
+local obsidian_workspaces = {
+  {
+    name = "personal",
+    path = "~/vault",
+  },
+  {
+    name = "pi",
+    path = "~/pi/vault",
+  },
+  {
+    name = "work",
+    path = "~/work/repos/grc-product-vault",
+  },
+}
+
 -- Plugin specification
 require("lazy").setup({
   -- Core/LSP/Treesitter
@@ -117,28 +133,42 @@ require("lazy").setup({
     "epwalsh/obsidian.nvim",
     version = "*",
     lazy = true,
-    ft = "markdown",
+    event = (function()
+      local events = {}
+      for _, ws in ipairs(obsidian_workspaces) do
+        local path = vim.fn.expand(ws.path)
+        if vim.fn.isdirectory(path) == 1 then
+          table.insert(events, "BufReadPre " .. path .. "/*.md")
+          table.insert(events, "BufNewFile " .. path .. "/*.md")
+          table.insert(events, "BufReadPre " .. path .. "/**/*.md")
+          table.insert(events, "BufNewFile " .. path .. "/**/*.md")
+        end
+      end
+      return events
+    end)(),
+    cmd = {
+      "ObsidianToday",
+      "ObsidianNew",
+      "ObsidianQuickSwitch",
+      "ObsidianFollowLink",
+      "ObsidianBacklinks",
+      "ObsidianTags",
+      "ObsidianSearch",
+      "ObsidianLink",
+      "ObsidianLinkNew",
+      "ObsidianLinks",
+      "ObsidianTemplate",
+      "ObsidianWorkspace",
+      "ObsidianRename",
+      "ObsidianPasteImg",
+    },
     dependencies = {
       "nvim-lua/plenary.nvim",
     },
     opts = {
       workspaces = (function()
-        local all_workspaces = {
-          {
-            name = "personal",
-            path = "~/vault",
-          },
-          {
-            name = "pi",
-            path = "~/pi/vault",
-          },
-          {
-            name = "work",
-            path = "~/work/repos/grc-product-vault",
-          },
-        }
         local existing = {}
-        for _, ws in ipairs(all_workspaces) do
+        for _, ws in ipairs(obsidian_workspaces) do
           if vim.fn.isdirectory(vim.fn.expand(ws.path)) == 1 then
             table.insert(existing, ws)
           end
@@ -151,10 +181,6 @@ require("lazy").setup({
       },
       -- Performance: don't scan deep into files for aliases
       search_max_lines = 20,
-      completion = {
-        nvim_cmp = true,
-        min_chars = 2,
-      },
       -- Asynchronous URL opening
       follow_url_func = function(url)
         vim.fn.jobstart({"open", url})
