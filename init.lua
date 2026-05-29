@@ -203,13 +203,6 @@ require("lazy").setup({
     end,
   },
 
-  -- Visual Markdown rendering (Callouts, etc)
-  {
-    "MeanderingProgrammer/render-markdown.nvim",
-    ft = { "markdown" },
-    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- or nvim-web-devicons
-    opts = {},
-  },
 
   -- Rainbow Delimiters (Treesitter version)
   { "HiPhish/rainbow-delimiters.nvim" },
