@@ -246,6 +246,10 @@ local keymap = vim.keymap.set
 
 keymap("n", "Y", "y$")
 
+-- Toggle comment
+keymap("n", "<leader>cc", "gcc", { remap = true, desc = "Toggle comment" })
+keymap("v", "<leader>cc", "gc", { remap = true, desc = "Toggle comment" })
+
 -- very magic
 keymap("n", "/", "/\\v")
 keymap("v", "/", "/\\v")
