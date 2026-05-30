@@ -21,15 +21,21 @@ function M.smart_close()
         return
     end
 
+    local has_file = vim.fn.expand('%') ~= ""
+
     if vim.fn.winnr('$') == 1 then
-        vim.cmd("write")
+        if has_file then
+            vim.cmd("write")
+        end
         if #vim.fn.filter(vim.fn.range(1, vim.fn.bufnr('$')), 'buflisted(v:val)') > 1 then
             vim.cmd("bdelete")
         else
             vim.cmd("quit")
         end
     else
-        vim.cmd("write")
+        if has_file then
+            vim.cmd("write")
+        end
         vim.cmd("close")
     end
 end

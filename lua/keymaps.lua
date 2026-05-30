@@ -101,6 +101,12 @@ cabbr setwd cd %:h<CR>:pwd<CR>
 cabbr d2u lua require('utils').dos2unix()
 ]])
 
+-- Grab command output into an editable, searchable split buffer
+vim.api.nvim_create_user_command("Grab", function(opts)
+  utils.grab(opts.args)
+end, { nargs = 1 })
+
+
 -- escape shorthand
 keymap("i", "<C-w>", "<ESC><C-w>")
 keymap("i", "<leader><leader>", "<C-[>")

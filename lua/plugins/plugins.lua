@@ -1,13 +1,12 @@
 --------------------------------------------------------------------------------
--- Legacy and Preserved Plugins Specification Module
--- Purpose: Declares all classic and standard Vim plugins.
+-- General Plugins Specification Module
+-- Purpose: Declares all standard, classic, and general Vim/Neovim plugins.
 -- What goes here:
---  * Plugins that run immediately or require no complex Lua-based configs.
---  * Standard/legacy syntax themes (Zenburn, Tungsten, Yttrium).
+--  * General plugins that run immediately or require no complex configs.
+--  * Standard syntax themes (Zenburn, Tungsten, Yttrium).
 --  * Classic utility scripts (GNUPlot, tmux, tabular, noscrollbar, table-mode).
 --------------------------------------------------------------------------------
 return {
-
   "tpope/vim-repeat",
   "mdlerch/tungsten.vim",
   "mdlerch/yttrium.vim",
