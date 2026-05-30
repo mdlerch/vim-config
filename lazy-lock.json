@@ -11,7 +11,7 @@
   "gnuplot.vim": { "branch": "master", "commit": "0d57b080f9fae8573c688b6679b31eb1666edc4c" },
   "lazy.nvim": { "branch": "main", "commit": "306a05526ada86a7b30af95c5cc81ffba93fef97" },
   "mason-lspconfig.nvim": { "branch": "main", "commit": "7b01e2974a47d489bb92f47a41e4c0088ea8f86e" },
-  "mason.nvim": { "branch": "main", "commit": "bb639d4bf385a4d89f478b83af4d770be05ab7eb" },
+  "mason.nvim": { "branch": "main", "commit": "16ba83bfc8a25f52bb545134f5bee082b195c460" },
   "mc-stan.vim": { "branch": "master", "commit": "b43de7d8ff19085c31f82ca2206807b63c9a4998" },
   "nvim-cmp": { "branch": "main", "commit": "a1d504892f2bc56c2e79b65c6faded2fd21f3eca" },
   "nvim-lspconfig": { "branch": "master", "commit": "9573948c38bfabeec353ae7dd7d3ffec4c506a6b" },
