@@ -19,6 +19,9 @@ return {
       local actions = require('telescope.actions')
       require('telescope').setup({
         defaults = {
+          preview = {
+            treesitter = false,
+          },
           mappings = {
             i = {
               ['<C-s>'] = actions.select_horizontal,

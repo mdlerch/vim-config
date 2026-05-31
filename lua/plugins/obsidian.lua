@@ -80,6 +80,7 @@ return {
         min_chars = 2,
       },
       search_max_lines = 20,
+      disable_frontmatter = true,
       follow_url_func = function(url)
         vim.fn.jobstart({"open", url})
       end,
