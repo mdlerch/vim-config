@@ -13,6 +13,19 @@ return {
     dependencies = { 'nvim-lua/plenary.nvim' },
     config = function()
       local builtin = require('telescope.builtin')
+      local actions = require('telescope.actions')
+      require('telescope').setup({
+        defaults = {
+          mappings = {
+            i = {
+              ['<C-s>'] = actions.select_horizontal,
+            },
+            n = {
+              ['<C-s>'] = actions.select_horizontal,
+            },
+          },
+        },
+      })
       vim.keymap.set('n', '<leader>f', builtin.find_files, {})
       vim.keymap.set('n', '<leader>a', builtin.live_grep, {}) -- The "Ag" style content search
       vim.keymap.set('n', '<leader>b', builtin.buffers, {})
