@@ -10,7 +10,10 @@ return {
   -- Telescope Fuzzy Finder (tracking master for Neovim 0.12+ compatibility)
   {
     'nvim-telescope/telescope.nvim',
-    dependencies = { 'nvim-lua/plenary.nvim' },
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    },
     config = function()
       local builtin = require('telescope.builtin')
       local actions = require('telescope.actions')
@@ -25,7 +28,16 @@ return {
             },
           },
         },
+        extensions = {
+          fzf = {
+            fuzzy = true,
+            override_generic_sorter = true,
+            override_file_sorter = true,
+            case_mode = "smart_case",
+          }
+        }
       })
+      require('telescope').load_extension('fzf')
       vim.keymap.set('n', '<leader>f', builtin.find_files, {})
       vim.keymap.set('n', '<leader>a', builtin.live_grep, {}) -- The "Ag" style content search
       vim.keymap.set('n', '<leader>b', builtin.buffers, {})

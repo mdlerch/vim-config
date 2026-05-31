@@ -5,8 +5,27 @@
 --  * vim.api.nvim_create_autocmd (start-up events, filetype setups, window entries).
 --  * vim.api.nvim_create_augroup (event namespaces).
 --------------------------------------------------------------------------------
--- Extra whitespace highlights
-vim.api.nvim_set_hl(0, "ExtraWhitespace", { fg = "red" })
+-- Highlights that must be applied after the colorscheme loads (and re-applied
+-- if the colorscheme ever changes).
+local function apply_highlights()
+    -- Extra whitespace
+    vim.api.nvim_set_hl(0, "ExtraWhitespace", { fg = "red" })
+
+    -- MatchParen: remove bold/underline added by some themes
+    vim.api.nvim_set_hl(0, "MatchParen", { underline = false, bold = false })
+
+    -- Statusline User groups (used by set_statusline in utils.lua)
+    vim.api.nvim_set_hl(0, "User1", { bg = "#1c1c1c", fg = "#87afd7" })
+    vim.api.nvim_set_hl(0, "User2", { bg = "#444444", fg = "#dfaf87" })
+    vim.api.nvim_set_hl(0, "User3", { bg = "#1c1c1c", fg = "#ff0000" })
+    vim.api.nvim_set_hl(0, "User4", { bg = "#444444", fg = "#87afd7" })
+    vim.api.nvim_set_hl(0, "User5", { bg = "#444444", fg = "#87afd7" })
+    vim.api.nvim_set_hl(0, "User6", { bg = "#444444", fg = "#87afd7" })
+end
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+    callback = apply_highlights,
+})
 
 local whitespace_group = vim.api.nvim_create_augroup("WHITESPACE", { clear = true })
 vim.api.nvim_create_autocmd("InsertEnter", {

@@ -8,6 +8,34 @@
 --------------------------------------------------------------------------------
 return {
 
+  -- Treesitter: archived but functional on Neovim 0.12. Pinned to prevent
+  -- accidental updates. Revisit in a few months for a native replacement.
+  {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    lazy = false,
+    pin = true,
+    build = ":TSUpdate",
+    config = function()
+      local ok, configs = pcall(require, "nvim-treesitter.configs")
+      if not ok then return end
+      configs.setup({
+        ensure_installed = {
+          -- Data science / academic
+          "python", "r", "julia", "sql",
+          -- Systems / scripting
+          "c", "lua", "bash",
+          -- Web (new work)
+          "typescript", "tsx", "javascript", "jsdoc", "html", "css",
+          -- Config / data formats
+          "yaml", "json", "toml",
+          -- Markup / docs
+          "markdown", "markdown_inline", "vim", "vimdoc", "regex",
+        },
+        highlight = { enable = true },
+      })
+    end,
+  },
 
   -- LSP Management (Mason / Mason-lspconfig / Lspconfig)
   { "williamboman/mason.nvim", config = true },
