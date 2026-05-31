@@ -8,11 +8,9 @@ vim.opt_local.shiftwidth = 4
 vim.opt_local.conceallevel = 2
 vim.opt_local.foldlevel = 99
 
--- Set text width to 79 if writing_on is not defined or 0
-local writing_on = vim.b.writing_on
-if not writing_on or writing_on == 0 then
-  vim.opt_local.textwidth = 79
-end
+-- Enable unconstrained line lengths (soft wrapping) and visual wrap by default
+vim.opt_local.textwidth = 0
+vim.opt_local.wrap = true
 
 -- Comment formatting
 vim.opt_local.comments = "s:<!--,m:    ,e:-->"
@@ -69,77 +67,15 @@ local function toggle_section(level)
   end
 end
 
--- 3. Custom Folding Logic (MarkdownFoldSection and MarkdownFoldText)
-_G.MarkdownFoldSection = function()
-  local lnum = vim.v.lnum
-  local tline = vim.fn.getline(lnum)
-  local pline = vim.fn.getline(lnum - 1)
-  local nline = vim.fn.getline(lnum + 1)
-
-  -- Headers
-  if nline:match("^====+") then
-    return ">1"
-  elseif nline:match("^----+") then
-    return ">2"
-  elseif tline:match("^%-%-%-+") and pline == "" and nline == "" then
-    return ">2"
-  elseif tline:match("^### ") then
-    return ">3"
-  elseif tline:match("^#### ") then
-    return ">4"
-  end
-
-  -- Code chunk
-  if tline:match("^%s*```{") then
-    return "a1"
-  elseif tline:match("^%s*```$") then
-    return "s1"
-  end
-
-  return "="
-end
-
-_G.MarkdownFoldText = function()
-  local foldstart = vim.v.foldstart
-  local foldend = vim.v.foldend
-  local tline = vim.fn.getline(foldstart)
-  local foldsize = foldend - foldstart
-  local foldlevel = vim.fn.foldlevel(foldstart)
-
-  local title = ""
-  if tline:match("^%s*```{r ") then
-    title = tline:gsub("^%s*```{r%s*", ""):gsub("%W.*$", "")
-    title = "    ~~~ " .. title .. " " .. foldsize .. " lines "
-  else
-    title = tline:gsub("#", "")
-    title = title:gsub("^%s*", ""):gsub("%s*$", "")
-    
-    if foldlevel == 1 then
-      title = "# " .. title
-    elseif foldlevel == 2 then
-      title = "    # " .. title
-    elseif foldlevel >= 3 then
-      title = "        # " .. title
-    end
-    title = title .. " [" .. foldsize .. " lines]" .. " (" .. foldlevel .. ") "
-  end
-  return title
-end
-
+-- 3. Folding (treesitter-based)
 vim.opt_local.foldmethod = "expr"
-vim.opt_local.foldexpr = "v:lua.MarkdownFoldSection()"
-vim.opt_local.foldtext = "v:lua.MarkdownFoldText()"
+vim.opt_local.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- 4. Keymaps
 local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { buffer = true, silent = true, desc = desc })
 end
 
--- Preview bindings (LaunchPDF / LaunchHTML)
-map("n", "<leader>sd", "<ESC>:call LaunchPDF()<CR>", "Launch PDF Preview")
-map("i", "<leader>sd", "<ESC>:call LaunchPDF()<CR>", "Launch PDF Preview")
-map("n", "<leader>sh", "<ESC>:call LaunchHTML()<CR>", "Launch HTML Preview")
-map("i", "<leader>sh", "<ESC>:call LaunchHTML()<CR>", "Launch HTML Preview")
 
 -- Header toggling bindings
 map("n", "<leader>1", function() toggle_section(1) end, "Set H1 Underline (=)")

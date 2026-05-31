@@ -7,7 +7,7 @@
 --  * Invocation links calling helper functions in `lua/utils.lua`.
 --------------------------------------------------------------------------------
 local keymap = vim.keymap.set
-local utils = require("utils")
+local utils = require("user.utils")
 
 -- General maps
 keymap("n", "Y", "y$")

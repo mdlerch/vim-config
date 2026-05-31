@@ -63,7 +63,6 @@ opt.smartcase = true
 -- Timeouts
 opt.timeoutlen = 700
 opt.ttimeoutlen = 10
-opt.lazyredraw = false
 
 -- Wildmenu
 opt.wildmode = { "longest", "list", "full" }

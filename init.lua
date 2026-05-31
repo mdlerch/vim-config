@@ -36,11 +36,8 @@ package.preload["nvim-treesitter.configs"] = function()
 end
 
 -- Load modular configuration settings
-require("options")
-require("keymaps")
-require("autocmds")
-require("lazy_setup")
-
--- Apply colorscheme
-vim.cmd("colorscheme tungsten")
+require("user.options")
+require("user.keymaps")
+require("user.autocmds")
+require("user.lazy_setup")
 

@@ -70,6 +70,11 @@ return {
         end
         return existing
       end)(),
+      ui = {
+        hl_groups = {
+          ObsidianRefText = { underline = true, fg = "#87ffff" },
+        },
+      },
       completion = {
         nvim_cmp = true,
         min_chars = 2,

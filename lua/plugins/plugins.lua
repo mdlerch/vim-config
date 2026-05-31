@@ -8,7 +8,7 @@
 --------------------------------------------------------------------------------
 return {
   "tpope/vim-repeat",
-  "mdlerch/tungsten.vim",
+  { "mdlerch/tungsten.vim", lazy = false, priority = 1000, config = function() vim.cmd.colorscheme("tungsten") end },
   "mdlerch/yttrium.vim",
   "jnurmine/Zenburn",
   "vasconcelloslf/vim-interestingwords",

@@ -80,17 +80,6 @@ function M.launch_html(args)
     jobstart(htmlviewer .. " " .. file)
 end
 
--- Fuzzy launch
-function M.fuzzy_launch(launcher, ext)
-    local sourcer = 'find -iname "*.' .. ext .. '"'
-    local sinker = launcher
-    vim.fn['fzf#run']({
-        source = sourcer,
-        sink = sinker,
-        down = '40%',
-        options = '--color dark,pointer:110,hl+:110,bg+:234'
-    })
-end
 
 -- Smart motion to beginning of line
 function M.big_h(vis)
