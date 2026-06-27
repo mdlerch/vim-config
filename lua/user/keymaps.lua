@@ -120,8 +120,7 @@ keymap("n", "<leader>tj", "<C-]>")
 keymap("n", "<leader>tr", ":!ctags -R<CR>")
 
 -- Quick spell fix
-keymap("n", "<leader>z", "[s1z=<C-o>")
-keymap("i", "<leader>z", "<C-g>u<ESC>[s1z=`]a<C-g>u")
+keymap("n", "<leader>z", "[s1z=")
 
 -- Custom utility mappings
 keymap("n", "<F5>", utils.writing_toggle)
