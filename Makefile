@@ -1,21 +1,21 @@
-VIMDIR = ~/vim-config
-LINK = ln -f -s
-
-define INFECT
-if ! [ -e $2 ]; then $(LINK) $(VIMDIR)/$(1) $(2) ; else echo "$2 already exists"; fi
-endef
+VIMDIR = $(CURDIR)
+LINK = ln -s
 
 all: nvim_
 
-vim: vim_ bundle_
-nvim: nvim_ bundle_
+.PHONY: status
+status:
+	@echo "=== Vim config symlink status ==="
+	@ls -la ~/.config 2>/dev/null | grep "$(CURDIR)" || true
 
-vim_:
-	if ! [ -e ~/.vim ] ; then $(LINK) $(VIMDIR) ~/.vim ; fi
-
-bundle_:
-	if ! [ -e ~/vim-bundle ] ; then mkdir ~/vim-bundle; fi
-	${LINK} ~/vim-bundle ${VIMDIR}
-
+.PHONY: nvim_
 nvim_:
-	if ! [ -e ~/config/nvim ] ; then $(LINK) $(VIMDIR) ~/.config/nvim ; fi
+	@if [ -L ~/.config/nvim ] && [ "$$(readlink ~/.config/nvim)" = "$(VIMDIR)" ]; then \
+	    echo "  ok: ~/.config/nvim"; \
+	elif [ -L ~/.config/nvim ]; then \
+	    echo "  WARNING: ~/.config/nvim is a symlink pointing elsewhere: $$(readlink ~/.config/nvim)"; \
+	elif [ -e ~/.config/nvim ]; then \
+	    echo "  WARNING: ~/.config/nvim is a real directory — skipping. Remove manually to link."; \
+	else \
+	    $(LINK) $(VIMDIR) ~/.config/nvim && echo "  linked: ~/.config/nvim"; \
+	fi
