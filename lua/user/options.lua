@@ -31,6 +31,7 @@ opt.cpoptions:append("J")
 opt.formatprg = "par -w80"
 
 -- Appearance
+opt.termguicolors = true
 opt.showcmd = true
 opt.showmode = true
 opt.number = true
