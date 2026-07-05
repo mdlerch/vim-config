@@ -8,31 +8,33 @@
 --------------------------------------------------------------------------------
 return {
 
-  -- Treesitter: archived but functional on Neovim 0.12. Pinned to prevent
-  -- accidental updates. Revisit in a few months for a native replacement.
+  -- Treesitter: `master` is archived/frozen and its markdown injection query
+  -- crashes on Neovim 0.12 for ANY fenced code block with a language/info
+  -- string (not just Obsidian tags like ```chart). `main` is the actively
+  -- maintained rewrite that relies on Neovim core's built-in highlighting.
   {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    branch = "main",
     lazy = false,
-    pin = true,
     build = ":TSUpdate",
     config = function()
-      local ok, configs = pcall(require, "nvim-treesitter.configs")
-      if not ok then return end
-      configs.setup({
-        ensure_installed = {
-          -- Data science / academic
-          "python", "r", "julia", "sql",
-          -- Systems / scripting
-          "c", "lua", "bash",
-          -- Web (new work)
-          "typescript", "tsx", "javascript", "jsdoc", "html", "css",
-          -- Config / data formats
-          "yaml", "json", "toml",
-          -- Markup / docs
-          "markdown", "markdown_inline", "vim", "vimdoc", "regex",
-        },
-        highlight = { enable = true },
+      require("nvim-treesitter").install({
+        -- Data science / academic
+        "python", "r", "julia", "sql",
+        -- Systems / scripting
+        "c", "lua", "bash",
+        -- Web (new work)
+        "typescript", "tsx", "javascript", "jsdoc", "html", "css",
+        -- Config / data formats
+        "yaml", "json", "toml",
+        -- Markup / docs
+        "markdown", "markdown_inline", "vim", "vimdoc", "regex",
+      })
+
+      vim.api.nvim_create_autocmd("FileType", {
+        callback = function()
+          pcall(vim.treesitter.start)
+        end,
       })
     end,
   },
