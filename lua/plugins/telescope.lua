@@ -41,7 +41,9 @@ return {
         }
       })
       require('telescope').load_extension('fzf')
-      vim.keymap.set('n', '<leader>f', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>f', function()
+        builtin.find_files({ follow = true })
+      end, {})
       vim.keymap.set('n', '<leader>a', builtin.live_grep, {}) -- The "Ag" style content search
       vim.keymap.set('n', '<leader>b', builtin.buffers, {})
     end
